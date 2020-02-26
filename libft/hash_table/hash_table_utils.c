@@ -6,25 +6,27 @@
 /*   By: cseguier <cseguier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/26 01:35:31 by cseguier          #+#    #+#             */
-/*   Updated: 2020/02/26 01:35:32 by cseguier         ###   ########.fr       */
+/*   Updated: 2020/02/26 05:36:31 by cseguier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/hash_table.h"
+
 /*
 ** Basic non crytographic hash function
-**
 ** {Input} : the string to hash
 ** {Return} : the hash
-*/ 
-size_t ht_hash(char *cp)
-{
-    unsigned long hash = 5381;
-    int c;
+*/
 
-    while ((c = *cp++))
+size_t		ht_hash(char *cp)
+{
+	unsigned long	hash;
+	int				c;
+
+	hash = 5381;
+	while ((c = *cp++))
 		hash = ((hash << 5) + hash) + c;
-	return hash;
+	return (hash);
 }
 
 /*
@@ -33,10 +35,10 @@ size_t ht_hash(char *cp)
 ** The key (hash of the elem)
 ** The data to add
 ** And a value for the next collision pointer if needed
-** 
 ** {Return} : Return a value to conveniently use in a return :)
-*/ 
-int		ht_fill_hash_table(h_t *element, size_t key, char *data, h_t *next, int index)
+*/
+
+int			ht_fill_hash_table(h_t *element, size_t key, char *data, h_t *next, int index)
 {
 	element->key = key;
 	element->index = index;
@@ -47,15 +49,14 @@ int		ht_fill_hash_table(h_t *element, size_t key, char *data, h_t *next, int ind
 
 /*
 ** Iterate through the collision list and try to find a match
-** 
 ** {Input} : The linked list
 ** The string to find
 ** A pointer on a list pointer to store the match
-** 
 ** {Return} : a boolean value for success or failure
 ** And store the match, or the last element of the collision list
 */
-int		ht_find_match_store(h_t *hash_table, char *to_compare, h_t **store)
+
+int			ht_find_match_store(h_t *hash_table, char *to_compare, h_t **store)
 {
 	h_t	*tmp;
 
@@ -80,14 +81,13 @@ int		ht_find_match_store(h_t *hash_table, char *to_compare, h_t **store)
 
 /*
 ** Handle the case where we try to add an already existing elem
-** 
 ** {Input} : The hash table
 ** The Data we will compare
 ** The tmp storage we use to store the last elem of the collision list
 ** If it isn't a false positive
-** 
 ** {Return} : a boolean value for success or failure
 */
+
 static int	is_false_positive(h_t *hash_table, char *data, h_t **tmp)
 {
 	return (ht_find_match_store(hash_table, data, tmp));
@@ -95,18 +95,16 @@ static int	is_false_positive(h_t *hash_table, char *data, h_t **tmp)
 
 /*
 ** Handle the collision
-** 
-** 2 cases : 
+** 2 cases :
 ** 1/ Element we try to add already exist
 ** 2/ Real collision so we add a new node to the linked list
-** 
 ** {Input} : the hash table
 ** The Data we will compare
 ** The key of the item we might create
-** 
 ** {Return} : a boolean value for success or failure
 */
-int		ht_handle_collision(h_t *hash_table, char *data, size_t key, int index)
+
+int			ht_handle_collision(h_t *hash_table, char *data, size_t key, int index)
 {
 	h_t		*tmp;
 

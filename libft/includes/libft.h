@@ -6,7 +6,7 @@
 /*   By: cseguier <cseguier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/07 17:13:11 by cseguier          #+#    #+#             */
-/*   Updated: 2020/02/26 01:35:52 by cseguier         ###   ########.fr       */
+/*   Updated: 2020/02/26 04:14:50 by cseguier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,13 +26,12 @@ typedef struct	s_lftlist
 	struct s_lftlist	*next;
 }				t_lftlist;
 
-
 typedef struct	s_gnl
 {
 	struct s_gnl		*next;
 	struct s_gnl		*prev;
 	char				*stock;
-	int				fd;
+	int					fd;
 }				t_gnl;
 
 int				ft_atoi(char const *str);
@@ -41,7 +40,7 @@ void			ft_bzero(void *s, size_t n);
 char			*ft_capitalize(char *str);
 void			ft_doublefree(char **s);
 void			ft_doublefree_int(int **s, int size);
-void 			ft_doubleprint(char **s);
+void			ft_doubleprint(char **s);
 void			ft_foreach(int *tab, size_t lenght, void (*f)(int));
 int				ft_isalnum(int c);
 int				ft_isalpha(int c);

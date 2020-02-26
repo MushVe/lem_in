@@ -6,16 +6,16 @@
 /*   By: cseguier <cseguier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/26 01:35:12 by cseguier          #+#    #+#             */
-/*   Updated: 2020/02/26 01:35:15 by cseguier         ###   ########.fr       */
+/*   Updated: 2020/02/26 05:19:18 by cseguier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_get_line.h"
 
-char *my_strtok(char *line, int *end)
+char		*my_strtok(char *line, int *end)
 {
-	static int index = 0;
-	int offset;
+	static int	index = 0;
+	int			offset;
 
 	if (index != 0)
 		index++;
@@ -34,23 +34,21 @@ char *my_strtok(char *line, int *end)
 	return (line + offset);
 }
 
-static bool return_line(char *storage, char **line)
+static bool	return_line(char *storage, char **line)
 {
-	static int end = 1;
+	static int	end = 1;
 
 	if (end == 0)
 		return (0);
 	*line = my_strtok(storage, &end);
 	return (1);
-
 }
 
-static int store_lines(int fd, char **storage, char *buffer, f_list *func)
+static int	store_lines(int fd, char **storage, char *buffer, f_list *func)
 {
 	int ret;
 
 	ret = 0;
-	
 	while ((ret = read(fd, buffer, BUFFA_SIZE)) > 0)
 	{
 		func->my_strjoin(storage, buffer);
@@ -60,13 +58,13 @@ static int store_lines(int fd, char **storage, char *buffer, f_list *func)
 	return (ret);
 }
 
-void my_strdup(char **dest, char *src)
+void		my_strdup(char **dest, char *src)
 {
 	if (!(*dest = ft_strdup(src)))
 		exit(0);
 }
 
-void _init(f_list *func)
+void		_init(f_list *func)
 {
 	func[0].my_strjoin = &my_strdup;
 	func[0].next = &func[1];
@@ -74,10 +72,10 @@ void _init(f_list *func)
 	func[1].next = &func[1];
 }
 
-int ft_get_line(int fd, char **line, char **storage)
+int			ft_get_line(int fd, char **line, char **storage)
 {
-	f_list func[2];
-	char buffer[BUFFA_SIZE + 1];
+	f_list	func[2];
+	char	buffer[BUFFA_SIZE + 1];
 
 	ft_bzero(buffer, BUFFA_SIZE + 1);
 	_init(func);

@@ -6,20 +6,21 @@
 /*   By: cseguier <cseguier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/26 01:35:26 by cseguier          #+#    #+#             */
-/*   Updated: 2020/02/26 01:35:27 by cseguier         ###   ########.fr       */
+/*   Updated: 2020/02/26 05:53:36 by cseguier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/hash_table.h"
+
 /*
 ** Create an empty hash table
 ** {Input} : Take a number of item as an arg, multiply it by 100 to lower collision
 ** And a control structure to track the capacity
-** 
 ** {Return} the newly allocated hash_table
 ** Or NULL if it couldn't allocate
 */
-h_t		*hash_table_create(size_t item_count, h_t_handle *h_t_handler)
+
+h_t		*hash_table_create(size_t item_count, t_hthandle *t_hthandler)
 {
 	h_t		*hash_table;
 	int		i;
@@ -28,32 +29,32 @@ h_t		*hash_table_create(size_t item_count, h_t_handle *h_t_handler)
 	//	calculer taille par rapport au nombre d'items et pas mettre valeur fixe
 	if (!(hash_table = ft_memalloc(item_count * 100 * sizeof(h_t))))
 		return (0);
-	h_t_handler->capacity = item_count;
-	h_t_handler->modulo = item_count * 10;
-	h_t_handler->current_capacity = item_count;
-	h_t_handler->hash_table = hash_table;
+	t_hthandler->capacity = item_count;
+	t_hthandler->modulo = item_count * 10;
+	t_hthandler->current_capacity = item_count;
+	t_hthandler->hash_table = hash_table;
 	while (++i < item_count * 100)
 		hash_table[i].key = -1;
 	return (hash_table);
 }
 
-void free_content(char **content)
+void	free_content(char **content)
 {
 	free(*content);
 	*content = NULL;
 }
 
-void free_node(h_t **node)
+void	free_node(h_t **node)
 {
 	free(*node);
 	*node = NULL;
 }
 
-void delete_list(h_t **collision_list)
+void	delete_list(h_t **collision_list)
 {
-	h_t *node;
-	h_t *node_to_free;
-	char *to_free;
+	h_t		*node;
+	h_t		*node_to_free;
+	char	*to_free;
 
 	node = *collision_list;
 	node_to_free = NULL;
@@ -71,78 +72,76 @@ void delete_list(h_t **collision_list)
 	*collision_list = NULL;
 }
 
-int hash_table_delete(h_t_handle *h_t_handler)
+int		hash_table_delete(t_hthandle *t_hthandler)
 {
-	int size;
-	int i;
-	char *to_free;
-	h_t *collision_list;
+	int		size;
+	int		i;
+	char	*to_free;
+	h_t		*collision_list;
 
 	i = -1;
-	size = h_t_handler->capacity * 100;
+	size = t_hthandler->capacity * 100;
 	collision_list = NULL;
 	while (++i < size)
 	{
-		to_free = h_t_handler->hash_table[i].room_name;
-		collision_list = h_t_handler->hash_table[i].next;
+		to_free = t_hthandler->hash_table[i].room_name;
+		collision_list = t_hthandler->hash_table[i].next;
 		if (to_free)
 			free_content(&to_free);
 		if (collision_list)
 			delete_list(&collision_list);
 	}
-	free(h_t_handler->hash_table);
+	free(t_hthandler->hash_table);
 	return (1);
 }
 
 /*
 ** Put the data in the hash_table
-** 
 ** {Input} : Take a control structure to track the capacity
 ** And the data to add
-** 
 ** Return 0 if it could not put the data
 ** Return 1 if it could
 */
-int		hash_table_put(h_t_handle *h_t_handler, char *data, int index)
+
+int		hash_table_put(t_hthandle *t_hthandler, char *data, int index)
 {
 	h_t		*hash_table;
 	size_t	key;
 	int		ret;
-	
+
 	ret = 0;
-	if (!h_t_handler->hash_table)
+	if (!t_hthandler->hash_table)
 		return (0);
-	if (h_t_handler->current_capacity < 1)
+	if (t_hthandler->current_capacity < 1)
 		return (0);
-	key = ht_hash(data) % h_t_handler->modulo;
-	hash_table = &h_t_handler->hash_table[key];
+	key = ht_hash(data) % t_hthandler->modulo;
+	hash_table = &t_hthandler->hash_table[key];
 	if (hash_table->key == -1)
 		ret = ht_fill_hash_table(hash_table, key, data, NULL, index);
 	else if (ft_strcmp(data, hash_table->room_name) != 0)
 		ret = ht_handle_collision(hash_table, data, key, index);
 	if (ret)
-		h_t_handler->current_capacity -= 1;
+		t_hthandler->current_capacity -= 1;
 	return (ret);
 }
 
 /*
 ** Get the data from the hashtable
-** 
 ** {Input} : Take the control structure, the key of the item
 ** And the string to get in case of collision
-** 
 ** {Return} : the string if everything went well
 ** And NULL if shit goes wrong
 */
-h_t			*hash_table_get(h_t_handle *h_t_handler, char *to_get)
+
+h_t		*hash_table_get(t_hthandle *t_hthandler, char *to_get)
 {
 	h_t		*hash_table;
 	h_t		*store;
-	size_t 	key;
-	
+	size_t	key;
+
 	store = NULL;
-	key = ht_hash(to_get) % h_t_handler->modulo;
-	hash_table = &h_t_handler->hash_table[key];
+	key = ht_hash(to_get) % t_hthandler->modulo;
+	hash_table = &t_hthandler->hash_table[key];
 	if (hash_table->key == -1)
 		return (NULL);
 	if (ht_find_match_store(hash_table, to_get, &store))

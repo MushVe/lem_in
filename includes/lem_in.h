@@ -6,7 +6,7 @@
 /*   By: cseguier <cseguier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/26 01:37:37 by cseguier          #+#    #+#             */
-/*   Updated: 2020/02/26 01:37:38 by cseguier         ###   ########.fr       */
+/*   Updated: 2020/02/26 05:53:36 by cseguier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,10 +89,10 @@ int handle_rooms(char **line, t_list **tmp, t_anthill *data, int command_flag, c
 ** Tubes
 */
 
-h_t *does_room_exist(char *line, h_t_handle *h_t_handler);
-int is_tube_valid(h_t **room1, h_t **room2, char *line, h_t_handle *h_t_handler);
+h_t *does_room_exist(char *line, t_hthandle *t_hthandler);
+int is_tube_valid(h_t **room1, h_t **room2, char *line, t_hthandle *t_hthandler);
 char *split_tubes(char *line);
-int **handle_tubes(char **line, t_list **tubes, h_t_handle *h_t_handler, int room_count, char **stoage);
+int **handle_tubes(char **line, t_list **tubes, t_hthandle *t_hthandler, int room_count, char **stoage);
 
 
 int **parser(int *size, char **line, char **storage);
