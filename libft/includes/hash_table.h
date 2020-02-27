@@ -6,7 +6,7 @@
 /*   By: cseguier <cseguier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/26 01:35:42 by cseguier          #+#    #+#             */
-/*   Updated: 2020/02/26 05:54:13 by cseguier         ###   ########.fr       */
+/*   Updated: 2020/02/27 05:18:07 by cseguier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,12 @@
 
 # include "libft.h"
 
-typedef struct	s_h_t
+typedef struct	s_ht
 {
 	long long	key;
 	char		*room_name;
 	int			index;
-	struct t_ht	*next;
+	struct s_ht	*next;
 }				t_ht;
 
 typedef struct	s_hthandle

@@ -6,7 +6,7 @@
 /*   By: cseguier <cseguier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/26 01:35:26 by cseguier          #+#    #+#             */
-/*   Updated: 2020/02/26 05:53:36 by cseguier         ###   ########.fr       */
+/*   Updated: 2020/02/27 05:19:56 by cseguier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,14 +20,14 @@
 ** Or NULL if it couldn't allocate
 */
 
-h_t		*hash_table_create(size_t item_count, t_hthandle *t_hthandler)
+t_ht		*hash_table_create(size_t item_count, t_hthandle *t_hthandler)
 {
-	h_t		*hash_table;
+	t_ht	*hash_table;
 	int		i;
 
 	i = -1;
 	//	calculer taille par rapport au nombre d'items et pas mettre valeur fixe
-	if (!(hash_table = ft_memalloc(item_count * 100 * sizeof(h_t))))
+	if (!(hash_table = ft_memalloc(item_count * 100 * sizeof(t_ht))))
 		return (0);
 	t_hthandler->capacity = item_count;
 	t_hthandler->modulo = item_count * 10;
@@ -44,16 +44,16 @@ void	free_content(char **content)
 	*content = NULL;
 }
 
-void	free_node(h_t **node)
+void	free_node(t_ht **node)
 {
 	free(*node);
 	*node = NULL;
 }
 
-void	delete_list(h_t **collision_list)
+void	delete_list(t_ht **collision_list)
 {
-	h_t		*node;
-	h_t		*node_to_free;
+	t_ht	*node;
+	t_ht	*node_to_free;
 	char	*to_free;
 
 	node = *collision_list;
@@ -77,7 +77,7 @@ int		hash_table_delete(t_hthandle *t_hthandler)
 	int		size;
 	int		i;
 	char	*to_free;
-	h_t		*collision_list;
+	t_ht		*collision_list;
 
 	i = -1;
 	size = t_hthandler->capacity * 100;
@@ -105,7 +105,7 @@ int		hash_table_delete(t_hthandle *t_hthandler)
 
 int		hash_table_put(t_hthandle *t_hthandler, char *data, int index)
 {
-	h_t		*hash_table;
+	t_ht		*hash_table;
 	size_t	key;
 	int		ret;
 
@@ -133,10 +133,10 @@ int		hash_table_put(t_hthandle *t_hthandler, char *data, int index)
 ** And NULL if shit goes wrong
 */
 
-h_t		*hash_table_get(t_hthandle *t_hthandler, char *to_get)
+t_ht		*hash_table_get(t_hthandle *t_hthandler, char *to_get)
 {
-	h_t		*hash_table;
-	h_t		*store;
+	t_ht		*hash_table;
+	t_ht		*store;
 	size_t	key;
 
 	store = NULL;

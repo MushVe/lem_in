@@ -6,13 +6,15 @@
 /*   By: cseguier <cseguier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/07 17:13:11 by cseguier          #+#    #+#             */
-/*   Updated: 2020/02/26 04:14:50 by cseguier         ###   ########.fr       */
+/*   Updated: 2020/02/27 05:59:17 by cseguier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LIBFT_H
 # define LIBFT_H
 
+# include <stdbool.h>
+# include <stdarg.h>
 # include <unistd.h>
 # include <stdlib.h>
 # include <string.h>

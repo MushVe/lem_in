@@ -6,7 +6,7 @@
 /*   By: cseguier <cseguier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/26 01:32:13 by cseguier          #+#    #+#             */
-/*   Updated: 2020/02/26 05:53:36 by cseguier         ###   ########.fr       */
+/*   Updated: 2020/02/27 05:29:46 by cseguier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@ int	is_line_valid(char *line)
 
 int	fill_adjacency_matrix(int **matrix, char *line, t_hthandle *t_hthandler)
 {
-	h_t			*room1;
-	h_t			*room2;
+	t_ht		*room1;
+	t_ht		*room2;
 	static int	i = 0;
 
 	room1 = NULL;

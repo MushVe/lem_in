@@ -6,7 +6,7 @@
 /*   By: cseguier <cseguier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/26 01:32:08 by cseguier          #+#    #+#             */
-/*   Updated: 2020/02/26 03:43:10 by cseguier         ###   ########.fr       */
+/*   Updated: 2020/02/27 05:51:40 by cseguier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int		is_room(char *line)
 
 	comment = is_comment(line);
 	command = is_command(line);
-	spaces = white_space_count(line) == 2;
+	spaces = white_space_count(line);
 	to_ret = !comment && !command && line[0] != 'L' && spaces == 2;
 	return (to_ret);
 }

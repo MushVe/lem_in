@@ -6,7 +6,7 @@
 /*   By: cseguier <cseguier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/26 01:31:58 by cseguier          #+#    #+#             */
-/*   Updated: 2020/02/26 05:53:36 by cseguier         ###   ########.fr       */
+/*   Updated: 2020/02/27 05:30:33 by cseguier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,14 +42,14 @@ int				add_front_node(t_list **head, char *data)
 	return (1);
 }
 
-map_room_index	*store_rooms(t_anthill data, t_hthandle *t_hthandler, t_list *rooms)
+t_map_room_index	*store_rooms(t_anthill data, t_hthandle *t_hthandler, t_list *rooms)
 {
-	int				i;
-	map_room_index	*junction_table;
-	char			*splitted;
+	int					i;
+	t_map_room_index	*junction_table;
+	char				*splitted;
 
 	i = 0;
-	if (!(junction_table = malloc(sizeof(map_room_index) * (data.room_count + 1))))
+	if (!(junction_table = malloc(sizeof(t_map_room_index) * (data.room_count + 1))))
 		exit_error("Malloc failed\n", (char*)__func__);
 	while (rooms)
 	{
@@ -93,7 +93,7 @@ void			init(t_anthill *data, t_list *tmp, t_hthandle *t_hthandler)
 	t_hthandler->modulo = 0;
 }
 
-void			delete_junction_table(map_room_index *junction)
+void			delete_junction_table(t_map_room_index *junction)
 {
 	free(junction);
 }
@@ -125,7 +125,7 @@ void			display_anthill(t_list *list)
 
 void			display(t_anthill data, t_list *list)
 {
-	printf("%lld\n%s\n", data.ant_count, list->data);
+	ft_printf("%lld\n%s\n", data.ant_count, list->data);
 	display_anthill(list->next);
 }
 
@@ -134,7 +134,7 @@ void			display(t_anthill data, t_list *list)
 ** between the lines
 */
 
-void			clean(t_hthandle *handle, t_list *list, map_room_index *junction, t_anthill data)
+void			clean(t_hthandle *handle, t_list *list, t_map_room_index *junction, t_anthill data)
 {
 	delete_display_list(list);
 	hash_table_delete(handle);
@@ -145,11 +145,11 @@ void			clean(t_hthandle *handle, t_list *list, map_room_index *junction, t_anthi
 
 int				**parser(int *size, char **line, char **storage)
 {
-	t_anthill		data;
-	t_list			*tmp;
-	t_hthandle		t_hthandler;
-	map_room_index	*junction;
-	int				**matrix;
+	t_anthill			data;
+	t_list				*tmp;
+	t_hthandle			t_hthandler;
+	t_map_room_index	*junction;
+	int					**matrix;
 
 	*line = NULL;
 	tmp = NULL;

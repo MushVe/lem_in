@@ -6,7 +6,7 @@
 /*   By: cseguier <cseguier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/26 01:35:31 by cseguier          #+#    #+#             */
-/*   Updated: 2020/02/26 05:36:31 by cseguier         ###   ########.fr       */
+/*   Updated: 2020/02/27 05:10:54 by cseguier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ size_t		ht_hash(char *cp)
 ** {Return} : Return a value to conveniently use in a return :)
 */
 
-int			ht_fill_hash_table(h_t *element, size_t key, char *data, h_t *next, int index)
+int			ht_fill_hash_table(t_ht *element, size_t key, char *data, t_ht *next, int index)
 {
 	element->key = key;
 	element->index = index;
@@ -56,9 +56,9 @@ int			ht_fill_hash_table(h_t *element, size_t key, char *data, h_t *next, int in
 ** And store the match, or the last element of the collision list
 */
 
-int			ht_find_match_store(h_t *hash_table, char *to_compare, h_t **store)
+int			ht_find_match_store(t_ht *hash_table, char *to_compare, t_ht **store)
 {
-	h_t	*tmp;
+	t_ht	*tmp;
 
 	tmp = hash_table;
 	while (tmp->next != NULL)
@@ -88,7 +88,7 @@ int			ht_find_match_store(h_t *hash_table, char *to_compare, h_t **store)
 ** {Return} : a boolean value for success or failure
 */
 
-static int	is_false_positive(h_t *hash_table, char *data, h_t **tmp)
+static int	is_false_positive(t_ht *hash_table, char *data, t_ht **tmp)
 {
 	return (ht_find_match_store(hash_table, data, tmp));
 }
@@ -104,16 +104,16 @@ static int	is_false_positive(h_t *hash_table, char *data, h_t **tmp)
 ** {Return} : a boolean value for success or failure
 */
 
-int			ht_handle_collision(h_t *hash_table, char *data, size_t key, int index)
+int			ht_handle_collision(t_ht *hash_table, char *data, size_t key, int index)
 {
-	h_t		*tmp;
+	t_ht		*tmp;
 
 	tmp = NULL;
 	if (is_false_positive(hash_table, data, &tmp))
 		return (1);
 	if (tmp == NULL)
 		tmp = hash_table;
-	if (!(tmp->next = ft_memalloc(sizeof(h_t))))
+	if (!(tmp->next = ft_memalloc(sizeof(t_ht))))
 		return (0);
 	return (ht_fill_hash_table(tmp->next, key, data, NULL, index));
 }

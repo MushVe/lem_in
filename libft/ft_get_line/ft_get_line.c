@@ -6,7 +6,7 @@
 /*   By: cseguier <cseguier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/26 01:35:12 by cseguier          #+#    #+#             */
-/*   Updated: 2020/02/26 05:19:18 by cseguier         ###   ########.fr       */
+/*   Updated: 2020/02/27 05:14:58 by cseguier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ static bool	return_line(char *storage, char **line)
 	return (1);
 }
 
-static int	store_lines(int fd, char **storage, char *buffer, f_list *func)
+static int	store_lines(int fd, char **storage, char *buffer, t_func_list *func)
 {
 	int ret;
 
@@ -64,7 +64,7 @@ void		my_strdup(char **dest, char *src)
 		exit(0);
 }
 
-void		_init(f_list *func)
+void		_init(t_func_list *func)
 {
 	func[0].my_strjoin = &my_strdup;
 	func[0].next = &func[1];
@@ -74,7 +74,7 @@ void		_init(f_list *func)
 
 int			ft_get_line(int fd, char **line, char **storage)
 {
-	f_list	func[2];
+	t_func_list	func[2];
 	char	buffer[BUFFA_SIZE + 1];
 
 	ft_bzero(buffer, BUFFA_SIZE + 1);

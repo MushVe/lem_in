@@ -6,13 +6,13 @@
 /*   By: cseguier <cseguier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/26 01:32:17 by cseguier          #+#    #+#             */
-/*   Updated: 2020/02/26 05:53:36 by cseguier         ###   ########.fr       */
+/*   Updated: 2020/02/27 05:55:11 by cseguier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/lem_in.h"
 
-h_t		*does_room_exist(char *line, t_hthandle *t_hthandler)
+t_ht	*does_room_exist(char *line, t_hthandle *t_hthandler)
 {
 	char	*room;
 
@@ -20,7 +20,7 @@ h_t		*does_room_exist(char *line, t_hthandle *t_hthandler)
 	return (hash_table_get(t_hthandler, room));
 }
 
-int		is_tube_valid(h_t **room1, h_t **room2, char *line, t_hthandle *t_hthandler)
+int		is_tube_valid(t_ht **room1, t_ht **room2, char *line, t_hthandle *t_hthandler)
 {
 	*room1 = does_room_exist(line, t_hthandler);
 	*room2 = does_room_exist(line, t_hthandler);
@@ -38,10 +38,9 @@ int		is_tube_valid(h_t **room1, h_t **room2, char *line, t_hthandle *t_hthandler
 
 char	*split_tubes(char *line)
 {
-	static int	index;
+	static int	index = 0;
 	int			offset;
 
-	index = 0;
 	if (index != 0)
 	{
 		line[index] = '-';
