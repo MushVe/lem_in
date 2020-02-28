@@ -6,7 +6,7 @@
 /*   By: cseguier <cseguier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/07 17:13:11 by cseguier          #+#    #+#             */
-/*   Updated: 2020/02/27 05:59:17 by cseguier         ###   ########.fr       */
+/*   Updated: 2020/02/28 05:57:23 by cseguier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 # include <string.h>
 
 # define GNL_BUFF_SIZE 3024
+# define GL_BUFF_SIZE 1000000
 
 typedef struct	s_lftlist
 {
@@ -35,6 +36,19 @@ typedef struct	s_gnl
 	char				*stock;
 	int					fd;
 }				t_gnl;
+
+typedef struct	s_gl_list
+{
+	struct s_gl_list	*next;
+	void				(*my_strjoin)(char **, char *);
+}				t_gl_list;
+
+bool			gl_is_storage_empty(char *storage);
+bool			gl_contain_new_line(char *data, char **new_line_pos);
+bool			gl_is_nl_last_char(char *data, char *new_line_pos);
+bool			gl_save_data(char **storage, char *buffer);
+void			gl_strjoin_free_s1(char **s1, char *s2);
+int				ft_get_line(int fd, char **line, char **storage);
 
 int				ft_atoi(char const *str);
 int				ft_abs(int nb);

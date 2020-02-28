@@ -6,7 +6,7 @@
 #    By: cseguier <cseguier@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/07 17:07:19 by cseguier          #+#    #+#              #
-#    Updated: 2020/02/26 01:39:11 by cseguier         ###   ########.fr        #
+#    Updated: 2020/02/28 03:05:46 by cseguier         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,13 +29,12 @@ FILE = 	ft_abs.c ft_atoi.c ft_bzero.c ft_capitalize.c ft_doublefree.c \
 		ft_strlen.c ft_strmap.c ft_strmapi.c ft_strncat.c ft_strncmp.c \
 		ft_strncpy.c ft_strnequ.c ft_strnew.c ft_strnstr.c ft_strrchr.c \
 		ft_strrev.c ft_strsplit.c ft_strstr.c ft_strsub.c ft_strtrim.c \
-		ft_tolower.c ft_toupper.c ft_upcase.c gnl_strjoin.c \
+		ft_tolower.c ft_toupper.c ft_upcase.c \
 		ft_printf.c pft_parser.c pft_node.c pft_flag_process.c \
 		pft_add_stuff.c pft_add_width.c pft_convert.c pft_check.c \
 		pft_get_type.c pft_get_double.c pft_get_unsigned.c \
 		hash_table_api.c hash_table_utils.c\
 		ft_get_line.c get_line_utils.c \
-		old_get_next_line.c 
 
 SRC = $(FILE:%=%)
 

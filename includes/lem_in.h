@@ -6,7 +6,7 @@
 /*   By: cseguier <cseguier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/26 01:37:37 by cseguier          #+#    #+#             */
-/*   Updated: 2020/02/27 05:25:02 by cseguier         ###   ########.fr       */
+/*   Updated: 2020/02/28 05:58:51 by cseguier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 
 #include "../libft/includes/hash_table.h"
 #include "../libft/includes/ft_printf.h"
-#include "../libft/includes/ft_get_line.h"
 
 typedef struct	s_list
 {
