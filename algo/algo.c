@@ -6,7 +6,7 @@
 /*   By: cseguier <cseguier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/29 01:27:16 by cseguier          #+#    #+#             */
-/*   Updated: 2020/02/29 07:42:54 by cseguier         ###   ########.fr       */
+/*   Updated: 2020/02/29 08:15:03 by cseguier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,16 +23,17 @@ int algo(t_p *p)
 		exit_error("Malloc Failed", (char*)__func__);
 	q = create_queue();
 	host = p->data.rooms.start_index;
-
+	ft_printf("000 %s\t%d\n", p->junction[host].room_name, p->junction[host].index);
+	ft_printf("host %d %d\n", host, p->data.rooms.start_index);
 	en_queue(q, p->junction[host].index);
 	visited_record[host] = 1;
 
 
-	while (q->rear != NULL)
+	while (q->rear != NULL && host != p->data.rooms.end_index)
 	{
 		host = q->front->data;
 		de_queue(q);
-		ft_printf("%s\t%d\n", p->junction[host].room_name, p->junction[host].index);
+		ft_printf("111 %s\t%d\n", p->junction[host].room_name, p->junction[host].index);
 		link = -1;
 		while (++link < p->size)
 		{

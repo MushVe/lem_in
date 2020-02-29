@@ -1,8 +1,8 @@
 11
 ##start
-1 1 1
-2 2 2
+salle1 1 1
+salle2 2 2
 ##end
-3 3 3
-1-2
-2-3
+salle3 3 3
+salle1-salle2
+salle2-salle3

@@ -32,19 +32,19 @@ int			 main()
 
 	init(&p);
 	parser(&p);
-	display(p.data, p.tmp);
+	// display(p.data, p.tmp);
 	algo(&p);
 
-	// for (size_t i = 0; i < size; i++)
+	// for (size_t i = 0; i < p.size; i++)
 	// {
-	// 	for (size_t j = 0; j < size; j++)
+	// 	for (size_t j = 0; j < p.size; j++)
 	// 	{
-	// 		if (matrix[i][j] != 1)
-	// 			printf(".");
+	// 		if (p.matrix[i][j] != 1)
+	// 			ft_printf(".");
 	// 		else
-	// 			printf("1");
+	// 			ft_printf("1");
 	// 	}
-	// 	printf("\n");
+	// 	ft_printf("\n");
 	// }
 
 	/*
