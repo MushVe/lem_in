@@ -6,7 +6,7 @@
 /*   By: cseguier <cseguier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/26 01:30:39 by cseguier          #+#    #+#             */
-/*   Updated: 2020/02/26 02:09:57 by cseguier         ###   ########.fr       */
+/*   Updated: 2020/02/29 07:17:00 by cseguier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,26 +19,21 @@ int		is_ant_count_valid(char *line)
 	i = -1;
 	while (line[++i])
 		if (!ft_isdigit(line[i]))
-			return (0);
+			exit_error("Ants parsing invalid\n", (char*)__func__);
 	return (atoi(line));
 }
 
-void	get_ants(char *line, t_anthill *data)
+void	get_ants(t_p *p)
 {
-	int	ant_count;
-
-	ant_count = is_ant_count_valid(line);
-	if (ant_count <= 0)
-		exit_error("Ants parsing invalid\n", (char*)__func__);
-	data->ant_count = ant_count;
+	p->data.ant_count = is_ant_count_valid(p->line);
 }
 
-void	handle_ants(char **line, t_anthill *data, char **storage)
+void	handle_ants(t_p *p)
 {
-	if (ft_get_line(0, line, storage) < 0)
+	if (ft_get_line(0, &p->line, &p->storage) < 0)
 		exit_error("GNL error\n", (char*)__func__);
-	if (line)
-		get_ants(*line, data);
+	if (p->line)
+		get_ants(p);
 	else
 	{
 		exit_error("line empty\n", (char*)__func__);

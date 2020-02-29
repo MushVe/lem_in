@@ -6,7 +6,7 @@
 #    By: cseguier <cseguier@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/26 01:31:01 by cseguier          #+#    #+#              #
-#    Updated: 2020/02/26 01:31:07 by cseguier         ###   ########.fr        #
+#    Updated: 2020/02/29 01:53:27 by cseguier         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,7 @@ NAME = lem-in #cseguier.filler
 
 LIBFT = libft/libftprintf.a
 
-FILE = ants.c main.c parser.c room.c tubes.c utils_tubes.c utils.c
+FILE = ants.c main.c parser.c room.c tubes.c utils_tubes.c utils.c algo.c
 
 INC = -I libft 
 
@@ -43,6 +43,10 @@ objs/%.o: %.c
 	@$(CC) $(INC) -o $@ -c $<
 
 objs/%.o: parser/%.c
+	@mkdir -p objs
+	@$(CC) $(INC) -o $@ -c $<
+
+objs/%.o: algo/%.c
 	@mkdir -p objs
 	@$(CC) $(INC) -o $@ -c $<
 

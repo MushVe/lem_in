@@ -6,7 +6,7 @@
 /*   By: cseguier <cseguier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/07 17:13:11 by cseguier          #+#    #+#             */
-/*   Updated: 2020/02/28 05:57:23 by cseguier         ###   ########.fr       */
+/*   Updated: 2020/02/29 07:43:58 by cseguier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,23 +19,7 @@
 # include <stdlib.h>
 # include <string.h>
 
-# define GNL_BUFF_SIZE 3024
 # define GL_BUFF_SIZE 1000000
-
-typedef struct	s_lftlist
-{
-	void				*content;
-	size_t				content_size;
-	struct s_lftlist	*next;
-}				t_lftlist;
-
-typedef struct	s_gnl
-{
-	struct s_gnl		*next;
-	struct s_gnl		*prev;
-	char				*stock;
-	int					fd;
-}				t_gnl;
 
 typedef struct	s_gl_list
 {
@@ -49,6 +33,33 @@ bool			gl_is_nl_last_char(char *data, char *new_line_pos);
 bool			gl_save_data(char **storage, char *buffer);
 void			gl_strjoin_free_s1(char **s1, char *s2);
 int				ft_get_line(int fd, char **line, char **storage);
+
+///////////////////////////////////////////////////////////
+
+typedef struct	s_qnode
+{
+	int				data;
+	struct s_qnode	*next;
+}				t_qnode;
+
+typedef struct	s_queue
+{
+	t_qnode	*front;
+	t_qnode	*rear;
+}				t_queue;
+
+t_queue			*create_queue(void);
+void			en_queue(t_queue *q, int data);
+void			de_queue(t_queue *q);
+
+///////////////////////////////////////////////////////////
+
+typedef struct	s_lftlist
+{
+	void				*content;
+	size_t				content_size;
+	struct s_lftlist	*next;
+}				t_lftlist;
 
 int				ft_atoi(char const *str);
 int				ft_abs(int nb);

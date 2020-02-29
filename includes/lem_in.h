@@ -6,7 +6,7 @@
 /*   By: cseguier <cseguier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/26 01:37:37 by cseguier          #+#    #+#             */
-/*   Updated: 2020/02/28 05:58:51 by cseguier         ###   ########.fr       */
+/*   Updated: 2020/02/29 07:12:28 by cseguier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@ typedef struct	s_list
 typedef struct	s_command
 {
 	char	*start;
+	int		start_index;
+	int		end_index;
 	char	*end;
 }				t_command;
 
@@ -48,6 +50,24 @@ typedef struct	s_map_room_index
 	char	*room_name;
 }				t_map_room_index;
 
+typedef struct	s_p
+{
+	int					size;
+	char				*line;
+	char				*storage;
+	t_map_room_index	*junction; //nom + index
+	int 				**matrix;
+	t_anthill			data;
+	t_list				*tmp;
+	t_hthandle			hthandler;
+}				t_p;
+
+
+/*
+** Algo
+*/
+
+int				algo(t_p *p);
 
 /*
 ** Linked list to store the anthill
@@ -72,7 +92,7 @@ void			exit_error(char *reason, char *camefrom);
 ** Ants 
 */
 
-void			handle_ants(char **line, t_anthill *data, char **storage);
+void			handle_ants(t_p *p);
 
 /*
 ** Rooms
@@ -93,7 +113,15 @@ int				is_tube_valid(t_ht **room1, t_ht **room2, char *line, t_hthandle *t_hthan
 char			*split_tubes(char *line);
 int				**handle_tubes(char **line, t_list **tubes, t_hthandle *t_hthandler, int room_count, char **stoage);
 
+/*
+** parser
+*/
 
-int				**parser(int *size, char **line, char **storage);
+int				parser(t_p *p);
+void			display(t_anthill data, t_list *list);
+void			delete_junction_table(t_map_room_index *junction);
+void			delete_display_list(t_list *list);
+
+
 
 #endif

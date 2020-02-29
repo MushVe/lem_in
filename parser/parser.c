@@ -6,7 +6,7 @@
 /*   By: cseguier <cseguier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/26 01:31:58 by cseguier          #+#    #+#             */
-/*   Updated: 2020/02/27 05:30:33 by cseguier         ###   ########.fr       */
+/*   Updated: 2020/02/29 07:56:53 by cseguier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ t_list			*create_node(char *data)
 
 	if (data == NULL)
 		exit_error("Data to insert in list is NULL\n", (char*)__func__);
-	if (!(node = malloc(sizeof(t_list))))
+	if (!(node = ft_memalloc(sizeof(t_list))))
 		exit_error("Malloc failed\n", (char*)__func__);
 	node->data = data;
 	node->next = NULL;
@@ -49,12 +49,13 @@ t_map_room_index	*store_rooms(t_anthill data, t_hthandle *t_hthandler, t_list *r
 	char				*splitted;
 
 	i = 0;
-	if (!(junction_table = malloc(sizeof(t_map_room_index) * (data.room_count + 1))))
+	if (!(junction_table = ft_memalloc(sizeof(t_map_room_index) * (data.room_count + 1))))
 		exit_error("Malloc failed\n", (char*)__func__);
 	while (rooms)
 	{
 		if (is_room(rooms->data) && is_room_valid(rooms->data))
 		{
+			ft_printf("%s\n", rooms->data);
 			splitted = allocate_room(rooms->data);
 			hash_table_put(t_hthandler, splitted, i);
 			junction_table[i].index = i;
@@ -63,6 +64,10 @@ t_map_room_index	*store_rooms(t_anthill data, t_hthandle *t_hthandler, t_list *r
 		}
 		rooms = rooms->next;
 	}
+	data.rooms.start_index = hash_table_get(t_hthandler, data.rooms.start)->index;
+	data.rooms.end_index = hash_table_get(t_hthandler, data.rooms.end)->index;
+	ft_printf("start: %s\t%d\n", data.rooms.start, data.rooms.start_index);
+	ft_printf("end: %s\t%d\n", data.rooms.end, data.rooms.end_index);
 	return (junction_table);
 }
 
@@ -80,18 +85,6 @@ t_map_room_index	*store_rooms(t_anthill data, t_hthandle *t_hthandler, t_list *r
 ** 2/Get the rooms
 ** Verify Pitfalls
 */
-
-void			init(t_anthill *data, t_list *tmp, t_hthandle *t_hthandler)
-{
-	data->ant_count = 0;
-	data->room_count = 0;
-	data->rooms.end = NULL;
-	data->rooms.start = NULL;
-	t_hthandler->capacity = 0;
-	t_hthandler->current_capacity = 0;
-	t_hthandler->hash_table = NULL;
-	t_hthandler->modulo = 0;
-}
 
 void			delete_junction_table(t_map_room_index *junction)
 {
@@ -134,39 +127,15 @@ void			display(t_anthill data, t_list *list)
 ** between the lines
 */
 
-void			clean(t_hthandle *handle, t_list *list, t_map_room_index *junction, t_anthill data)
+int				parser(t_p *p)
 {
-	delete_display_list(list);
-	hash_table_delete(handle);
-	delete_junction_table(junction);
-	free(data.rooms.end);
-	free(data.rooms.start);
-}
-
-int				**parser(int *size, char **line, char **storage)
-{
-	t_anthill			data;
-	t_list				*tmp;
-	t_hthandle			t_hthandler;
-	t_map_room_index	*junction;
-	int					**matrix;
-
-	*line = NULL;
-	tmp = NULL;
-	init(&data, tmp, &t_hthandler);
-	handle_ants(line, &data, storage);
-	if (!handle_rooms(line, &tmp, &data, 0, storage))
+	handle_ants(p);
+	if (!handle_rooms(&p->line, &p->tmp, &p->data, 0, &p->storage))
 		exit_error("ERROR, room parsing failed\n", (char*)__func__);
-	hash_table_create(data.room_count, &t_hthandler);
-	junction = store_rooms(data, &t_hthandler, tmp);
-	if (!(matrix = handle_tubes(line, &tmp, &t_hthandler, data.room_count, storage)))
+	hash_table_create(p->data.room_count, &p->hthandler);
+	p->junction = store_rooms(p->data, &p->hthandler, p->tmp);
+	if (!(p->matrix = handle_tubes(&p->line, &p->tmp, &p->hthandler, p->data.room_count, &p->storage)))
 		exit_error("ERROR, tubes parsing failed\n", (char*)__func__);  // Pas sur, voir si on a assez de data pour faire le traiteme, (char*)__func__nt
-	*size = data.room_count;
-	/*
-	** Attention a ne pas utiliser avant la fin du programme hein
-	*/
-	display(data, tmp);
-	free(*storage);
-	clean(&t_hthandler, tmp, junction, data);
-	return (matrix);
+	p->size = p->data.room_count;
+	return (0);
 }

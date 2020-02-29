@@ -6,13 +6,13 @@
 /*   By: cseguier <cseguier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/26 01:37:45 by cseguier          #+#    #+#             */
-/*   Updated: 2020/02/27 05:04:33 by cseguier         ###   ########.fr       */
+/*   Updated: 2020/02/29 07:41:31 by cseguier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "queue.h"
+#include "../includes/libft.h"
 
-static t_qnode	*new_node(char *data)
+static t_qnode	*new_node(int data)
 {
 	t_qnode	*temp;
 
@@ -23,7 +23,7 @@ static t_qnode	*new_node(char *data)
 	return (temp);
 }
 
-static t_queue	*create_queue(void)
+t_queue			*create_queue(void)
 {
 	t_queue	*q;
 
@@ -34,7 +34,7 @@ static t_queue	*create_queue(void)
 	return (q);
 }
 
-void			en_queue(t_queue *q, char *data)
+void			en_queue(t_queue *q, int data)
 {
 	t_qnode	*temp;
 

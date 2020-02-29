@@ -6,7 +6,7 @@
 #    By: cseguier <cseguier@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/07 17:07:19 by cseguier          #+#    #+#              #
-#    Updated: 2020/02/28 03:05:46 by cseguier         ###   ########.fr        #
+#    Updated: 2020/02/29 06:18:13 by cseguier         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,6 +35,7 @@ FILE = 	ft_abs.c ft_atoi.c ft_bzero.c ft_capitalize.c ft_doublefree.c \
 		pft_get_type.c pft_get_double.c pft_get_unsigned.c \
 		hash_table_api.c hash_table_utils.c\
 		ft_get_line.c get_line_utils.c \
+		queue.c \
 
 SRC = $(FILE:%=%)
 
