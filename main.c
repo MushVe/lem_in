@@ -1,6 +1,6 @@
 #include "includes/lem_in.h"
 
-void	init(t_p *p)
+void	init(t_p *p, t_bfs *bfs)
 {
 	p->tmp = NULL;
 	p->size = 0;
@@ -28,12 +28,13 @@ void		clean(t_p *p)
 
 int			 main()
 {
-	t_p p;
+	t_p 	p;
+	t_bfs	bfs;
 
-	init(&p);
+	init(&p, &bfs);
 	parser(&p);
 	// display(p.data, p.tmp);
-	algo(&p);
+	algo(&p, &bfs);
 
 	// for (size_t i = 0; i < p.size; i++)
 	// {

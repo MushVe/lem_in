@@ -6,7 +6,7 @@
 /*   By: cseguier <cseguier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/26 01:31:58 by cseguier          #+#    #+#             */
-/*   Updated: 2020/02/29 08:07:50 by cseguier         ###   ########.fr       */
+/*   Updated: 2020/03/01 02:46:57 by cseguier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,6 @@ t_map_room_index	*store_rooms(t_anthill *data, t_hthandle *t_hthandler, t_list *
 	{
 		if (is_room(rooms->data) && is_room_valid(rooms->data))
 		{
-			// ft_printf("%s\n", rooms->data);
 			splitted = allocate_room(rooms->data);
 			hash_table_put(t_hthandler, splitted, i);
 			junction_table[i].index = i;
@@ -66,8 +65,6 @@ t_map_room_index	*store_rooms(t_anthill *data, t_hthandle *t_hthandler, t_list *
 	}
 	data->rooms.start_index = hash_table_get(t_hthandler, data->rooms.start)->index;
 	data->rooms.end_index = hash_table_get(t_hthandler, data->rooms.end)->index;
-	ft_printf("start: %s\t%d\n", data->rooms.start, data->rooms.start_index);
-	ft_printf("end:   %s\t%d\n", data->rooms.end, data->rooms.end_index);
 	return (junction_table);
 }
 

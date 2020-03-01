@@ -6,48 +6,99 @@
 /*   By: cseguier <cseguier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/29 01:27:16 by cseguier          #+#    #+#             */
-/*   Updated: 2020/02/29 08:15:03 by cseguier         ###   ########.fr       */
+/*   Updated: 2020/03/01 06:14:03 by cseguier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/lem_in.h"
 
-int algo(t_p *p)
+void	bfs_init(t_bfs *bfs, int size)
+{
+	int	i;
+
+	if (!(bfs->visited_record = ft_memalloc(sizeof(int*) * size + 1))
+		|| !(bfs->parent = ft_memalloc(sizeof(int*) * size + 1))
+		|| !(bfs->path = ft_memalloc(sizeof(int*) * size + 1)))
+		exit_error("Malloc Failed", (char*)__func__);
+	i = 0;
+	while (++i < size + 1)
+		bfs->path[i] = -1;
+}
+
+void	find_path(t_bfs *bfs, int start, int end, int i)
+{
+	bfs->path[i] = bfs->parent[i];
+	if (bfs->parent[i] == start)
+		return ;
+	else
+		find_path(bfs, start, end, ++i);
+
+}
+
+int	*rev(int *str, int size)
+{
+	int	i;
+	int	buff;
+	int	*res;
+
+	if (!(res = ft_memalloc(sizeof(int*) * size + 1)))
+		exit_error("Malloc Failed", (char*)__func__);
+	i = 0;
+	buff = 0;
+	while (size > i)
+	{
+		buff = res[size];
+		res[size] = res[i];
+		res[i] = buff;
+		i++;
+		size--;
+	}
+	return res;
+}
+
+int algo(t_p *p, t_bfs *bfs)
 {
 	t_queue	*q;
 	int		host;
 	int		link;
-	char	*visited_record;
 
-	if (!(visited_record = ft_memalloc(sizeof(char*) * p->size + 1)))
-		exit_error("Malloc Failed", (char*)__func__);
+	bfs_init(bfs, p->size);
 	q = create_queue();
 	host = p->data.rooms.start_index;
-	ft_printf("000 %s\t%d\n", p->junction[host].room_name, p->junction[host].index);
-	ft_printf("host %d %d\n", host, p->data.rooms.start_index);
-	en_queue(q, p->junction[host].index);
-	visited_record[host] = 1;
 
+	ft_printf("start: %s\t%d\n", p->data.rooms.start, p->data.rooms.start_index);
+	ft_printf("end:   %s\t%d\n", p->data.rooms.end, p->data.rooms.end_index);
+
+	en_queue(q, p->junction[host].index);
+	bfs->visited_record[host] = 1;
 
 	while (q->rear != NULL && host != p->data.rooms.end_index)
 	{
 		host = q->front->data;
 		de_queue(q);
-		ft_printf("111 %s\t%d\n", p->junction[host].room_name, p->junction[host].index);
+		// ft_printf("111 %s\t%d\n", p->junction[host].room_name, p->junction[host].index);
 		link = -1;
 		while (++link < p->size)
 		{
-			if (p->matrix[host][link] == 1 && visited_record[link] == 0)
+			if (p->matrix[host][link] == 1
+				&& bfs->visited_record[link] == 0)
 			{
 				en_queue(q, p->junction[link].index);
-				visited_record[link] = 1;
+				bfs->visited_record[link] = 1;
+				bfs->parent[link] = host;
 			}
 		}
 	}
 
+	if (host == p->data.rooms.end_index)
+		find_path(bfs, p->data.rooms.start_index, p->data.rooms.end_index, 0);
 
-
-
+	int i = -1;
+	//bfs->path = rev(bfs->path, p->size);
+	while (bfs->path[++i] != -1)
+	{
+		ft_printf("%s\n", p->junction[bfs->path[i]].room_name);
+	}
 	return (0);
 }
 
@@ -68,22 +119,3 @@ while (i++)
 5 . 1 1 . 1 *
 
 */
-	// while(!isempty)
-	// {
-	// 	// Dequeue a vertex from queue and print it
-	// 	s = queue.front();
-	// 	cout << s << " ";
-	// 	queue.pop_front();
-  
-	// 	// Get all adjacent vertices of the dequeued
-	// 	// vertex s. If a adjacent has not been visited,
-	// 	// then mark it visited and enqueue it
-	// 	for (i = adj[s].begin();i != adj[s].end();++i)
-	// 	{
-	// 		if (!visited[*i])
-	// 		{
-	// 			visited[*i] = true;
-	// 			queue.push_back(*i);
-	// 		}
-	// 	}
-	// }

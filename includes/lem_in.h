@@ -6,7 +6,7 @@
 /*   By: cseguier <cseguier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/26 01:37:37 by cseguier          #+#    #+#             */
-/*   Updated: 2020/02/29 07:12:28 by cseguier         ###   ########.fr       */
+/*   Updated: 2020/03/01 05:22:56 by cseguier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,12 +62,18 @@ typedef struct	s_p
 	t_hthandle			hthandler;
 }				t_p;
 
+typedef struct	s_bfs 
+{
+	int		*visited_record;
+	int		*parent;
+	int		*path;
+}				t_bfs;
 
 /*
 ** Algo
 */
 
-int				algo(t_p *p);
+int				algo(t_p *p, t_bfs *bfs);
 
 /*
 ** Linked list to store the anthill
