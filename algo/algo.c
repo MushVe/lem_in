@@ -6,7 +6,7 @@
 /*   By: cseguier <cseguier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/29 01:27:16 by cseguier          #+#    #+#             */
-/*   Updated: 2020/03/03 02:10:24 by cseguier         ###   ########.fr       */
+/*   Updated: 2020/03/03 05:07:31 by cseguier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,29 +16,27 @@ void	bfs_init(t_bfs *bfs, int size)
 {
 	int	i;
 
-	if (!(bfs->visited_record = ft_memalloc(sizeof(int*) * size + 1))
-		|| !(bfs->parent = ft_memalloc(sizeof(int*) * size + 1))
-		|| !(bfs->path = ft_memalloc(sizeof(int*) * size + 1)))
+	if (!(bfs->visited_record = ft_memalloc(sizeof(int*) * size))
+		|| !(bfs->parent = ft_memalloc(sizeof(int*) * size)))
 		exit_error("Malloc Failed", (char*)__func__);
 	i = 0;
-	while (++i < size + 1)
-		bfs->path[i] = -1;
+	bfs->max_path = 0;
 }
 
-void	find_path(t_bfs *bfs, int start, int end, int i, t_map_room_index *jun)
+void	find_path(t_bfs *bfs, t_p *p, int end, int i)
 {
-	bfs->path[i] = end;
-	
-	if (end != start)
+	// ft_printf("AAAA\n");
+	bfs->path[bfs->path_id][i] = p->data.rooms.end_index;
+	// ft_printf("BBBB\n");
+	if (end != p->data.rooms.start_index)
 	{
-		find_path(bfs, start, bfs->parent[end], ++i, jun);
-		ft_printf("%s %d\n",
-			jun[end].room_name, bfs->parent[end]);
+		// ft_printf("CCCC\n");
+		find_path(bfs, p, bfs->parent[end], ++i);
+		ft_printf("%s\n", p->junction[end].room_name);
 	}
 	else
 	{
-		ft_printf("%s %d\n",
-			jun[end].room_name, bfs->parent[end]);
+		ft_printf("%s\n", p->junction[end].room_name);
 		return ;
 	}
 }
@@ -59,12 +57,11 @@ int algo(t_p *p, t_bfs *bfs)
 	en_queue(q, p->junction[host].index);
 	bfs->visited_record[host] = 1;
 
-	while (q->rear != NULL && host != p->data.rooms.end_index)
+	while (q->rear != NULL)
 	{
 		host = q->front->data;
 		de_queue(q);
-		ft_printf("decu  ---> \t%s\t%d\n",
-			p->junction[host].room_name, p->junction[host].index);
+		// ft_printf("decu  ---> \t%s\t%d\n", p->junction[host].room_name, p->junction[host].index);
 		link = -1;
 		while (++link < p->size)
 		{
@@ -72,18 +69,32 @@ int algo(t_p *p, t_bfs *bfs)
 				&& bfs->visited_record[link] == 0)
 			{
 				en_queue(q, link);
-				ft_printf("encu <--- \t%s\t%d\n",
-					p->junction[link].room_name, p->junction[link].index);
+				// ft_printf("encu <---  \t%s\t%d\n", p->junction[link].room_name, p->junction[link].index);
 				bfs->visited_record[link] = 1;
 				bfs->parent[link] = host;
-				ft_printf("parent/host %s <> link %s\n",
-					 p->junction[host].room_name, p->junction[link].room_name);
+				if (host == p->data.rooms.end_index || link == p->data.rooms.end_index)
+					bfs->max_path++;
+				ft_printf("            %s <> %s\n", p->junction[host].room_name, p->junction[link].room_name);
 			}
 		}
 	}
 
-	if (host == p->data.rooms.end_index)
-		find_path(bfs, p->data.rooms.start_index, p->data.rooms.end_index, 0, p->junction);
+	ft_printf("max_path: %d\n", bfs->max_path);
+	// ft_printf("000\n");
+
+	bfs->path_id = -1;
+	if (!(bfs->path = ft_memalloc(sizeof(int*) * bfs->max_path)))
+		exit_error("Malloc Failed", (char*)__func__);
+	// ft_printf("111\n");
+	while (++bfs->path_id < bfs->max_path)
+	{
+		// ft_printf("222\n");
+		if (!(bfs->path[bfs->path_id] = ft_memalloc(sizeof(int) * p->size)))
+			exit_error("Malloc Failed", (char*)__func__);
+		// ft_printf("333\n");
+		find_path(bfs, p, p->data.rooms.end_index, 0);
+		// ft_printf("444\n");
+	}
 
 	// int i = p->size;
 	// //bfs->path = rev(bfs->path, p->size);

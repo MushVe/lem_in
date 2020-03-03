@@ -6,7 +6,7 @@
 /*   By: cseguier <cseguier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/26 01:37:37 by cseguier          #+#    #+#             */
-/*   Updated: 2020/03/01 05:22:56 by cseguier         ###   ########.fr       */
+/*   Updated: 2020/03/03 05:30:13 by cseguier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,11 +62,19 @@ typedef struct	s_p
 	t_hthandle			hthandler;
 }				t_p;
 
+typedef struct	s_path
+{
+	int				*data;
+	struct s_path	*next;
+}				t_path;
+
 typedef struct	s_bfs 
 {
 	int		*visited_record;
 	int		*parent;
-	int		*path;
+	t_path	*path;
+	int		max_path;
+	int		path_id;
 }				t_bfs;
 
 /*
@@ -74,6 +82,9 @@ typedef struct	s_bfs
 */
 
 int				algo(t_p *p, t_bfs *bfs);
+void			bfs_free_list(t_lst **list);
+int				bfs_new_node(char *data, int size, t_pf *p);
+char			*bfs_get_node(int aim, t_pf *p);
 
 /*
 ** Linked list to store the anthill
