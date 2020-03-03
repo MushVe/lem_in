@@ -6,7 +6,7 @@
 /*   By: cseguier <cseguier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/29 01:27:16 by cseguier          #+#    #+#             */
-/*   Updated: 2020/03/03 02:05:35 by cseguier         ###   ########.fr       */
+/*   Updated: 2020/03/03 02:10:24 by cseguier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	find_path(t_bfs *bfs, int start, int end, int i, t_map_room_index *jun)
 {
 	bfs->path[i] = end;
 	
-	if (bfs->parent[end] != bfs->parent[start])
+	if (end != start)
 	{
 		find_path(bfs, start, bfs->parent[end], ++i, jun);
 		ft_printf("%s %d\n",
