@@ -6,7 +6,7 @@
 /*   By: cseguier <cseguier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/29 01:27:16 by cseguier          #+#    #+#             */
-/*   Updated: 2020/03/03 05:07:31 by cseguier         ###   ########.fr       */
+/*   Updated: 2020/03/03 05:41:18 by cseguier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,14 @@ void	bfs_init(t_bfs *bfs, int size)
 	int	i;
 
 	if (!(bfs->visited_record = ft_memalloc(sizeof(int*) * size))
-		|| !(bfs->parent = ft_memalloc(sizeof(int*) * size)))
+		|| !(bfs->parent = ft_memalloc(sizeof(int*) * size))
+		|| !(bfs->tmp_path = ft_memalloc(sizeof(int*) * size)))
 		exit_error("Malloc Failed", (char*)__func__);
 	i = 0;
 	bfs->max_path = 0;
 }
 
-void	find_path(t_bfs *bfs, t_p *p, int end, int i)
+int		*find_path(t_bfs *bfs, t_p *p, int end, int i)
 {
 	// ft_printf("AAAA\n");
 	bfs->path[bfs->path_id][i] = p->data.rooms.end_index;
@@ -83,17 +84,12 @@ int algo(t_p *p, t_bfs *bfs)
 	// ft_printf("000\n");
 
 	bfs->path_id = -1;
-	if (!(bfs->path = ft_memalloc(sizeof(int*) * bfs->max_path)))
-		exit_error("Malloc Failed", (char*)__func__);
-	// ft_printf("111\n");
+	
 	while (++bfs->path_id < bfs->max_path)
 	{
-		// ft_printf("222\n");
-		if (!(bfs->path[bfs->path_id] = ft_memalloc(sizeof(int) * p->size)))
-			exit_error("Malloc Failed", (char*)__func__);
-		// ft_printf("333\n");
-		find_path(bfs, p, p->data.rooms.end_index, 0);
-		// ft_printf("444\n");
+		bfs->tmp_path = find_path(bfs, p, p->data.rooms.end_index, 0);
+		bfs_new_node(bfs->tmp_path, p->size, p);
+		
 	}
 
 	// int i = p->size;

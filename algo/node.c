@@ -6,7 +6,7 @@
 /*   By: cseguier <cseguier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/03 05:18:48 by cseguier          #+#    #+#             */
-/*   Updated: 2020/03/03 05:30:41 by cseguier         ###   ########.fr       */
+/*   Updated: 2020/03/03 05:41:59 by cseguier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	bfs_free_list(t_path **list)
 	while (cpy)
 	{
 		tmp = cpy->next;
-		ft_memdel((void*)&cpy->str);
+		ft_memdel((void*)&cpy->data);
 		ft_memdel((void*)&cpy);
 		cpy = NULL;
 		cpy = tmp;
@@ -37,8 +37,7 @@ int		bfs_new_node(int *data, int size, t_pf *p)
 	cpy = p->first;
 	if (!(node = (t_path*)ft_memalloc(sizeof(t_path))))
 		return (0);
-	node->str = ft_strdup(data);
-	ft_memdel((void*)&data);
+	node->data = data; //malloc
 	node->size = size;
 	if (p->null == 1)
 		node->null = 1;
@@ -65,5 +64,5 @@ char	*bfs_get_node(int aim, t_pf *p)
 	i = -1;
 	while (++i < aim && cpy)
 		cpy = cpy->next;
-	return (cpy->str);
+	return (cpy->data);
 }

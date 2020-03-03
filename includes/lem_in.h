@@ -6,7 +6,7 @@
 /*   By: cseguier <cseguier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/26 01:37:37 by cseguier          #+#    #+#             */
-/*   Updated: 2020/03/03 05:30:13 by cseguier         ###   ########.fr       */
+/*   Updated: 2020/03/03 05:40:16 by cseguier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,7 @@ typedef struct	s_bfs
 	int		*visited_record;
 	int		*parent;
 	t_path	*path;
+	int		tmp_path;
 	int		max_path;
 	int		path_id;
 }				t_bfs;
@@ -83,7 +84,7 @@ typedef struct	s_bfs
 
 int				algo(t_p *p, t_bfs *bfs);
 void			bfs_free_list(t_lst **list);
-int				bfs_new_node(char *data, int size, t_pf *p);
+int				bfs_new_node(int *data, int size, t_pf *p);
 char			*bfs_get_node(int aim, t_pf *p);
 
 /*
