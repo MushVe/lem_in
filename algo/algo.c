@@ -6,7 +6,7 @@
 /*   By: cseguier <cseguier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/29 01:27:16 by cseguier          #+#    #+#             */
-/*   Updated: 2020/03/04 05:42:30 by cseguier         ###   ########.fr       */
+/*   Updated: 2020/03/04 05:58:46 by cseguier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,12 +128,12 @@ int algo(t_p *p, t_bfs *bfs)
 		{
 			if (cpy->data[i] != -1)
 			{
-				// ft_printf("Chemin #%d: ", bfs->path_id + 1);
-				// ft_printf("%s ", p->junction[cpy->data[i]].room_name);
-				// ft_printf(" %d\n", cpy->data[i]);
+				ft_printf("Chemin #%d: ", bfs->path_id + 1);
+				ft_printf("%s ", p->junction[cpy->data[i]].room_name);
+				ft_printf(" %d\n", cpy->data[i]);
 			}
 		}
-		// ft_printf("++++++\n");
+		ft_printf("++++++\n");
 		cpy = cpy->next;
 	}
 
