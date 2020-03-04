@@ -6,7 +6,7 @@
 /*   By: cseguier <cseguier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/26 01:32:13 by cseguier          #+#    #+#             */
-/*   Updated: 2020/02/27 05:29:46 by cseguier         ###   ########.fr       */
+/*   Updated: 2020/03/04 05:41:27 by cseguier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ int	**handle_tubes(char **line, t_list **tubes, t_hthandle *t_hthandler, int roo
 		return (NULL);
 	while (ft_get_line(0, line, storage) > 0)
 	{
+		// ft_printf("line: %s\n", *line);
 		if (!(add_front_node(tubes, *line)))
 			return (0);
 		if (is_empty(*line))

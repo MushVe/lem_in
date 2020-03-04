@@ -33,6 +33,7 @@ int			 main()
 
 	init(&p, &bfs);
 	parser(&p);
+	ft_printf("End gnl\n");
 	// display(p.data, p.tmp);
 	algo(&p, &bfs);
 

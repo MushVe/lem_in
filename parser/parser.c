@@ -6,7 +6,7 @@
 /*   By: cseguier <cseguier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/26 01:31:58 by cseguier          #+#    #+#             */
-/*   Updated: 2020/03/01 02:46:57 by cseguier         ###   ########.fr       */
+/*   Updated: 2020/03/04 05:43:10 by cseguier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,7 +130,9 @@ int				parser(t_p *p)
 	if (!handle_rooms(&p->line, &p->tmp, &p->data, 0, &p->storage))
 		exit_error("ERROR, room parsing failed\n", (char*)__func__);
 	hash_table_create(p->data.room_count, &p->hthandler);
+	ft_printf("Before the worst function ever\n");
 	p->junction = store_rooms(&p->data, &p->hthandler, p->tmp);
+	ft_printf("After the worst function ever\n");
 	if (!(p->matrix = handle_tubes(&p->line, &p->tmp, &p->hthandler, p->data.room_count, &p->storage)))
 		exit_error("ERROR, tubes parsing failed\n", (char*)__func__);  // Pas sur, voir si on a assez de data pour faire le traiteme, (char*)__func__nt
 	p->size = p->data.room_count;

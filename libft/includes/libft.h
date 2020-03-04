@@ -6,7 +6,7 @@
 /*   By: cseguier <cseguier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/07 17:13:11 by cseguier          #+#    #+#             */
-/*   Updated: 2020/02/29 07:43:58 by cseguier         ###   ########.fr       */
+/*   Updated: 2020/03/04 05:37:13 by cseguier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 # include <stdlib.h>
 # include <string.h>
 
-# define GL_BUFF_SIZE 1000000
+# define GL_BUFF_SIZE 5000000
 
 typedef struct	s_gl_list
 {

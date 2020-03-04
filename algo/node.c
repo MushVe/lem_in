@@ -6,18 +6,18 @@
 /*   By: cseguier <cseguier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/03 05:18:48 by cseguier          #+#    #+#             */
-/*   Updated: 2020/03/03 05:41:59 by cseguier         ###   ########.fr       */
+/*   Updated: 2020/03/04 04:08:47 by cseguier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/lem_in.h"
 
-void	bfs_free_list(t_path **list)
+void	bfs_free_list(t_path **path)
 {
 	t_path	*cpy;
 	t_path	*tmp;
 
-	cpy = *list;
+	cpy = *path;
 	tmp = NULL;
 	while (cpy)
 	{
@@ -29,38 +29,48 @@ void	bfs_free_list(t_path **list)
 	}
 }
 
-int		bfs_new_node(int *data, int size, t_pf *p)
+int		bfs_new_node(int *data, t_path **path, int size)
 {
 	t_path	*cpy;
 	t_path	*node;
+	int		i;
+	int		j;
 
-	cpy = p->first;
-	if (!(node = (t_path*)ft_memalloc(sizeof(t_path))))
-		return (0);
-	node->data = data; //malloc
-	node->size = size;
-	if (p->null == 1)
-		node->null = 1;
-	else
-		node->null = 0;
+	cpy = *path;
+	if (!(node = (t_path*)ft_memalloc(sizeof(t_path))) 
+		|| !(node->data = ft_memalloc(sizeof(int) * size)))
+		exit_error("Malloc Failed", (char*)__func__);
+	ft_printf("AAAA\n");
+	i = size;
+	j = -1;
+	while (--i >= 0)
+		node->data[i] = data[++j];
+	//	ft_printf("BBBB\n");
 	node->next = NULL;
 	if (!cpy)
 	{
-		p->first = node;
+		*path = node;
 		return (1);
 	}
+	//	ft_printf("CCCC\n");
 	while (cpy->next != NULL)
+	{
+		ft_printf("DDDD\n");
 		cpy = cpy->next;
+	}
 	cpy->next = node;
+	ft_printf("%p\n", cpy);
+	ft_printf("%p\n", cpy->next);
+	//	ft_printf("EEEE\n");
 	return (1);
 }
 
-char	*bfs_get_node(int aim, t_pf *p)
+int		*bfs_get_node(int aim, t_path *path)
 {
 	t_path	*cpy;
 	int		i;
 
-	cpy = p->first;
+	cpy = path;
 	i = -1;
 	while (++i < aim && cpy)
 		cpy = cpy->next;

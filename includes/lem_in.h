@@ -6,7 +6,7 @@
 /*   By: cseguier <cseguier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/26 01:37:37 by cseguier          #+#    #+#             */
-/*   Updated: 2020/03/03 05:40:16 by cseguier         ###   ########.fr       */
+/*   Updated: 2020/03/04 03:52:54 by cseguier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ typedef struct	s_bfs
 	int		*visited_record;
 	int		*parent;
 	t_path	*path;
-	int		tmp_path;
+	int		*tmp_path;
 	int		max_path;
 	int		path_id;
 }				t_bfs;
@@ -83,9 +83,9 @@ typedef struct	s_bfs
 */
 
 int				algo(t_p *p, t_bfs *bfs);
-void			bfs_free_list(t_lst **list);
-int				bfs_new_node(int *data, int size, t_pf *p);
-char			*bfs_get_node(int aim, t_pf *p);
+void			bfs_free_list(t_path **path);
+int				bfs_new_node(int *data, t_path **path, int size);
+int				*bfs_get_node(int aim, t_path *path);
 
 /*
 ** Linked list to store the anthill
@@ -129,7 +129,7 @@ int				handle_rooms(char **line, t_list **tmp, t_anthill *data, int command_flag
 t_ht			*does_room_exist(char *line, t_hthandle *t_hthandler);
 int				is_tube_valid(t_ht **room1, t_ht **room2, char *line, t_hthandle *t_hthandler);
 char			*split_tubes(char *line);
-int				**handle_tubes(char **line, t_list **tubes, t_hthandle *t_hthandler, int room_count, char **stoage);
+int				**handle_tubes(char **l, t_list **t, t_hthandle *h, int r, char **stoage);
 
 /*
 ** parser
