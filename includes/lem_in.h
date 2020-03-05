@@ -6,7 +6,7 @@
 /*   By: cseguier <cseguier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/26 01:37:37 by cseguier          #+#    #+#             */
-/*   Updated: 2020/03/04 03:52:54 by cseguier         ###   ########.fr       */
+/*   Updated: 2020/03/05 04:23:27 by cseguier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,7 @@ typedef struct	s_path
 
 typedef struct	s_bfs 
 {
+	int		*matrix_level;
 	int		*visited_record;
 	int		*parent;
 	t_path	*path;
