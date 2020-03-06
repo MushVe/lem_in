@@ -6,7 +6,7 @@
 /*   By: cseguier <cseguier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/29 14:01:55 by cseguier          #+#    #+#             */
-/*   Updated: 2019/11/13 01:42:26 by cseguier         ###   ########.fr       */
+/*   Updated: 2020/03/06 05:46:00 by cseguier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ static char	*pft_adjust_width(char *res, char *it, int i, t_pf *p)
 	return (res);
 }
 
-char	*pft_add_width(char *res, t_pf *p)
+char		*pft_add_width(char *res, t_pf *p)
 {
 	int		i;
 	char	*it;

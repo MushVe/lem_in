@@ -6,7 +6,7 @@
 /*   By: cseguier <cseguier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/26 01:35:18 by cseguier          #+#    #+#             */
-/*   Updated: 2020/02/28 06:45:48 by cseguier         ###   ########.fr       */
+/*   Updated: 2020/03/06 05:36:48 by cseguier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 bool	gl_is_storage_empty(char *storage)
 {
-	// ft_printf("What does storage contain %s <%c>\n", storage == NULL ? "nothing" : storage, storage != NULL ? storage[0] : '\0');
 	return (storage == NULL || *storage == '\0');
 }
 
@@ -42,36 +41,20 @@ void	gl_strjoin_free_s1(char **s1, char *s2)
 	int		size_s2;
 	char	*new_str;
 
-	// ft_printf("buffer: <<%s>>\n\n\n\n", s2);
-	// ft_printf("storage: ((%s))\n\n\n\n\n", *s1);
 	new_str = NULL;
 	size_s1 = ft_strlen(*s1);
 	size_s2 = ft_strlen(s2);
-	// ft_printf("Inside: %s after the strlen\n", __func__);
 	if (!(new_str = ft_memalloc(size_s1 + size_s2 + 1)))
 		exit(0);
 	if (!ft_strcpy(new_str, *s1))
 		exit(0);
 	if (!ft_strcpy(new_str + size_s1, s2))
 		exit(0);
-	// ft_printf("new_str ???%s???\n\n", new_str);
-	// ft_printf("2nd strcpy %s\n", new_str);
-	// ft_printf("Inside: %s after the allocations\n", __func__);
 	free(*s1);
 	*s1 = new_str;
 }
 
 bool	gl_save_data(char **storage, char *buffer)
 {
-	static int	i = 0;
-
-	// ft_printf("%d times in %s\n", i, __func__);
-	i++;
-	if (*storage)
-	{
-		// ft_printf("storage is not empty in %s\n", __func__);
-		// return ((*storage = strjoin_free_s1(storage, buffer)) != NULL);
-	}
-	// ft_printf("first allocation of storage in %s\n", __func__);
 	return ((*storage = ft_strdup(buffer)) != NULL);
 }

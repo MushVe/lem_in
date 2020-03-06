@@ -6,7 +6,7 @@
 /*   By: cseguier <cseguier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/03 05:18:48 by cseguier          #+#    #+#             */
-/*   Updated: 2020/03/06 04:47:23 by cseguier         ###   ########.fr       */
+/*   Updated: 2020/03/06 05:08:33 by cseguier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,14 +37,14 @@ int		bfs_new_node(int *data, t_path **path, int size)
 	int		j;
 
 	cpy = *path;
-	if (!(node = (t_path*)ft_memalloc(sizeof(t_path))) 
+	if (!(node = (t_path*)ft_memalloc(sizeof(t_path)))
 		|| !(node->data = ft_memalloc(sizeof(int) * size)))
 		exit_error("Malloc Failed", (char*)__func__);
-	node->size = size;
 	i = size;
 	j = -1;
 	while (data[++j] != -1)
 		node->data[--i] = data[j];
+	node->size = size;
 	node->next = NULL;
 	if (!cpy)
 	{
@@ -52,9 +52,7 @@ int		bfs_new_node(int *data, t_path **path, int size)
 		return (1);
 	}
 	while (cpy->next != NULL)
-	{
 		cpy = cpy->next;
-	}
 	cpy->next = node;
 	return (1);
 }

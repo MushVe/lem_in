@@ -6,33 +6,11 @@
 /*   By: cseguier <cseguier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/26 01:35:12 by cseguier          #+#    #+#             */
-/*   Updated: 2020/02/29 07:17:49 by cseguier         ###   ########.fr       */
+/*   Updated: 2020/03/06 05:42:43 by cseguier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/libft.h"
-
-static char		*my_strtok(char *line, int *end)
-{
-	static int	index = 0;
-	int			offset;
-
-	if (index != 0)
-		index++;
-	offset = index;
-	while (line[index])
-	{
-		if (line[index] == '\n')
-		{
-			line[index] = '\0';
-			return (line + offset);
-		}
-		index++;
-	}
-	index = 0;
-	*end = 0;
-	return (line + offset);
-}
 
 static bool		return_line(char *storage, char **line)
 {

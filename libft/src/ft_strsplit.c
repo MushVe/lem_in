@@ -6,7 +6,7 @@
 /*   By: cseguier <cseguier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/12 15:45:38 by cseguier          #+#    #+#             */
-/*   Updated: 2020/03/03 04:20:08 by cseguier         ###   ########.fr       */
+/*   Updated: 2020/03/06 05:30:50 by cseguier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ static void	dimensional_copy(char const *s, char c, char **dest)
 char		**ft_strsplit(char const *s, char c)
 {
 	int		i;
-	int		*letters_array;
+	int		*tab;
 	int		words_numbers;
 	char	**new_strings;
 
@@ -98,15 +98,15 @@ char		**ft_strsplit(char const *s, char c)
 	if (!s)
 		return (NULL);
 	words_numbers = count_words(s, c);
-	if (!(letters_array = count_letters(s, c, &words_numbers)))
+	if (!(tab = count_letters(s, c, &words_numbers)))
 		return (NULL);
 	if (!(new_strings = ft_memalloc((words_numbers + 1) * sizeof(char*))))
 		return (0);
 	while (++i < words_numbers)
-		if (!(new_strings[i] = ft_memalloc((letters_array[i] + 1) * sizeof(char))))
+		if (!(new_strings[i] = ft_memalloc((tab[i] + 1) * sizeof(char))))
 			return (0);
 	dimensional_copy(s, c, new_strings);
-	free(letters_array);
+	free(tab);
 	return (new_strings);
 }
 

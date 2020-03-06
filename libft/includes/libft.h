@@ -6,7 +6,7 @@
 /*   By: cseguier <cseguier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/07 17:13:11 by cseguier          #+#    #+#             */
-/*   Updated: 2020/03/04 05:58:11 by cseguier         ###   ########.fr       */
+/*   Updated: 2020/03/06 05:44:02 by cseguier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,10 @@
 # include <unistd.h>
 # include <stdlib.h>
 # include <string.h>
+
+/*
+** GET LINE
+*/
 
 # define GL_BUFF_SIZE 1500
 
@@ -34,7 +38,9 @@ bool			gl_save_data(char **storage, char *buffer);
 void			gl_strjoin_free_s1(char **s1, char *s2);
 int				ft_get_line(int fd, char **line, char **storage);
 
-///////////////////////////////////////////////////////////
+/*
+** QUEUE
+*/
 
 typedef struct	s_qnode
 {
@@ -52,7 +58,9 @@ t_queue			*create_queue(void);
 void			en_queue(t_queue *q, int data);
 void			de_queue(t_queue *q);
 
-///////////////////////////////////////////////////////////
+/*
+** LIBFT
+*/
 
 typedef struct	s_lftlist
 {
@@ -133,6 +141,7 @@ char			*ft_strrchr(char const *s, int c);
 char			*ft_strrev(char const *str, size_t len);
 char			**ft_strsplit(char const *s, char c);
 char			*ft_strstr(char const *str, char const *need);
+char			*my_strtok(char *line, int *end);
 char			*ft_strsub(char const *s, unsigned int start, size_t len);
 char			*ft_strtrim(char const *s);
 int				ft_tolower(int c);

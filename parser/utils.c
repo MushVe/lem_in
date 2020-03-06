@@ -6,17 +6,11 @@
 /*   By: cseguier <cseguier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/26 01:32:22 by cseguier          #+#    #+#             */
-/*   Updated: 2020/02/26 03:57:26 by cseguier         ###   ########.fr       */
+/*   Updated: 2020/03/06 06:45:30 by cseguier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/lem_in.h"
-
-void	exit_error(char *reason, char *camefrom)
-{
-	ft_printf("In function <%s> : %s\n", camefrom, reason);
-	exit(0);
-}
 
 int		is_comment(char *line)
 {

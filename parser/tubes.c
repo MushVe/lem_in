@@ -6,7 +6,7 @@
 /*   By: cseguier <cseguier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/26 01:32:13 by cseguier          #+#    #+#             */
-/*   Updated: 2020/03/04 05:41:27 by cseguier         ###   ########.fr       */
+/*   Updated: 2020/03/06 06:35:29 by cseguier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,28 +40,25 @@ int	fill_adjacency_matrix(int **matrix, char *line, t_hthandle *t_hthandler)
 	return (0);
 }
 
-int	**handle_tubes(char **line, t_list **tubes, t_hthandle *t_hthandler, int room_count, char **storage)
+int	handle_tubes(t_p *p)
 {
-	int **matrix;
-
-	if (!(matrix = allocate_double_array(room_count)))
+	if (!(p->matrix = allocate_double_array(p->data.room_count)))
 		exit_error("Malloc failed\n", (char*)__func__);
-	if (!fill_adjacency_matrix(matrix, *line, t_hthandler))
-		return (NULL);
-	while (ft_get_line(0, line, storage) > 0)
+	if (!fill_adjacency_matrix(p->matrix, p->line, &p->hthandler))
+		return (0);
+	while (ft_get_line(0, &p->line, &p->storage) > 0)
 	{
-		// ft_printf("line: %s\n", *line);
-		if (!(add_front_node(tubes, *line)))
+		if (!(add_front_node(&p->tmp, p->line)))
 			return (0);
-		if (is_empty(*line))
-			return (NULL);
-		else if (is_command(*line))
-			return (NULL);
-		else if (is_comment(*line))
+		if (is_empty(p->line))
+			return (0);
+		else if (is_command(p->line))
+			return (0);
+		else if (is_comment(p->line))
 			continue;
-		if (is_line_valid(*line))
-			if (!fill_adjacency_matrix(matrix, *line, t_hthandler))
-				return (NULL);
+		if (is_line_valid(p->line))
+			if (!fill_adjacency_matrix(p->matrix, p->line, &p->hthandler))
+				return (0);
 	}
-	return (matrix);
+	return (1);
 }

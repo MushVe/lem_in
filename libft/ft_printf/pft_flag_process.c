@@ -6,7 +6,7 @@
 /*   By: cseguier <cseguier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/29 14:01:55 by cseguier          #+#    #+#             */
-/*   Updated: 2019/11/13 01:48:16 by cseguier         ###   ########.fr       */
+/*   Updated: 2020/03/06 05:46:12 by cseguier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ static char	*first_process(char c, va_list ap, t_pf *p, char *res)
 	return (res);
 }
 
-int		ptf_process(char c, va_list ap, t_pf *p)
+int			ptf_process(char c, va_list ap, t_pf *p)
 {
 	char	*res;
 

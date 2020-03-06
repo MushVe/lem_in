@@ -6,13 +6,13 @@
 /*   By: cseguier <cseguier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/29 14:01:55 by cseguier          #+#    #+#             */
-/*   Updated: 2019/11/13 01:46:11 by cseguier         ###   ########.fr       */
+/*   Updated: 2020/03/06 05:46:41 by cseguier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_printf.h"
 
-int		get_type(t_pf *p, char c)
+int			get_type(t_pf *p, char c)
 {
 	if (c == 'h')
 	{
@@ -39,7 +39,7 @@ int		get_type(t_pf *p, char c)
 	return (0);
 }
 
-int		getoptions(t_pf *p, const char *frmt)
+int			getoptions(t_pf *p, const char *frmt)
 {
 	if (frmt[0] == '+')
 		p->op_plus = 1;
@@ -66,7 +66,7 @@ int		getoptions(t_pf *p, const char *frmt)
 	return (1);
 }
 
-static int		ptf_fonction(char *frmt, t_pf *p, int *i, va_list ap)
+static int	ptf_fonction(char *frmt, t_pf *p, int *i, va_list ap)
 {
 	while (!(pft_isflag(frmt[i[0]], p)) && pft_isoption(frmt[i[0]]))
 	{
@@ -82,7 +82,7 @@ static int		ptf_fonction(char *frmt, t_pf *p, int *i, va_list ap)
 	return (1);
 }
 
-int		get_everything(char *frmt, t_pf *p, int *i, va_list ap)
+int			get_everything(char *frmt, t_pf *p, int *i, va_list ap)
 {
 	while (frmt[++i[0]])
 	{
@@ -104,7 +104,7 @@ int		get_everything(char *frmt, t_pf *p, int *i, va_list ap)
 	return (1);
 }
 
-int		ptf_parser(const char *restrict frmt, t_pf *p, va_list ap)
+int			ptf_parser(const char *restrict frmt, t_pf *p, va_list ap)
 {
 	int	i[3];
 

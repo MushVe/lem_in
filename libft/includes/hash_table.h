@@ -6,7 +6,7 @@
 /*   By: cseguier <cseguier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/26 01:35:42 by cseguier          #+#    #+#             */
-/*   Updated: 2020/02/27 05:18:07 by cseguier         ###   ########.fr       */
+/*   Updated: 2020/03/06 05:56:59 by cseguier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,9 @@ typedef struct	s_hthandle
 ** Utils for the hash table
 */
 
-int				ht_fill_hash_table(t_ht *element, size_t key, char *data, t_ht *next, int index);
-int				ht_find_match_store(t_ht *hash_table, char *to_compare, t_ht **store);
-int				ht_handle_collision(t_ht *hash_table, char *data, size_t key, int index);
+int				ht_fill_hash_table(t_ht *e, size_t k, char *d, int i);
+int				ht_find_match_store(t_ht *h, char *t, t_ht **s);
+int				ht_handle_collision(t_ht *h, char *d, size_t k, int i);
 size_t			ht_hash(char *cp);
 
 /*
@@ -48,6 +48,7 @@ t_ht			*hash_table_create(size_t item_count, t_hthandle *t_hthandler);
 int				hash_table_delete(t_hthandle *t_hthandler);
 t_ht			*hash_table_get(t_hthandle *t_hthandler, char *to_get);
 int				hash_table_put(t_hthandle *t_hthandler, char *data, int index);
-// hash_table_delete(t_hthandle *t_hthandler)
-
+/*
+** hash_table_delete(t_hthandle *t_hthandler)
+*/
 #endif
