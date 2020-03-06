@@ -6,7 +6,7 @@
 /*   By: cseguier <cseguier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/26 01:37:37 by cseguier          #+#    #+#             */
-/*   Updated: 2020/03/05 04:23:27 by cseguier         ###   ########.fr       */
+/*   Updated: 2020/03/06 04:15:11 by cseguier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,7 @@ typedef struct	s_p
 typedef struct	s_path
 {
 	int				*data;
+	int				size; 
 	struct s_path	*next;
 }				t_path;
 

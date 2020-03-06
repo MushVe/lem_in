@@ -6,7 +6,7 @@
 /*   By: cseguier <cseguier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/29 01:27:16 by cseguier          #+#    #+#             */
-/*   Updated: 2020/03/05 07:46:56 by cseguier         ###   ########.fr       */
+/*   Updated: 2020/03/06 04:50:42 by cseguier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,53 +31,42 @@ void	bfs_init(t_bfs *bfs, int size)
 int	find_path(t_bfs *bfs, t_p *p, int host, int i)
 {
 	int	link;
-	int j;
 
 	link = -1;
 	// ft_printf("++ NEW ROUND %d %s ++\n", i, p->junction[host].room_name);
 	bfs->tmp_path[i] = p->junction[host].index;
+	bfs->visited_record[host] = 1;
 	if (host != p->data.rooms.start_index)
 	{
 		while (++link < p->size)
 		{
 			// ft_printf("host:  %s   link:  %s   ", p->junction[host].room_name, p->junction[link].room_name);
 			// ft_printf("matrix:  %10d   level:  %10d\n", p->matrix[link][host], bfs->matrix_level[host]);
-			if (p->matrix[link][host] > 0 && bfs->matrix_level[link] < bfs->matrix_level[host])
+			if (p->matrix[link][host] > 0
+				&& bfs->visited_record[link] == 0
+				&& bfs->matrix_level[link] <= bfs->matrix_level[host])
 			{
 				// ft_printf("findpath-> host: %s  link: %s\n", p->junction[host].room_name, p->junction[link].room_name);
 				if(find_path(bfs, p, link, i + 1))
 					return (1);
-				//break;
 			}
 		}
 	}
 	else
 	{
-		j = -1;
-		while (bfs->tmp_path[++j] != -1)
-		{
-			ft_printf("<<<>>>>   %s ", p->junction[bfs->tmp_path[j]].room_name);
-			ft_printf(" %d\n", bfs->tmp_path[j]);
-		}
-		// 	bfs->tmp_path[i] = -1;
-		// 	return (0);
+		// j = -1;
+		// while (bfs->tmp_path[++j] != -1)
+		// {
+		// 	ft_printf("wip   %s ", p->junction[bfs->tmp_path[j]].room_name);
+		// 	ft_printf(" %d\n", bfs->tmp_path[j]);
+		// }
+		// ft_printf("++++++++++++++++++++++\n");
+		bfs_new_node(bfs->tmp_path, &bfs->path, i + 1);
 	}
-	ft_printf("++++++++++++++++++++++\n");
 	bfs->tmp_path[i] = -1;
+	bfs->visited_record[host] = 0;
 	return (0);
 }
-
-// void	find_all_paths(t_bfs *bfs, t_p *p, int host)
-// {
-// 	int	link;
-
-// 	link = -1;
-// 	while (++link < p->size)
-// 	{
-// 		if (p->matrix[host][link] > 0 && p->matrix[host][link] < bfs->matrix_level[host])
-// 			find_path(bfs, p, link, ++i);
-// 	}
-// }
 
 int algo(t_p *p, t_bfs *bfs)
 {
@@ -101,7 +90,6 @@ int algo(t_p *p, t_bfs *bfs)
 	{
 		host = q->front->data;
 		de_queue(q);
-		// ft_printf("decu  ---> \t%s\t%d\n", p->junction[host].room_name, p->junction[host].index);
 		link = -1;
 		while (++link < p->size)
 		{
@@ -118,11 +106,8 @@ int algo(t_p *p, t_bfs *bfs)
 					if (bfs->visited_record[link] == 0)
 					{
 						en_queue(q, link);
-						// ft_printf("encu <---  \t%s\t%d\n", p->junction[link].room_name, p->junction[link].index);
 						bfs->visited_record[link] = 1;
 						bfs->parent[link] = host;
-							
-						// ft_printf("            %s <> %s\n", p->junction[host].room_name, p->junction[link].room_name);
 					}
 				}
 			}
@@ -177,33 +162,37 @@ int algo(t_p *p, t_bfs *bfs)
  	// 	bfs_new_node(bfs->tmp_path, &bfs->path, p->size);
 	// }
 
-	find_path(bfs, p, p->data.rooms.end_index, 0);
-	ft_printf("\n");
+// j = -1;
+		// while (bfs->tmp_path[++j] != -1)
+		// {
+		// 	ft_printf("wip   %s ", p->junction[bfs->tmp_path[j]].room_name);
+		// 	ft_printf(" %d\n", bfs->tmp_path[j]);
+		// }
+		// ft_printf("++++++++++++++++++++++\n");
+
 	i = -1;
-	while (++i < p->size && bfs->tmp_path[i] > 0)
+	while (++i < p->size)
+		bfs->visited_record[i] = 0;
+	find_path(bfs, p, p->data.rooms.end_index, 0);
+
+	t_path	*cpy;
+
+	cpy = bfs->path;
+
+	bfs->path_id = 0;
+	while (cpy && ++bfs->path_id)
 	{
-		ft_printf("<<<>>>>   %s ", p->junction[bfs->tmp_path[i]].room_name);
-		ft_printf(" %d\n", bfs->tmp_path[i]);
+		i = -1;
+		while (++i < cpy->size)
+		{
+			ft_printf("Chemin #%d: ", bfs->path_id);
+			ft_printf(" %s ", p->junction[cpy->data[i]].room_name);
+			ft_printf(" %d ", cpy->data[i]);
+			ft_printf(" %d\n", cpy->size);
+		}
+		ft_printf("++++++++++++++++++\n");
+		cpy = cpy->next;
 	}
-	// t_path	*cpy;
-
-	// cpy = bfs->path;
-
-	// bfs->path_id = -1;
-	// while (++bfs->path_id < bfs->max_path && cpy)
-	// {
-	// 	i = -1;
-	// 	while (++i < p->size)
-	// 	{
-	// 		if (cpy->data[i] != -1)
-	// 		{
-	// 			ft_printf("Chemin #%d: ", bfs->path_id + 1);
-	// 			ft_printf("%s ", p->junction[cpy->data[i]].room_name);
-	// 			ft_printf(" %d\n", cpy->data[i]);
-	// 		}
-	// 	}
-	// 	cpy = cpy->next;
-	// }
 
 	
 
