@@ -6,44 +6,44 @@
 /*   By: cseguier <cseguier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/03 05:18:48 by cseguier          #+#    #+#             */
-/*   Updated: 2020/03/06 05:08:33 by cseguier         ###   ########.fr       */
+/*   Updated: 2020/03/07 05:51:29 by cseguier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/lem_in.h"
 
-void	bfs_free_list(t_path **path)
+void	bfs_free_list(t_path_list **path)
 {
-	t_path	*cpy;
-	t_path	*tmp;
+	t_path_list	*cpy;
+	t_path_list	*tmp;
 
 	cpy = *path;
 	tmp = NULL;
 	while (cpy)
 	{
 		tmp = cpy->next;
-		ft_memdel((void*)&cpy->data);
+		ft_memdel((void*)&cpy->room);
 		ft_memdel((void*)&cpy);
 		cpy = NULL;
 		cpy = tmp;
 	}
 }
 
-int		bfs_new_node(int *data, t_path **path, int size)
+int		bfs_new_node(int *room, t_path_list **path, int size)
 {
-	t_path	*cpy;
-	t_path	*node;
-	int		i;
-	int		j;
+	t_path_list	*cpy;
+	t_path_list	*node;
+	int			i;
+	int			j;
 
 	cpy = *path;
-	if (!(node = (t_path*)ft_memalloc(sizeof(t_path)))
-		|| !(node->data = ft_memalloc(sizeof(int) * size)))
+	if (!(node = (t_path_list*)ft_memalloc(sizeof(t_path_list)))
+		|| !(node->room = ft_memalloc(sizeof(int) * size)))
 		exit_error("Malloc Failed", (char*)__func__);
 	i = size;
 	j = -1;
-	while (data[++j] != -1)
-		node->data[--i] = data[j];
+	while (room[++j] != -1)
+		node->room[--i] = room[j];
 	node->size = size;
 	node->next = NULL;
 	if (!cpy)
@@ -57,14 +57,14 @@ int		bfs_new_node(int *data, t_path **path, int size)
 	return (1);
 }
 
-int		*bfs_get_node(int aim, t_path *path)
+int		*bfs_get_node(int aim, t_path_list *path)
 {
-	t_path	*cpy;
-	int		i;
+	t_path_list	*cpy;
+	int			i;
 
 	cpy = path;
 	i = -1;
 	while (++i < aim && cpy)
 		cpy = cpy->next;
-	return (cpy->data);
+	return (cpy->room);
 }

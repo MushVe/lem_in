@@ -6,7 +6,7 @@
 /*   By: cseguier <cseguier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/26 01:37:37 by cseguier          #+#    #+#             */
-/*   Updated: 2020/03/06 06:53:12 by cseguier         ###   ########.fr       */
+/*   Updated: 2020/03/07 06:09:22 by cseguier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,22 +60,32 @@ typedef struct		s_p
 	t_hthandle			hthandler;
 }					t_p;
 
-typedef struct		s_path
+typedef struct		s_path_list
 {
-	int				*data;
-	int				size;
-	struct s_path	*next;
-}					t_path;
+	int					*room;
+	int					size;
+	struct s_path_list	*next;
+}					t_path_list;
+
+typedef struct		s_path_array
+{
+	int	*room;
+	int	size;
+}					t_path_array;
 
 typedef struct		s_bfs
 {
-	int		*matrix_level;
-	int		*visited_record;
-	int		*parent;
-	t_path	*path;
-	int		*tmp_path;
-	int		max_path;
-	int		path_id;
+	int				*matrix_level;
+	int				*visited_record;
+	int				*parent;
+	t_path_list		*path_list;
+	int				*tmp_path;
+	int				max_path;
+	int				path_id;
+	int				path_nb;
+	int				host;
+	int				link;
+	t_path_array	*path_array;
 }					t_bfs;
 
 /*
@@ -83,9 +93,14 @@ typedef struct		s_bfs
 */
 
 int					algo(t_p *p, t_bfs *bfs);
-void				bfs_free_list(t_path **path);
-int					bfs_new_node(int *data, t_path **path, int size);
-int					*bfs_get_node(int aim, t_path *path);
+void				bfs_free_list(t_path_list **path);
+int					bfs_new_node(int *data, t_path_list **path, int size);
+int					*bfs_get_node(int aim, t_path_list *path);
+void				bfs_init(t_bfs *bfs, int size);
+void				fill_path_array(t_p *p, t_bfs *bfs);
+void				print_path_array(t_p *p, t_bfs *bfs);
+void				print_matrix(t_p *p, t_bfs *bfs, int i, int j);
+void				get_matrix_level(t_p *p, t_bfs *bfs);
 
 /*
 ** Linked list to store the anthill
@@ -127,7 +142,6 @@ int					is_room_name_alphanumerical(char *line);
 int					is_coord_only_digit(char *line);
 int					is_tube(char *line);
 
-
 /*
 ** Tubes
 */
@@ -136,7 +150,6 @@ t_ht				*does_room_exist(char *line, t_hthandle *t_hthandler);
 int					is_tube_valid(t_ht **r1, t_ht **r2, char *l, t_hthandle *ht);
 char				*split_tubes(char *line);
 int					handle_tubes(t_p *p);
-//int					**handle_tubes(char **l, t_list **t, t_hthandle *h, int r, char **s);
 
 /*
 ** parser

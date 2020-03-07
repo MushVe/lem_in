@@ -6,7 +6,7 @@
 #    By: cseguier <cseguier@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/26 01:31:01 by cseguier          #+#    #+#              #
-#    Updated: 2020/03/06 06:53:48 by cseguier         ###   ########.fr        #
+#    Updated: 2020/03/07 05:54:59 by cseguier         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,7 @@ NAME = lem-in #cseguier.filler
 LIBFT = libft/libftprintf.a
 
 FILE = ants.c main.c parser.c utils_parser.c room.c utils_room.c tubes.c \
-	utils_tubes.c utils.c utils_2.c algo.c node.c
+	utils_tubes.c utils.c utils_2.c algo.c utils_algo.c node.c
 
 INC = -I libft 
 
