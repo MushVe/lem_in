@@ -6,7 +6,7 @@
 /*   By: cseguier <cseguier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/26 01:37:37 by cseguier          #+#    #+#             */
-/*   Updated: 2020/03/07 06:09:22 by cseguier         ###   ########.fr       */
+/*   Updated: 2020/03/09 16:46:35 by cseguier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,13 @@ typedef struct		s_path_array
 	int	size;
 }					t_path_array;
 
+typedef struct		s_path_combo
+{
+	int				*room;
+	int				size;
+	int				ants;
+}					t_path_combo;
+
 typedef struct		s_bfs
 {
 	int				*matrix_level;
@@ -103,6 +110,12 @@ void				print_matrix(t_p *p, t_bfs *bfs, int i, int j);
 void				get_matrix_level(t_p *p, t_bfs *bfs);
 
 /*
+** Resolve
+*/
+
+int resolve(t_p *p, t_bfs *bfs);
+
+/*
 ** Linked list to store the anthill
 */
 
@@ -125,7 +138,7 @@ void				exit_error(char *reason, char *camefrom);
 ** Ants
 */
 
-void			handle_ants(t_p *p);
+void				handle_ants(t_p *p);
 
 /*
 ** Rooms
@@ -147,7 +160,7 @@ int					is_tube(char *line);
 */
 
 t_ht				*does_room_exist(char *line, t_hthandle *t_hthandler);
-int					is_tube_valid(t_ht **r1, t_ht **r2, char *l, t_hthandle *ht);
+int					is_tube_valid(t_ht **a, t_ht **b, char *l, t_hthandle *ht);
 char				*split_tubes(char *line);
 int					handle_tubes(t_p *p);
 
@@ -161,6 +174,6 @@ void				delete_junction_table(t_map_room_index *junction);
 void				delete_display_list(t_list *list);
 t_list				*create_node(char *data);
 int					add_front_node(t_list **head, char *data);
-t_map_room_index	*store_rooms(t_anthill *data, t_hthandle *ht, t_list *rooms);
+t_map_room_index	*store_rooms(t_anthill *d, t_hthandle *ht, t_list *r);
 
 #endif

@@ -35,6 +35,7 @@ int			 main()
 	parser(&p);
 	// display(p.data, p.tmp);
 	algo(&p, &bfs);
+	resolve(&p, &bfs);
 
 	// for (size_t i = 0; i < p.size; i++)
 	// {
