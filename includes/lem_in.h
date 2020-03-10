@@ -6,7 +6,7 @@
 /*   By: cseguier <cseguier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/26 01:37:37 by cseguier          #+#    #+#             */
-/*   Updated: 2020/03/09 16:46:35 by cseguier         ###   ########.fr       */
+/*   Updated: 2020/03/10 18:09:28 by cseguier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,7 +113,11 @@ void				get_matrix_level(t_p *p, t_bfs *bfs);
 ** Resolve
 */
 
-int resolve(t_p *p, t_bfs *bfs);
+int					resolve(t_p *p, t_bfs *bfs);
+int					get_shortest_path(t_bfs *bfs);
+void				copy_path(t_bfs *b, t_path_combo *p, int pi, int ci);
+void				copy_path_combo(t_path_combo *final, t_path_combo *path);
+void				print_combo(t_p *p, t_path_combo *path);
 
 /*
 ** Linked list to store the anthill
