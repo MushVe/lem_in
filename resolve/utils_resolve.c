@@ -6,7 +6,7 @@
 /*   By: cseguier <cseguier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/10 15:59:09 by cseguier          #+#    #+#             */
-/*   Updated: 2020/03/10 18:10:54 by cseguier         ###   ########.fr       */
+/*   Updated: 2020/03/11 12:58:16 by cseguier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ void	print_combo(t_p *p, t_path_combo *path)
 	while (path[++path_id].ants != -1)
 	{
 		ft_printf("Ants: %d ", path[path_id].ants);
-		ft_printf("Path Size: %d\n", path[path_id].size);
+		ft_printf("Path Size: %d >>> ", path[path_id].size);
 		room_id = -1;
 		while (++room_id < path[path_id].size)
 		{
