@@ -6,7 +6,7 @@
 /*   By: cseguier <cseguier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/07 05:52:29 by cseguier          #+#    #+#             */
-/*   Updated: 2020/03/09 11:16:39 by cseguier         ###   ########.fr       */
+/*   Updated: 2020/03/12 16:53:58 by cseguier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,7 @@ void	print_path_array(t_p *p, t_bfs *bfs)
 			ft_printf(" [%s]\n", p->junction[id_alias].room_name);
 		}
 	}
+	ft_printf("\n");
 }
 
 /*

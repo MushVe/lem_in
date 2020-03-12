@@ -6,7 +6,7 @@
 /*   By: cseguier <cseguier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/26 01:37:37 by cseguier          #+#    #+#             */
-/*   Updated: 2020/03/10 18:09:28 by cseguier         ###   ########.fr       */
+/*   Updated: 2020/03/12 18:43:04 by cseguier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,13 @@ typedef struct		s_path_combo
 	int				ants;
 }					t_path_combo;
 
+typedef struct		s_nb
+{
+	int	path;
+	int	line;
+}					t_nb;
+
+
 typedef struct		s_bfs
 {
 	int				*matrix_level;
@@ -114,7 +121,7 @@ void				get_matrix_level(t_p *p, t_bfs *bfs);
 */
 
 int					resolve(t_p *p, t_bfs *bfs);
-int					get_shortest_path(t_bfs *bfs);
+int					get_next_shortest_path(t_bfs *bfs, int path_id, int *min);
 void				copy_path(t_bfs *b, t_path_combo *p, int pi, int ci);
 void				copy_path_combo(t_path_combo *final, t_path_combo *path);
 void				print_combo(t_p *p, t_path_combo *path);
