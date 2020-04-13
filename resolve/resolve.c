@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "../includes/lem_in.h"
+#include <stdio.h>
 
 void	init_combo(t_path_combo **path_combo, int ant)
 {
@@ -19,7 +20,7 @@ void	init_combo(t_path_combo **path_combo, int ant)
 	if (!(*path_combo = ft_memalloc(sizeof(t_path_combo) * ant + 1)))
 		exit_error("Malloc Failed", (char*)__func__);
 	i = -1;
-	while (++i < ant + 1)
+	while (++i < ant)
 	{
 		(*path_combo)[i].size = -1;
 		(*path_combo)[i].ants = -1;
@@ -74,7 +75,7 @@ void	clear_path_combo(t_path_combo *path_combo, int ant)
 	int	i;
 
 	i = -1;
-	while (++i < ant + 1)
+	while (++i < ant)
 	{
 		path_combo[i].ants = -1;
 		path_combo[i].size = -1;
@@ -143,17 +144,22 @@ int	get_shortest_combo(t_p *p, t_bfs *bfs, t_nb *nb, t_path_combo *path_combo)
 	int				test_limit;
 	int				test_id;
 	int				minimum_size;
+	int				shortest;
 
+	shortest = 0;
 	shortest_id = -1;
 	test_limit = 2;
 	test_id = -1;
 	best_nb_lines = __INT_MAX__;
 	minimum_size = -1;
+	nb->path = 0;
 	init_combo(&best_combo, p->data.ant_count);
-	while (++test_id < test_limit)
+	while (shortest != 1 && ++test_id < test_limit)
 	{
 		path_id = -1;
 		nb->line = 0;
+		ft_putnbr(test_id);
+		ft_printf("\t ---- test id %d\n", test_id);
 		ft_printf("\n--------------- TEST #%d ---------------\n", test_id);
 		nb->path = 0;
 		while (++nb->path < p->data.ant_count && nb->path < bfs->path_nb)
@@ -163,13 +169,13 @@ int	get_shortest_combo(t_p *p, t_bfs *bfs, t_nb *nb, t_path_combo *path_combo)
 			ft_printf("got [%d]\n", shortest_id);
 			if (shortest_id == -1)
 			{
+				shortest = 1;
 				ft_printf("Already shortest\n");
 				nb->path--;
 				if (test_id < test_limit)
 					minimum_size++;
-				break;
 			}
-			if (!(collide(bfs, path_combo, shortest_id)))
+			else if (!(collide(bfs, path_combo, shortest_id)))
 			{
 				//nb->path++;
 				copy_path(bfs, path_combo, shortest_id, ++path_id);
@@ -180,6 +186,7 @@ int	get_shortest_combo(t_p *p, t_bfs *bfs, t_nb *nb, t_path_combo *path_combo)
 				if (nb->line < best_nb_lines)
 				{
 					best_nb_lines = nb->line;
+					ft_printf("\tnew best %d\n", best_nb_lines);
 					ft_printf("111\n");
 					clear_path_combo(best_combo, p->data.ant_count);
 					ft_printf("222\n");
@@ -190,7 +197,10 @@ int	get_shortest_combo(t_p *p, t_bfs *bfs, t_nb *nb, t_path_combo *path_combo)
 				}
 			}
 		}
+		ft_printf("\tAAAAAAAAAAAAAAAAAAAAAA\n");
+		ft_printf("\tnb_line %d\n", nb->line);
 	}
+	ft_printf("\tOut of the loop\n");
 	clear_path_combo(path_combo, p->data.ant_count);
 	ft_printf("000\n");
 	copy_path_combo(path_combo, best_combo);

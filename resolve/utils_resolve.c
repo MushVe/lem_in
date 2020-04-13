@@ -40,7 +40,7 @@ void	copy_path(t_bfs *bfs, t_path_combo *path_combo, int path_id, int combo_id)
 	int	room_id;
 
 	ft_printf("\n++ copy_path array into combo ++\n");
-	ft_printf("path_id: %d  combo_id: %d\n", path_id, combo_id);
+	ft_printf("path_id: %d  combo_id: %d bfs->path_array[path_id].size: %d\n", path_id, combo_id, bfs->path_array[path_id].size);
 	path_combo[combo_id].size = bfs->path_array[path_id].size;
 	path_combo[combo_id].ants = 0;
 	if (!(path_combo[combo_id].room = ft_memalloc(sizeof(int) * bfs->path_array[path_id].size)))
@@ -56,7 +56,7 @@ void	copy_path(t_bfs *bfs, t_path_combo *path_combo, int path_id, int combo_id)
 	ft_printf("\n");
 }
 
-void	copy_path_combo(t_path_combo *final, t_path_combo *path)
+void	copy_path_combo(t_path_combo *best, t_path_combo *path)
 {
 	int	path_id;
 	int	room_id;
@@ -64,13 +64,15 @@ void	copy_path_combo(t_path_combo *final, t_path_combo *path)
 	path_id = -1;
 	while (path[++path_id].ants != -1)
 	{
-		final[path_id].ants = path[path_id].ants;
-		final[path_id].size = path[path_id].size;
-		if (!(final[path_id].room = ft_memalloc(sizeof(int) * final[path_id].size)))
+		ft_printf("! ants : %d !", path[path_id].ants);
+		ft_printf("! size : %d !\n", path[path_id].size);
+		best[path_id].ants = path[path_id].ants;
+		best[path_id].size = path[path_id].size;
+		if (!(best[path_id].room = ft_memalloc(sizeof(int) * best[path_id].size)))
 			exit_error("Malloc Failed", (char*)__func__);
 		room_id = -1;
 		while (++room_id < path[path_id].size)
-			final[path_id].room[room_id] = path[path_id].room[room_id];
+			best[path_id].room[room_id] = path[path_id].room[room_id];
 	}
 }
 

@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "../includes/lem_in.h"
+#include <stdio.h>
 
 int		is_ant_count_valid(char *line)
 {
@@ -20,7 +21,7 @@ int		is_ant_count_valid(char *line)
 	while (line[++i])
 		if (!ft_isdigit(line[i]))
 			exit_error("Ants parsing invalid\n", (char*)__func__);
-	return (atoi(line));
+	return (ft_atoi(line));
 }
 
 void	get_ants(t_p *p)
