@@ -125,6 +125,7 @@ int					get_next_shortest_path(t_bfs *bfs, int path_id, int *min);
 void				copy_path(t_bfs *b, t_path_combo *p, int pi, int ci);
 void				copy_path_combo(t_path_combo *final, t_path_combo *path);
 void				print_combo(t_p *p, t_path_combo *path);
+void				quicksort(t_bfs *bfs);
 
 /*
 ** Linked list to store the anthill

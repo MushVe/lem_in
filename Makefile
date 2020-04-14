@@ -20,7 +20,7 @@ LIBFT = libft/libftprintf.a
 
 FILE = ants.c main.c parser.c utils_parser.c room.c utils_room.c tubes.c \
 	utils_tubes.c utils.c utils_2.c algo.c utils_algo.c node.c resolve.c \
-	utils_resolve.c
+	utils_resolve.c quicksort.c
 
 INC = -I libft 
 

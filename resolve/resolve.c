@@ -152,6 +152,9 @@ int	get_shortest_combo(t_p *p, t_bfs *bfs, t_nb *nb, t_path_combo *path_combo)
 	int				minimum_size;
 	int				shortest;
 
+	//limiting factor : start and end room connections + ant number (maj malloc combo)
+	//trier chemins
+
 	shortest = 0;
 	shortest_id = -1;
 	test_limit = 2;
@@ -161,12 +164,11 @@ int	get_shortest_combo(t_p *p, t_bfs *bfs, t_nb *nb, t_path_combo *path_combo)
 	minimum_size = -1;
 	nb->path = 0;
 	init_combo(&best_combo, p->data.ant_count);
-	while (shortest != 1 && ++test_id < test_limit)
+	while (++test_id < test_limit || shortest != 1)
 	{
 		path_id = -1;
 		nb->line = 0;
-		ft_putnbr(test_id);
-		ft_printf("\t ---- test id %d\n", test_id);
+		clear_path_combo(path_combo, p->data.ant_count);
 		ft_printf("\n--------------- TEST #%d ---------------\n", test_id);
 		nb->path = 0;
 		ft_printf("_______conditions nbpath:%d antcount:%d bfspathnb:%d\n",
@@ -200,10 +202,11 @@ int	get_shortest_combo(t_p *p, t_bfs *bfs, t_nb *nb, t_path_combo *path_combo)
 					ft_printf("\tnew best %d\n", best_nb_lines);
 					clear_path_combo(best_combo, p->data.ant_count);
 					copy_path_combo(best_combo, path_combo);
-					//clear_path_combo(path_combo, p->data.ant_count);
+					//
 				}
 			}
 		}
+	//	
 	}
 	ft_printf("\tOut of the loop\n");
 	// clear_path_combo(path_combo, p->data.ant_count);
@@ -223,6 +226,7 @@ int resolve(t_p *p, t_bfs *bfs)
 	t_path_combo	*path_combo;
 	t_nb			nb;
 
+	quicksort(bfs);
 	init_combo(&path_combo, p->data.ant_count);
 
 	nb.path = get_shortest_combo(p, bfs, &nb, path_combo);
