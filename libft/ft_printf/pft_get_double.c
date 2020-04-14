@@ -34,8 +34,6 @@ char	*pft_get_char(char c, va_list ap, t_pf *p)
 	if (!(res = ft_strnew(1)))
 		return (0);
 	res[0] = va_arg(ap, int);
-	if (res[0] == (char)NULL)
-		p->null = 1;
 	return (res);
 }
 
