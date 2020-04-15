@@ -12,25 +12,11 @@
 
 #include "../includes/lem_in.h"
 
-int	get_next_shortest_path(t_bfs *bfs, int path_id, int *minimum)
+int	get_next_path(t_bfs *bfs, int path_id)
 {
-	int	shortest;
-	int	res;
-
-	shortest = __INT_MAX__;
-	res = -1;
-	while (++path_id < bfs->path_nb)
-	{
-		if (bfs->path_array[path_id].size < shortest) // && shortest < *minimum)
-		{
-			// remeber shortest to increment on it
-			// care doublon or skip
-			*minimum = shortest;
-			shortest = bfs->path_array[path_id].size;
-			res = path_id;
-		}
-	}
-	return (res);
+	if (path_id + 1 < bfs->path_nb)
+		return (path_id + 1);
+	return (-1);
 }
 
 void	copy_path(t_bfs *bfs, t_path_combo *path_combo, int path_id, int combo_id)
@@ -96,4 +82,34 @@ void	print_combo(t_p *p, t_path_combo *path)
 	}
 	ft_printf("\n");
 	
+}
+
+int		get_room_connections(t_p *p, int room_id)
+{
+	int	x;
+	int	y;
+	int cpt;
+
+	x = -1;
+	cpt = 0;
+	while (++x < p->data.room_count)
+		if (p->matrix[x][room_id] != 0)
+			cpt++;
+	return (cpt);
+}
+
+int		get_test_limit(t_p *p)
+{
+	int	start;
+	int	end;
+
+	start = get_room_connections(p, p->data.rooms.start_index);
+	end = get_room_connections(p, p->data.rooms.end_index);
+	if (p->data.ant_count <= start && p->data.ant_count <= end)
+		return (p->data.ant_count);
+	if (start <= p->data.ant_count && start <= end)
+		return (start);
+	if (end <= p->data.ant_count && end <= start)
+		return (end);
+	return (-1);
 }

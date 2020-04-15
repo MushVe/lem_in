@@ -116,7 +116,7 @@ void	print_path_array(t_p *p, t_bfs *bfs)
 
 /*
 ** print_matrix(p, bfs, 0, 0);
-**
+*
 ** void	print_matrix(t_p *p, t_bfs *bfs, int i, int j)
 ** {
 ** 	ft_printf("   ");

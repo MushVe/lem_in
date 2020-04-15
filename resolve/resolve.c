@@ -157,15 +157,19 @@ int	get_shortest_combo(t_p *p, t_bfs *bfs, t_nb *nb, t_path_combo *path_combo)
 
 	shortest = 0;
 	shortest_id = -1;
-	test_limit = 2;
 	test_id = -1;
 	best_nb_lines = __INT_MAX__;
 	best_nb_path = 0;
-	minimum_size = -1;
 	nb->path = 0;
+
+	test_limit = get_test_limit(p);
+	if (test_limit == -1)
+		exit_error("Test Limit Exited", (char*)__func__);
+	ft_printf("Test Limit : %d\n", test_limit);
 	init_combo(&best_combo, p->data.ant_count);
 	while (++test_id < test_limit || shortest != 1)
 	{
+		shortest_id = test_id;
 		path_id = -1;
 		nb->line = 0;
 		clear_path_combo(path_combo, p->data.ant_count);
@@ -176,7 +180,7 @@ int	get_shortest_combo(t_p *p, t_bfs *bfs, t_nb *nb, t_path_combo *path_combo)
 		while (++nb->path < p->data.ant_count && nb->path <= bfs->path_nb)
 		{
 			ft_printf("_______ROUND #%d > ", nb->path);
-			shortest_id = get_next_shortest_path(bfs, shortest_id, &minimum_size);
+			shortest_id = get_next_path(bfs, shortest_id);
 			ft_printf("got shortest new path [%d]\n", shortest_id);
 			if (shortest_id == -1)
 			{
@@ -202,16 +206,14 @@ int	get_shortest_combo(t_p *p, t_bfs *bfs, t_nb *nb, t_path_combo *path_combo)
 					ft_printf("\tnew best %d\n", best_nb_lines);
 					clear_path_combo(best_combo, p->data.ant_count);
 					copy_path_combo(best_combo, path_combo);
-					//
 				}
 			}
 		}
-	//	
 	}
 	ft_printf("\tOut of the loop\n");
 	// clear_path_combo(path_combo, p->data.ant_count);
-	// copy_path_combo(path_combo, best_combo);
 	// clear_path_combo(best_combo, p->data.ant_count);
+	copy_path_combo(path_combo, best_combo);
 	nb->line = best_nb_lines;
 	nb->path = best_nb_path;
 	ft_printf("---------- nb path out of inferno %d ----------\n", nb->path);
