@@ -124,7 +124,7 @@ int					resolve(t_p *p, t_bfs *bfs);
 int					get_next_path(t_bfs *bfs, int path_id);
 void				copy_path(t_bfs *b, t_path_combo *p, int pi, int ci);
 void				copy_path_combo(t_path_combo *final, t_path_combo *path, int limit);
-void				print_combo(t_p *p, t_path_combo *path);
+void				print_combo(t_p *p, t_path_combo *path, int size);
 void				quicksort(t_bfs *bfs);
 int					get_room_connections(t_p *p, int room_level);
 int					get_test_limit(t_p *p);
