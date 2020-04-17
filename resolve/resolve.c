@@ -51,7 +51,8 @@ void	print_result(t_p *p, t_path_array *path_array, t_path_combo *path_combo, in
 	path_id = -1;
 	// ft_printf("NBPATH>>> %d\n", nb_path);
 	while (++path_id < nb_path)
-		ft_printf("Ants: %d in Path #%d\n", ants_by_rooms[path_id], path_id);
+		ft_printf("Ants: %d in Path #%d of Size %d\n",
+			ants_by_rooms[path_id], path_id, path_combo[path_id].size);
 	
 
 	// path_id = -1;
