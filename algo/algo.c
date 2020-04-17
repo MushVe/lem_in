@@ -100,7 +100,7 @@ int			algo(t_p *p, t_bfs *bfs)
 	reset_visited(p, bfs);
 	find_path(bfs, p, p->data.rooms.end_index, 0);
 	fill_path_array(p, bfs);
-	print_path_array(p, bfs);
+//	print_path_array(p, bfs);
 	bfs_free_list(&bfs->path_list);
 	return (0);
 }
