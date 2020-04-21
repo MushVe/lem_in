@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: cseguier <cseguier@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/04/21 21:35:49 by cseguier          #+#    #+#             */
+/*   Updated: 2020/04/21 21:35:49 by cseguier         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "includes/lem_in.h"
 
 void	init(t_p *p, t_bfs *bfs)
@@ -28,8 +40,9 @@ void		clean(t_p *p)
 
 int			 main()
 {
-	t_p 	p;
-	t_bfs	bfs;
+	t_p 			p;
+	t_bfs			bfs;
+	t_combo_data	cd;
 
 	ft_printf("+ init\n");
 	init(&p, &bfs);
@@ -39,7 +52,10 @@ int			 main()
 	// display(p.data, p.tmp);
 	algo(&p, &bfs);
 	ft_printf("+ resolve\n");
-	resolve(&p, &bfs);
+	resolve(&p, &bfs, &cd);
+	ft_printf("+ print\n");
+	print_lem_in(&cd);
+
 
 	// for (size_t i = 0; i < p.size; i++)
 	// {

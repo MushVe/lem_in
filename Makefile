@@ -20,7 +20,7 @@ LIBFT = libft/libftprintf.a
 
 FILE = ants.c main.c parser.c utils_parser.c room.c utils_room.c tubes.c \
 	utils_tubes.c utils.c utils_2.c algo.c utils_algo.c node.c resolve.c \
-	utils_resolve.c quicksort.c
+	utils_resolve.c quicksort.c print.c
 
 INC = -I libft 
 
@@ -45,6 +45,10 @@ objs/%.o: %.c
 	@$(CC) $(INC) -o $@ -c $<
 
 objs/%.o: parser/%.c
+	@mkdir -p objs
+	@$(CC) $(INC) -o $@ -c $<
+
+objs/%.o: print/%.c
 	@mkdir -p objs
 	@$(CC) $(INC) -o $@ -c $<
 

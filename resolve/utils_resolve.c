@@ -61,23 +61,23 @@ void	copy_path_combo(t_path_combo *best, t_path_combo *path, int limit)
 	// ft_printf("Copied\n");
 }
 
-void	print_combo(t_p *p, t_path_combo *path, int limit)
+void	print_combo(t_p *p, t_combo_data *cd)
 {
 	int	path_id;
 	int	room_id;
 
 	path_id = -1;
 	ft_printf("++++ Combo Content ++++\n");
-	while (++path_id < limit &&  path[path_id].size != -1)
+	while (++path_id < cd->nb_path && cd->path_combo[path_id].size != -1)
 	{
-		ft_printf("Ants: %d ", path[path_id].ants);
-		ft_printf("Path Size: %d >>> ", path[path_id].size);
+		ft_printf("Ants: %d ", cd->path_combo[path_id].ants);
+		ft_printf("Path Size: %d >>> ", cd->path_combo[path_id].size);
 		room_id = -1;
-		while (++room_id < path[path_id].size)
+		while (++room_id < cd->path_combo[path_id].size)
 		{
 			if (room_id != 0)
 				ft_printf(" - ");
-			ft_printf("[%s]", p->junction[path[path_id].room[room_id]].room_name);
+			ft_printf("[%s]", p->junction[cd->path_combo[path_id].room[room_id]].room_name);
 		}
 		ft_printf("\n");
 	}

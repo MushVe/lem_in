@@ -80,12 +80,13 @@ typedef struct		s_path_combo
 	int				ants;
 }					t_path_combo;
 
-typedef struct		s_nb
+typedef struct		s_combo_data
 {
-	int	path;
-	int	line;
-}					t_nb;
+	t_path_combo	*path_combo;
+	int	nb_path;
+	int	nb_line;
 
+}					t_combo_data;
 
 typedef struct		s_bfs
 {
@@ -101,6 +102,14 @@ typedef struct		s_bfs
 	int				link;
 	t_path_array	*path_array;
 }					t_bfs;
+
+
+
+/*
+** Print
+*/
+
+int					print_lem_in(t_combo_data *cd);
 
 /*
 ** Algo
@@ -120,11 +129,11 @@ void				get_matrix_level(t_p *p, t_bfs *bfs);
 ** Resolve
 */
 
-int					resolve(t_p *p, t_bfs *bfs);
+t_path_combo		*resolve(t_p *p, t_bfs *bfs, t_combo_data *cd);
 int					get_next_path(t_bfs *bfs, int path_id);
 void				copy_path(t_bfs *b, t_path_combo *p, int pi, int ci);
 void				copy_path_combo(t_path_combo *final, t_path_combo *path, int limit);
-void				print_combo(t_p *p, t_path_combo *path, int size);
+void				print_combo(t_p *p, t_combo_data *cd);
 void				quicksort(t_bfs *bfs);
 int					get_room_connections(t_p *p, int room_level);
 int					get_test_limit(t_p *p);

@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "../includes/lem_in.h"
-#include <stdio.h>
 
 void	init_combo(t_path_combo **path_combo, int limit)
 {
@@ -26,49 +25,6 @@ void	init_combo(t_path_combo **path_combo, int limit)
 		(*path_combo)[i].ants = -1;
 		(*path_combo)[i].room = NULL;
 	}
-}
-
-void	fill_ants_by_rooms(int **ants, t_path_combo *path, int nb_path)
-{
-	int	path_id;
-
-	path_id = -1;
-	if (!(*ants = ft_memalloc(sizeof(int) * nb_path)))
-		exit_error("Malloc Failed", (char*)__func__);
-	while (++path_id < nb_path)
-		(*ants)[path_id] = path[path_id].ants;
-}
-
-void	print_result(t_p *p, t_path_array *path_array, t_path_combo *path_combo, int lines, int nb_path)
-{
-	int	lines_id;
-	int	path_id;
-	int	ant_cpt;
-	int	*ants_by_rooms;
-
-	fill_ants_by_rooms(&ants_by_rooms, path_combo, nb_path);
-
-	path_id = -1;
-	// ft_printf("NBPATH>>> %d\n", nb_path);
-	while (++path_id < nb_path)
-		ft_printf("Ants: %d in Path #%d of Size %d\n",
-			ants_by_rooms[path_id], path_id, path_combo[path_id].size);
-	
-
-	// path_id = -1;
-	// while (++path_id < nb_path)
-	// {
-	// 	while (path_combo[path_id].ants)
-	// 	{
-			
-	// 	}
-	// }
-
-
-
-		ft_printf("\n");
-
-
 }
 
 void	clear_path_combo(t_path_combo *path_combo, int ant)
@@ -191,7 +147,7 @@ int		lead_ants(t_path_combo *path, int ants, int nb_path)
 	return (lines);
 }
 
-int	get_shortest_combo(t_p *p, t_bfs *bfs, t_nb *nb, t_path_combo *path_combo)
+int	get_shortest_combo(t_p *p, t_bfs *bfs, t_combo_data *cd)
 {
 	t_path_combo	*best_combo;
 	int				shortest_id;
@@ -209,7 +165,7 @@ int	get_shortest_combo(t_p *p, t_bfs *bfs, t_nb *nb, t_path_combo *path_combo)
 	test_id = -1;
 	best_nb_lines = __INT_MAX__;
 	best_nb_path = 0;
-	nb->path = 0;
+	cd->nb_path = 0;
 	shortest = 0;
 
 	test_limit = get_test_limit(p);
@@ -223,47 +179,47 @@ int	get_shortest_combo(t_p *p, t_bfs *bfs, t_nb *nb, t_path_combo *path_combo)
 		ft_printf("ID:%d path:%d\n", test_id, bfs->path_nb);
 		shortest_id = test_id - 1;
 		path_id = -1;
-		nb->line = 0;
-		clear_path_combo(path_combo, test_limit);
+		cd->nb_line = 0;
+		clear_path_combo(cd->path_combo, test_limit);
 		ft_printf("\n--------------- TEST #%d ---------------\n", test_id);
-		nb->path = 0;
+		cd->nb_path = 0;
 		ft_printf("_______conditions nbpath:%d antcount:%d bfspathnb:%d\n",
-			nb->path, p->data.ant_count, bfs->path_nb);
-		while (++nb->path <= test_limit)
+			cd->nb_path, p->data.ant_count, bfs->path_nb);
+		while (++cd->nb_path <= test_limit)
 		{
-			ft_printf("_______ROUND #%d > ", nb->path);
+			ft_printf("_______ROUND #%d > ", cd->nb_path);
 			shortest_id = get_next_path(bfs, shortest_id);
 			ft_printf("got new path [%d] ", shortest_id);
 			if (shortest_id == -1)
 			{
 				shortest = 1;
 				ft_printf(" -> No More Paths\n");
-				nb->path--;
+				cd->nb_path--;
 				if (test_id < test_limit)
 					minimum_size++;
 				break;
 			}
-			else if (!(collide(bfs, path_combo, shortest_id)))
+			else if (!(collide(bfs, cd->path_combo, shortest_id)))
 			{
-				//nb->path++;
-				copy_path(bfs, path_combo, shortest_id, ++path_id);
-				ft_printf("nb_lines_before: %d, nb_path: %d\n", nb->line, nb->path);
-				nb->line = lead_ants(path_combo, p->data.ant_count, nb->path);
-				print_combo(p, path_combo, test_limit);
-				ft_printf("nb_line %d, best %d\n", nb->line, best_nb_lines);
-				if (nb->line < best_nb_lines)
+				//cd->nb_path++;
+				copy_path(bfs, cd->path_combo, shortest_id, ++path_id);
+				ft_printf("nb_lines_before: %d, nb_path: %d\n", cd->nb_line, cd->nb_path);
+				cd->nb_line = lead_ants(cd->path_combo, p->data.ant_count, cd->nb_path);
+				print_combo(p, cd);
+				ft_printf("nb_line %d, best %d\n", cd->nb_line, best_nb_lines);
+				if (cd->nb_line < best_nb_lines)
 				{
-					best_nb_path = nb->path;
-					best_nb_lines = nb->line;
+					best_nb_path = cd->nb_path;
+					best_nb_lines = cd->nb_line;
 					ft_printf("\tnew best %d\n", best_nb_lines);
 					clear_path_combo(best_combo, test_limit);
-					copy_path_combo(best_combo, path_combo, nb->path);
+					copy_path_combo(best_combo, cd->path_combo, cd->nb_path);
 				}
 			}
 			else
 			{
 				// ft_printf("Is it working ?\n");
-				nb->path--;
+				cd->nb_path--;
 			}
 			
 		}
@@ -271,33 +227,24 @@ int	get_shortest_combo(t_p *p, t_bfs *bfs, t_nb *nb, t_path_combo *path_combo)
 	// ft_printf("\tOut of the loop\n");
 	// clear_path_combo(path_combo, p->data.ant_count);
 	// clear_path_combo(best_combo, p->data.ant_count);
-	clear_path_combo(path_combo, test_limit);
-	copy_path_combo(path_combo, best_combo, best_nb_path);
-	nb->line = best_nb_lines;
-	nb->path = best_nb_path;
+	clear_path_combo(cd->path_combo, test_limit);
+	copy_path_combo(cd->path_combo, best_combo, best_nb_path);
+	cd->nb_line = best_nb_lines;
+	cd->nb_path = best_nb_path;
 	// ft_printf("---------- nb path out of inferno %d ----------\n", best_nb_path);
-	ft_printf("---------- out of inferno paths #%d lines #%d----------\n", nb->path, nb->line);
-	return (nb->path);
+	ft_printf("\n---- Out Of Inferno Paths #%d Lines #%d----\n\n", cd->nb_path, cd->nb_line);
+	return (0);
 	// shortest_id = get_shortest_path(bfs);
 	// // ft_printf("\nshortest: #%d of %d rooms for %d ants\n", \
 	// 	shortest_id, bfs->path_array[shortest_id].size, p->data.ant_count);
 }
 
-int resolve(t_p *p, t_bfs *bfs)
+t_path_combo *resolve(t_p *p, t_bfs *bfs, t_combo_data *cd)
 {
-	t_path_combo	*path_combo;
-	t_nb			nb;
-	int				test_limit;
-
 	quicksort(bfs);
-	init_combo(&path_combo, p->data.ant_count);
-
-	test_limit = get_shortest_combo(p, bfs, &nb, path_combo);
-
-	// ft_printf("\n++ total lines {%d} ants {%d} ++\n", nb.line, p->data.ant_count);
-	print_combo(p, path_combo, test_limit);
-	// ft_printf("\n");
-	print_result(p, bfs->path_array, path_combo, nb.line, nb.path);
+	init_combo(&cd->path_combo, p->data.ant_count);
+	get_shortest_combo(p, bfs, cd);
+	print_combo(p, cd);
 	return (0);
 }
 
