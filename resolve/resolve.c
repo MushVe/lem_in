@@ -117,17 +117,61 @@ int	collide(t_bfs *bfs, t_path_combo *combo, int target_id)
 	return (0);
 }
 
+int		find_cible(t_path_combo *path, int nb_path, int marge)
+{
+	int	i;
+	int	cible_max;
+	int	cible_min;
+
+	i = -1;
+	cible_max = -1;
+	cible_min = -1;
+	while (++i < nb_path)
+	{
+		if (path[i].ants < path[cible_max].ants)
+			cible_max = i;
+		if (path[i].ants > path[cible_min].ants)
+			cible_min = i;
+	}
+	if (marge < 0)
+		return (cible_max);
+	return (cible_min);
+}
+
+int		adjust_ants(t_path_combo *path, int nb_path, int marge, int lines)
+{
+	int	i;
+	int	op;
+	int	cible;
+
+	i = -1;
+	if (marge < 0)
+		op = 1;
+	else
+		op = -1;
+	while (marge != 0)
+	{
+		cible = find_cible(path, nb_path, marge);
+		path[cible].ants += op;
+		marge += op;
+		lines -= op;
+	}
+	return (lines);
+}
+
 int		lead_ants(t_path_combo *path, int ants, int nb_path)
 {
 	int	lines;
 	int	i;
+	int total_ants;
 
 	lines = 0;
 	i = -1;
-	// ft_printf("\n--- LEAD ANTS ---\n");
+	total_ants = 0;
+	ft_printf("\n\t\t\t\t--- LEAD ANTS ---\n");
 	while (++i < nb_path)
 	{
-		// ft_printf("Line #%d = %d\n", i, (ants / nb_path) + path[i].size - 2);
+		ft_printf("\t\t\t\tLine #%d = %d\n", i, (ants / nb_path) + path[i].size - 2);
 		lines += (ants / nb_path) + path[i].size - 2;
 	}
 	lines = ft_round(lines, nb_path);
@@ -136,8 +180,14 @@ int		lead_ants(t_path_combo *path, int ants, int nb_path)
 		path[i].ants = lines - (path[i].size - 2);
 	i = -1;
 	while (++i < nb_path)
-		// ft_printf("o> ANTS %d for PATH #%d\n", path[i].ants, i);
-	// ft_printf("--- LEAD ANTS ---\n\n");
+	{
+		ft_printf("\t\t\t\to> ANTS %d for PATH #%d\n", path[i].ants, i);
+		total_ants += path[i].ants;
+	}
+	ft_printf("\t\t\t\tTotal Ants : %d\n", total_ants);
+	if (total_ants != ants)
+		lines = adjust_ants(path, nb_path, total_ants - ants, lines);
+	ft_printf("\t\t\t\t--- LEAD ANTS ---\n\n");
 	return (lines);
 }
 
