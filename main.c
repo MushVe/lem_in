@@ -31,10 +31,14 @@ int			 main()
 	t_p 	p;
 	t_bfs	bfs;
 
+	ft_printf("+ init\n");
 	init(&p, &bfs);
+	ft_printf("+ parser\n");
 	parser(&p);
+	ft_printf("+ algo\n");
 	// display(p.data, p.tmp);
 	algo(&p, &bfs);
+	ft_printf("+ resolve\n");
 	resolve(&p, &bfs);
 
 	// for (size_t i = 0; i < p.size; i++)

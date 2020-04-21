@@ -37,20 +37,29 @@ int		bfs_new_node(int *room, t_path_list **path, int size)
 	int			j;
 
 	cpy = *path;
+	// ft_printf("++++ AAA\n");
 	if (!(node = (t_path_list*)ft_memalloc(sizeof(t_path_list)))
 		|| !(node->room = ft_memalloc(sizeof(int) * size)))
 		exit_error("Malloc Failed", (char*)__func__);
+	// ft_printf("++++ BBB\n");
 	i = size;
 	j = -1;
-	while (room[++j] != -1)
+	// ft_printf("++++ DDD\n");
+	while (room[++j] != -1 && i > 0)
+	{
+		// ft_printf("+++++ i:%d j:%d room_i:%d room_j:%d\n", i, j, node->room[i], room[j]);
 		node->room[--i] = room[j];
+	}
+	// ft_printf("++++ EEE\n");
 	node->size = size;
 	node->next = NULL;
+	// ft_printf("++++ FFF\n");
 	if (!cpy)
 	{
 		*path = node;
 		return (1);
 	}
+	// ft_printf("++++ GGG\n");
 	while (cpy->next != NULL)
 		cpy = cpy->next;
 	cpy->next = node;

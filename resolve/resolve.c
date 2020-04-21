@@ -92,7 +92,7 @@ int	collide(t_bfs *bfs, t_path_combo *combo, int target_id)
 	int	target_room_id;
 
 	target_room_id = -1;
-	//ft_printf("-> COLLIDE ");
+//	ft_printf("-> COLLIDE ");
 	while (++target_room_id < bfs->path_array[target_id].size)
 	{
 		path_id = -1;
