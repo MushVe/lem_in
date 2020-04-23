@@ -54,7 +54,7 @@ int			 main()
 	ft_printf("+ resolve\n");
 	resolve(&p, &bfs, &cd);
 	ft_printf("+ print\n");
-	print_lem_in(&cd);
+	print_lem_in(&p, &cd);
 
 
 	// for (size_t i = 0; i < p.size; i++)

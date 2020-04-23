@@ -73,9 +73,15 @@ typedef struct		s_path_array
 	int	size;
 }					t_path_array;
 
+typedef struct		s_room_status
+{
+	int	id;
+	int	ant;
+}					t_room_status;
+
 typedef struct		s_path_combo
 {
-	int				*room;
+	t_room_status	*room;
 	int				size;
 	int				ants;
 }					t_path_combo;
@@ -83,10 +89,16 @@ typedef struct		s_path_combo
 typedef struct		s_combo_data
 {
 	t_path_combo	*path_combo;
-	int	nb_path;
-	int	nb_line;
+	int				nb_path;
+	int				nb_line;
 
 }					t_combo_data;
+
+typedef struct		s_ant_status
+{
+	int	id_path;
+	int	id_room;
+}					t_ant_status;
 
 typedef struct		s_bfs
 {
@@ -109,7 +121,7 @@ typedef struct		s_bfs
 ** Print
 */
 
-int					print_lem_in(t_combo_data *cd);
+int					print_lem_in(t_p *p, t_combo_data *cd);
 
 /*
 ** Algo
