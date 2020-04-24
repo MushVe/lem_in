@@ -6,7 +6,7 @@
 /*   By: cseguier <cseguier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/29 01:27:16 by cseguier          #+#    #+#             */
-/*   Updated: 2020/03/07 06:22:54 by cseguier         ###   ########.fr       */
+/*   Updated: 2020/04/24 18:21:56 by cseguier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,33 +28,24 @@ static int	find_path(t_bfs *bfs, t_p *p, int host, int i)
 	link = -1;
 	bfs->tmp_path[i] = p->junction[host].index;
 	bfs->visited_record[host] = 1;
-	//ft_printf("+++ findpath start\n");
 	if (host != p->data.rooms.start_index)
 	{
-		//ft_printf("+++ findpath 000\n");
 		while (++link < p->size)
 		{
-			//ft_printf("+++ findpath 111\n");
 			if (p->matrix[link][host] > 0
 				&& bfs->visited_record[link] == 0
 				&& bfs->matrix_level[link] <= bfs->matrix_level[host])
 				if (find_path(bfs, p, link, i + 1))
 					return (1);
 		}
-		//ft_printf("+++ findpath 222\n");
 	}
 	else
 	{
-		//ft_printf("+++ findpath 333\n");
 		bfs_new_node(bfs->tmp_path, &bfs->path_list, i + 1);
-		//ft_printf("+++ findpath 444\n");
 		bfs->path_nb++;
 	}
-	//ft_printf("+++ findpath 555\n");
 	bfs->tmp_path[i] = -1;
-	//ft_printf("+++ findpath 666\n");
 	bfs->visited_record[host] = 0;
-	//ft_printf("+++ findpath end\n");
 	return (0);
 }
 
@@ -116,8 +107,11 @@ int			algo(t_p *p, t_bfs *bfs)
 	ft_printf("++ algo fillpatharray\n");
 	fill_path_array(p, bfs);
 	ft_printf("++ algo free\n");
-//	print_path_array(p, bfs);
 	bfs_free_list(&bfs->path_list);
 	ft_printf("++ algo init\n");
 	return (0);
 }
+
+/*
+**	print_path_array(p, bfs);
+*/

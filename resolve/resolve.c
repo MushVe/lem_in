@@ -6,7 +6,7 @@
 /*   By: cseguier <cseguier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/09 09:46:07 by cseguier          #+#    #+#             */
-/*   Updated: 2020/03/12 18:43:30 by cseguier         ###   ########.fr       */
+/*   Updated: 2020/04/24 18:39:52 by cseguier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -247,6 +247,8 @@ t_path_combo *resolve(t_p *p, t_bfs *bfs, t_combo_data *cd)
 	init_combo(&cd->path_combo, p->data.ant_count);
 	get_shortest_combo(p, bfs, cd);
 	print_combo(p, cd);
+	ft_putendl("           ><\n         | __)  kya\n     \
+.-^^| |\n  __|      |\n <__.|_|-|_|");
 	return (0);
 }
 

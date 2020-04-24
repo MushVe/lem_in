@@ -6,7 +6,7 @@
 /*   By: cseguier <cseguier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/26 01:37:37 by cseguier          #+#    #+#             */
-/*   Updated: 2020/03/12 18:43:04 by cseguier         ###   ########.fr       */
+/*   Updated: 2020/04/24 18:42:01 by cseguier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,6 +94,13 @@ typedef struct		s_combo_data
 
 }					t_combo_data;
 
+typedef struct		s_bada_ids
+{
+	int	path;
+	int	room;
+	int	ant;
+}					t_bada_ids;
+
 typedef struct		s_ant_status
 {
 	int	id_path;
@@ -115,13 +122,12 @@ typedef struct		s_bfs
 	t_path_array	*path_array;
 }					t_bfs;
 
-
-
 /*
 ** Print
 */
 
 int					print_lem_in(t_p *p, t_combo_data *cd);
+void				go_to_next(t_combo_data *c, t_ant_status *a, t_bada_ids i);
 
 /*
 ** Algo
@@ -144,7 +150,7 @@ void				get_matrix_level(t_p *p, t_bfs *bfs);
 t_path_combo		*resolve(t_p *p, t_bfs *bfs, t_combo_data *cd);
 int					get_next_path(t_bfs *bfs, int path_id);
 void				copy_path(t_bfs *b, t_path_combo *p, int pi, int ci);
-void				copy_path_combo(t_path_combo *final, t_path_combo *path, int limit);
+void				copy_path_combo(t_path_combo *f, t_path_combo *p, int l);
 void				print_combo(t_p *p, t_combo_data *cd);
 void				quicksort(t_bfs *bfs);
 int					get_room_connections(t_p *p, int room_level);
