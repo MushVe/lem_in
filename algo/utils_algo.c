@@ -77,15 +77,16 @@ void	print_path_array(t_p *p, t_bfs *bfs)
 	path_id = -1;
 	while (++path_id < bfs->path_nb)
 	{
-		ft_printf("+++ PATH #%d OF %d ROOMS +++\n", \
+		ft_printf("\n+++ PATH #%d OF %d ROOMS +++\n", \
 			path_id, bfs->path_array[path_id].size);
 		room_id = -1;
 		while (++room_id < bfs->path_array[path_id].size)
 		{
 			id_alias = bfs->path_array[path_id].room[room_id];
-			ft_printf(" id. %6d", bfs->path_array[path_id].room[room_id]);
-			ft_printf(" [%s]\n", p->junction[id_alias].room_name);
+			//ft_printf(" id. %6d", bfs->path_array[path_id].room[room_id]);
+			ft_printf(" - [%s]", p->junction[id_alias].room_name);
 		}
+		ft_printf("\n");
 	}
 	ft_printf("\n");
 }
@@ -114,33 +115,32 @@ void	print_path_array(t_p *p, t_bfs *bfs)
 ** }
 */
 
-/*
-** print_matrix(p, bfs, 0, 0);
-**
-** void	print_matrix(t_p *p, t_bfs *bfs, int i, int j)
-** {
-** 	ft_printf("   ");
-** 	i = p->size;
-** 	while (--i >= 0)
-** 		ft_printf("%s ", p->junction[i].room_name);
-** 	ft_printf("\n");
-** 	i = p->size;
-** 	while (--i >= 0)
-** 	{
-** 		ft_printf("%s  ", p->junction[i].room_name);
-** 		j = p->size;
-** 		while (--j >= 0)
-** 		{
-** 			if (i == j)
-** 				ft_printf("  ");
-** 			else if (p->matrix[i][j] == 0)
-** 				ft_printf(". ");
-** 			else if (p->matrix[i][j] == __INT_MAX__)
-** 				ft_printf("X ");
-** 			else
-** 				ft_printf("%d ", p->matrix[i][j]);
-** 		}
-** 		ft_printf("    %d\n", bfs->matrix_level[i]);
-** 	}
-** }
-*/
+
+
+void	print_matrix(t_p *p, t_bfs *bfs, int i, int j)
+{
+	ft_printf("   ");
+	i = p->size;
+	while (--i >= 0)
+		ft_printf("%s ", p->junction[i].room_name);
+	ft_printf("\n");
+	i = p->size;
+	while (--i >= 0)
+	{
+		ft_printf("%s  ", p->junction[i].room_name);
+		j = p->size;
+		while (--j >= 0)
+		{
+			if (i == j)
+				ft_printf("  ");
+			else if (p->matrix[i][j] == 0)
+				ft_printf(". ");
+			else if (p->matrix[i][j] == __INT_MAX__)
+				ft_printf("X ");
+			else
+				ft_printf("%d ", p->matrix[i][j]);
+		}
+		ft_printf("    %d\n", bfs->matrix_level[i]);
+	}
+}
+

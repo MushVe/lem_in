@@ -63,13 +63,13 @@ int	collide(t_bfs *bfs, t_path_combo *combo, int target_id)
 					bfs->path_array[target_id].room[target_room_id]
 					&& room_id != 0)
 				{
-					// ft_printf("-> BONK\n");
+					ft_printf("-> BONK\n");
 					return (1);
 				}
 			}
 		}
 	}
-	// ft_printf("-> SMOOTH\n");
+	ft_printf("-> SMOOTH\n");
 	return (0);
 }
 
@@ -80,18 +80,38 @@ int		find_cible(t_path_combo *path, int nb_path, int marge)
 	int	cible_min;
 
 	i = -1;
-	cible_max = -1;
-	cible_min = -1;
+	cible_max = 0;
+	cible_min = 0;
 	while (++i < nb_path)
 	{
+		//ft_printf("\t\t\t\t\t\tnb_path: %d\t", nb_path);
 		if (path[i].ants < path[cible_max].ants)
+		{
 			cible_max = i;
+		}
 		if (path[i].ants > path[cible_min].ants)
+		{
 			cible_min = i;
+		}
+		//ft_printf("cible_max: %d\t", cible_max);
+		//ft_printf("cible_min: %d\n", cible_min);
 	}
 	if (marge < 0)
 		return (cible_max);
 	return (cible_min);
+}
+
+int		negative_ants(t_path_combo *path, int nb_path)
+{
+	int	i;
+
+	i = -1;
+	while (++i < nb_path)
+	{
+		if (path[i].ants < 0)
+			return (1);
+	}
+	return (0);
 }
 
 int		adjust_ants(t_path_combo *path, int nb_path, int marge, int lines)
@@ -105,12 +125,16 @@ int		adjust_ants(t_path_combo *path, int nb_path, int marge, int lines)
 		op = 1;
 	else
 		op = -1;
-	while (marge != 0)
+	while (marge != 0) // && !negative_ants(path, nb_path))
 	{
 		cible = find_cible(path, nb_path, marge);
+	// ft_printf("\t\t\t\t\tCible: %d\n", cible);
 		path[cible].ants += op;
+	// ft_printf("\t\t\t\t\tAnts:%d in Path: %d\n", path[cible].ants, cible);
+	// ft_printf("\t\t\t\t\tMarge: %d\n", marge);
 		marge += op;
-		lines -= op;
+		lines += op;
+	// ft_printf("\t\t\t\t\tLines: %d\n", lines);
 	}
 	return (lines);
 }
@@ -127,22 +151,32 @@ int		lead_ants(t_path_combo *path, int ants, int nb_path)
 	// ft_printf("\n\t\t\t\t--- LEAD ANTS ---\n");
 	while (++i < nb_path)
 	{
-		// ft_printf("\t\t\t\tLine #%d = %d\n", i, (ants / nb_path) + path[i].size - 2);
+		ft_printf("\t\t\t\tPath #%d = %d\n", i, (ants / nb_path) + path[i].size - 2);
 		lines += (ants / nb_path) + path[i].size - 2;
 	}
 	lines = ft_round(lines, nb_path);
+	ft_printf("\t\t\t\tLines rounded : %d\n", lines);
 	i = -1;
 	while (++i < nb_path)
 		path[i].ants = lines - (path[i].size - 2);
 	i = -1;
 	while (++i < nb_path)
 	{
-		// ft_printf("\t\t\t\to> ANTS %d for PATH #%d\n", path[i].ants, i);
+		ft_printf("\t\t\t\to> ANTS %d for PATH #%d\n", path[i].ants, i);
 		total_ants += path[i].ants;
 	}
-	// ft_printf("\t\t\t\tTotal Ants : %d\n", total_ants);
+	ft_printf("\t\t\t\tTotal Ants : %d\n", total_ants);
 	if (total_ants != ants)
-		lines = adjust_ants(path, nb_path, total_ants - ants, lines);
+	{
+		ft_printf("\t\t\t\tAdjust\n");
+		lines = adjust_ants(path, nb_path, total_ants - ants, lines); //AAAAAAAAAAAAAAAAAAAAHHHHHHHHHHHHH
+		// wesh walla
+	}
+	i = -1;
+	while (++i < nb_path)
+	{
+		ft_printf("\t\t\t\to> FINAL ANTS %d for PATH #%d\n", path[i].ants, i);
+	}
 	// ft_printf("\t\t\t\t--- LEAD ANTS ---\n\n");
 	return (lines);
 }
@@ -150,7 +184,7 @@ int		lead_ants(t_path_combo *path, int ants, int nb_path)
 int	get_shortest_combo(t_p *p, t_bfs *bfs, t_combo_data *cd)
 {
 	t_path_combo	*best_combo;
-	int				shortest_id;
+	int				first_path;
 	int				best_nb_lines;
 	int				best_nb_path;
 	int				path_id;
@@ -158,6 +192,7 @@ int	get_shortest_combo(t_p *p, t_bfs *bfs, t_combo_data *cd)
 	int				test_id;
 	int				minimum_size;
 	int				shortest;
+	int				got_first;
 
 	//limiting factor : start and end room connections + ant number (maj malloc combo)
 	//trier chemins
@@ -167,7 +202,7 @@ int	get_shortest_combo(t_p *p, t_bfs *bfs, t_combo_data *cd)
 	best_nb_path = 0;
 	cd->nb_path = 0;
 	shortest = 0;
-
+	got_first = 0;
 	test_limit = get_test_limit(p);
 	if (test_limit == -1)
 		exit_error("Test Limit Exited", (char*)__func__);
@@ -177,20 +212,30 @@ int	get_shortest_combo(t_p *p, t_bfs *bfs, t_combo_data *cd)
 	{
 		shortest = 0;
 		// ft_printf("ID:%d path:%d\n", test_id, bfs->path_nb);
-		shortest_id = test_id - 1;
+		first_path = test_id - 1;
 		path_id = -1;
 		cd->nb_line = 0;
 		clear_path_combo(cd->path_combo, test_limit);
-		// ft_printf("\n--------------- TEST #%d ---------------\n", test_id);
+		ft_printf("\n--------------- TEST #%d ---------------\n", test_id);
 		cd->nb_path = 0;
 		// ft_printf("_______conditions nbpath:%d antcount:%d bfspathnb:%d\n",
 		//	cd->nb_path, p->data.ant_count, bfs->path_nb);
 		while (++cd->nb_path <= test_limit)
 		{
-			// ft_printf("_______ROUND #%d > ", cd->nb_path);
-			shortest_id = get_next_path(bfs, shortest_id);
-			// ft_printf("got new path [%d] ", shortest_id);
-			if (shortest_id == -1)
+			ft_printf("_______ROUND #%d > ", cd->nb_path);
+			// if (cd->nb_path == 2 && !got_first)
+			// {
+			// 	first_path = get_next_path(bfs, 0);
+			// 	got_first = 1;
+			// }
+			// else
+			// {
+				first_path = get_next_path(bfs, first_path);
+			// }
+			
+			
+			// ft_printf("got new path [%d] ", first_path);
+			if (first_path == -1)
 			{
 				shortest = 1;
 				// ft_printf("-> No More Paths\n");
@@ -199,11 +244,11 @@ int	get_shortest_combo(t_p *p, t_bfs *bfs, t_combo_data *cd)
 					minimum_size++;
 				break;
 			}
-			else if (!(collide(bfs, cd->path_combo, shortest_id)))
+			else if (!(collide(bfs, cd->path_combo, first_path)))
 			{
 				//cd->nb_path++;
-				copy_path(bfs, cd->path_combo, shortest_id, ++path_id);
-				// ft_printf("nb_lines_before: %d, nb_path: %d\n", cd->nb_line, cd->nb_path);
+				copy_path(bfs, cd->path_combo, first_path, ++path_id);
+				ft_printf("nb_lines_before: %d, nb_path: %d\n", cd->nb_line, cd->nb_path);
 				cd->nb_line = lead_ants(cd->path_combo, p->data.ant_count, cd->nb_path);
 				//print_combo(p, cd);
 				// ft_printf("nb_line %d, best %d\n", cd->nb_line, best_nb_lines);
@@ -236,14 +281,15 @@ int	get_shortest_combo(t_p *p, t_bfs *bfs, t_combo_data *cd)
 	// ft_printf("---------- nb path out of inferno %d ----------\n", best_nb_path);
 	// ft_printf("\n---- Out Of Inferno Paths #%d Lines #%d----\n\n", cd->nb_path, cd->nb_line);
 	return (0);
-	// shortest_id = get_shortest_path(bfs);
+	// first_path = get_shortest_path(bfs);
 	// // ft_printf("\nshortest: #%d of %d rooms for %d ants\n", \
-	// 	shortest_id, bfs->path_array[shortest_id].size, p->data.ant_count);
+	// 	first_path, bfs->path_array[first_path].size, p->data.ant_count);
 }
 
 t_path_combo *resolve(t_p *p, t_bfs *bfs, t_combo_data *cd)
 {
 	quicksort(bfs);
+//	print_path_array(p, bfs);
 	init_combo(&cd->path_combo, p->data.ant_count);
 	get_shortest_combo(p, bfs, cd);
 	print_combo(p, cd);
@@ -255,10 +301,10 @@ t_path_combo *resolve(t_p *p, t_bfs *bfs, t_combo_data *cd)
 
 	// copy_path(bfs, path_combo, 0, 0);
 	// copy_path(bfs, path_combo, 1, 1);
-	// copy_path(bfs, path_combo, shortest_id, 2);
+	// copy_path(bfs, path_combo, first_path, 2);
 	// nb_path = 3;
 
-//	copy_path(bfs, path_combo, shortest_id, 0);
+//	copy_path(bfs, path_combo, first_path, 0);
 //	nb_path = 1;
 
 

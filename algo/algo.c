@@ -105,6 +105,7 @@ int			algo(t_p *p, t_bfs *bfs)
 	ft_printf("++ algo findpath\n");
 	find_path(bfs, p, p->data.rooms.end_index, 0);
 	ft_printf("++ algo fillpatharray\n");
+	//print_matrix(p, bfs, 0, 0);
 	fill_path_array(p, bfs);
 	ft_printf("++ algo free\n");
 	bfs_free_list(&bfs->path_list);

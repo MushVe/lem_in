@@ -60,9 +60,9 @@ static int	affect_ants(t_combo_data *cd, t_ant_status *ant, int id_ant)
 	{
 		if (cd->path_combo[id_path].ants > 0)
 		{
-			cd->path_combo[id_path].room[0].ant = id_ant;
+			cd->path_combo[id_path].room[1].ant = id_ant;
 			ant[id_ant].id_path = id_path;
-			ant[id_ant].id_room = cd->path_combo[id_path].room[0].id;
+			ant[id_ant].id_room = cd->path_combo[id_path].room[1].id;
 			cd->path_combo[id_path].ants--;
 			id_ant++;
 		}
@@ -70,11 +70,12 @@ static int	affect_ants(t_combo_data *cd, t_ant_status *ant, int id_ant)
 	return (id_ant);
 }
 
-static void	print_ants(t_p *p, t_ant_status *ant)
+static void	print_ants(t_p *p, t_ant_status *ant, int sd)
 {
 	int	i;
 
 	i = -1;
+	ft_printf("Line [%d]  ", sd);
 	while (++i < p->data.ant_count)
 	{
 		if (ant[i].id_room >= 0 && ant[i].id_room != p->data.rooms.start_index)
@@ -92,11 +93,12 @@ int			print_lem_in(t_p *p, t_combo_data *cd)
 	init_ant_status(&ant, p->data.ant_count);
 	i = -1;
 	id_ant = 0;
+	ft_printf("\n\nLines [%d]\n", cd->nb_line);
 	while (++i <= cd->nb_line)
 	{
 		bada_ants(cd, ant);
 		id_ant = affect_ants(cd, ant, id_ant);
-		print_ants(p, ant);
+		print_ants(p, ant, i);
 	}
 	return (0);
 }
