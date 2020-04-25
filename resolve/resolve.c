@@ -151,31 +151,31 @@ int		lead_ants(t_path_combo *path, int ants, int nb_path)
 	// ft_printf("\n\t\t\t\t--- LEAD ANTS ---\n");
 	while (++i < nb_path)
 	{
-		ft_printf("\t\t\t\tPath #%d = %d\n", i, (ants / nb_path) + path[i].size - 2);
+		// ft_printf("\t\t\t\tPath #%d = %d\n", i, (ants / nb_path) + path[i].size - 2);
 		lines += (ants / nb_path) + path[i].size - 2;
 	}
 	lines = ft_round(lines, nb_path);
-	ft_printf("\t\t\t\tLines rounded : %d\n", lines);
+	// ft_printf("\t\t\t\tLines rounded : %d\n", lines);
 	i = -1;
 	while (++i < nb_path)
 		path[i].ants = lines - (path[i].size - 2);
 	i = -1;
 	while (++i < nb_path)
 	{
-		ft_printf("\t\t\t\to> ANTS %d for PATH #%d\n", path[i].ants, i);
+		// ft_printf("\t\t\t\to> ANTS %d for PATH #%d\n", path[i].ants, i);
 		total_ants += path[i].ants;
 	}
-	ft_printf("\t\t\t\tTotal Ants : %d\n", total_ants);
+	// ft_printf("\t\t\t\tTotal Ants : %d\n", total_ants);
 	if (total_ants != ants)
 	{
-		ft_printf("\t\t\t\tAdjust\n");
+		// ft_printf("\t\t\t\tAdjust\n");
 		lines = adjust_ants(path, nb_path, total_ants - ants, lines); //AAAAAAAAAAAAAAAAAAAAHHHHHHHHHHHHH
 		// wesh walla
 	}
 	i = -1;
 	while (++i < nb_path)
 	{
-		ft_printf("\t\t\t\to> FINAL ANTS %d for PATH #%d\n", path[i].ants, i);
+		// ft_printf("\t\t\t\to> FINAL ANTS %d for PATH #%d\n", path[i].ants, i);
 	}
 	// ft_printf("\t\t\t\t--- LEAD ANTS ---\n\n");
 	return (lines);
@@ -216,13 +216,13 @@ int	get_shortest_combo(t_p *p, t_bfs *bfs, t_combo_data *cd)
 		path_id = -1;
 		cd->nb_line = 0;
 		clear_path_combo(cd->path_combo, test_limit);
-		ft_printf("\n--------------- TEST #%d ---------------\n", test_id);
+		// ft_printf("\n--------------- TEST #%d ---------------\n", test_id);
 		cd->nb_path = 0;
 		// ft_printf("_______conditions nbpath:%d antcount:%d bfspathnb:%d\n",
 		//	cd->nb_path, p->data.ant_count, bfs->path_nb);
 		while (++cd->nb_path <= test_limit)
 		{
-			ft_printf("_______ROUND #%d > ", cd->nb_path);
+			// ft_printf("_______ROUND #%d > ", cd->nb_path);
 			// if (cd->nb_path == 2 && !got_first)
 			// {
 			// 	first_path = get_next_path(bfs, 0);
@@ -289,7 +289,7 @@ int	get_shortest_combo(t_p *p, t_bfs *bfs, t_combo_data *cd)
 t_path_combo *resolve(t_p *p, t_bfs *bfs, t_combo_data *cd)
 {
 	quicksort(bfs);
-//	print_path_array(p, bfs);
+	print_path_array(p, bfs);
 	init_combo(&cd->path_combo, p->data.ant_count);
 	get_shortest_combo(p, bfs, cd);
 	print_combo(p, cd);
