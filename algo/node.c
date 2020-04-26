@@ -36,6 +36,7 @@ int		bfs_new_node(int *room, t_path_list **path, int size)
 	int			i;
 	int			j;
 
+	// ft_printf("+++ find path new node\n");
 	cpy = *path;
 	if (!(node = (t_path_list*)ft_memalloc(sizeof(t_path_list)))
 		|| !(node->room = ft_memalloc(sizeof(int) * size)))

@@ -26,6 +26,7 @@ static int	find_path(t_bfs *bfs, t_p *p, int host, int i)
 	int	link;
 
 	link = -1;
+	// ft_printf("+++ find path in function %d\n", i);
 	bfs->tmp_path[i] = p->junction[host].index;
 	bfs->visited_record[host] = 1;
 	if (host != p->data.rooms.start_index)
@@ -43,6 +44,9 @@ static int	find_path(t_bfs *bfs, t_p *p, int host, int i)
 	{
 		bfs_new_node(bfs->tmp_path, &bfs->path_list, i + 1);
 		bfs->path_nb++;
+		// ft_printf("+++ pathnb %d\n", bfs->path_nb);
+		if (bfs->path_nb == 5000)
+			return (1);
 	}
 	bfs->tmp_path[i] = -1;
 	bfs->visited_record[host] = 0;

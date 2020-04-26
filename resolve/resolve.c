@@ -63,42 +63,14 @@ int	collide(t_bfs *bfs, t_path_combo *combo, int target_id)
 					bfs->path_array[target_id].room[target_room_id]
 					&& room_id != 0)
 				{
-					ft_printf("-> BONK\n");
+					// ft_printf("-> BONK\n");
 					return (1);
 				}
 			}
 		}
 	}
-	ft_printf("-> SMOOTH\n");
+	// ft_printf("-> SMOOTH\n");
 	return (0);
-}
-
-int		find_cible(t_path_combo *path, int nb_path, int marge)
-{
-	int	i;
-	int	cible_max;
-	int	cible_min;
-
-	i = -1;
-	cible_max = 0;
-	cible_min = 0;
-	while (++i < nb_path)
-	{
-		//ft_printf("\t\t\t\t\t\tnb_path: %d\t", nb_path);
-		if (path[i].ants < path[cible_max].ants)
-		{
-			cible_max = i;
-		}
-		if (path[i].ants > path[cible_min].ants)
-		{
-			cible_min = i;
-		}
-		//ft_printf("cible_max: %d\t", cible_max);
-		//ft_printf("cible_min: %d\n", cible_min);
-	}
-	if (marge < 0)
-		return (cible_max);
-	return (cible_min);
 }
 
 int		negative_ants(t_path_combo *path, int nb_path)
@@ -114,6 +86,46 @@ int		negative_ants(t_path_combo *path, int nb_path)
 	return (0);
 }
 
+int		find_cible(t_path_combo *path, int nb_path, int marge)
+{
+	int	i;
+	int	cible_max;
+	int	cible_min;
+
+	i = -1;
+	cible_max = 0;
+	cible_min = 0;
+	while (++i < nb_path)
+	{
+		//ft_printf("\t\t\t\t\t\tnb_path: %d\t", nb_path);
+
+		// if (path[i].ants < path[cible_max].ants)
+		// {
+		// 	cible_max = i;
+		// }
+		// if (path[i].ants > path[cible_min].ants)
+		// {
+		// 	cible_min = i;
+		// }
+
+
+		if (path[i].ants + path[i].size < path[cible_max].ants + path[cible_max].size)
+		{
+			cible_max = i;
+		}
+		if (path[i].ants + path[i].size > path[cible_min].ants + path[cible_min].size)
+		{
+			cible_min = i;
+		}
+
+		//ft_printf("cible_max: %d\t", cible_max);
+		//ft_printf("cible_min: %d\n", cible_min);
+	}
+	if (marge < 0)
+		return (cible_max);
+	return (cible_min);
+}
+
 int		adjust_ants(t_path_combo *path, int nb_path, int marge, int lines)
 {
 	int	i;
@@ -121,11 +133,15 @@ int		adjust_ants(t_path_combo *path, int nb_path, int marge, int lines)
 	int	cible;
 
 	i = -1;
-	if (marge < 0)
-		op = 1;
-	else
-		op = -1;
-	while (marge != 0) // && !negative_ants(path, nb_path))
+
+	op = (marge < 0) ? 1 : -1;
+
+	// if (marge < 0)
+	// 	op = 1;
+	// else
+	//	op = -1;
+
+	while (marge != 0)
 	{
 		cible = find_cible(path, nb_path, marge);
 	// ft_printf("\t\t\t\t\tCible: %d\n", cible);
@@ -133,7 +149,8 @@ int		adjust_ants(t_path_combo *path, int nb_path, int marge, int lines)
 	// ft_printf("\t\t\t\t\tAnts:%d in Path: %d\n", path[cible].ants, cible);
 	// ft_printf("\t\t\t\t\tMarge: %d\n", marge);
 		marge += op;
-		lines += op;
+		if (path[cible].ants + path[cible].size - 2 != lines)
+			lines +=op;
 	// ft_printf("\t\t\t\t\tLines: %d\n", lines);
 	}
 	return (lines);
@@ -162,20 +179,20 @@ int		lead_ants(t_path_combo *path, int ants, int nb_path)
 	i = -1;
 	while (++i < nb_path)
 	{
-		// ft_printf("\t\t\t\to> ANTS %d for PATH #%d\n", path[i].ants, i);
+		// ft_printf("\t\t\t\to> ANTS %d for PATH #%d of SIZE %d\n", path[i].ants, i, path[i].size - 2);
 		total_ants += path[i].ants;
 	}
 	// ft_printf("\t\t\t\tTotal Ants : %d\n", total_ants);
 	if (total_ants != ants)
 	{
-		// ft_printf("\t\t\t\tAdjust\n");
+		// ft_printf("\t\t\t\tAdjust to [%d] for [%d] ants\n", ants, total_ants);
 		lines = adjust_ants(path, nb_path, total_ants - ants, lines); //AAAAAAAAAAAAAAAAAAAAHHHHHHHHHHHHH
 		// wesh walla
 	}
 	i = -1;
 	while (++i < nb_path)
 	{
-		// ft_printf("\t\t\t\to> FINAL ANTS %d for PATH #%d\n", path[i].ants, i);
+		// ft_printf("\t\t\t\to> FINAL ANTS %d for PATH #%d of SIZE %d\n", path[i].ants, i, path[i].size - 2);
 	}
 	// ft_printf("\t\t\t\t--- LEAD ANTS ---\n\n");
 	return (lines);
@@ -193,6 +210,7 @@ int	get_shortest_combo(t_p *p, t_bfs *bfs, t_combo_data *cd)
 	int				minimum_size;
 	int				shortest;
 	int				got_first;
+	int				best_behind;
 
 	//limiting factor : start and end room connections + ant number (maj malloc combo)
 	//trier chemins
@@ -210,6 +228,7 @@ int	get_shortest_combo(t_p *p, t_bfs *bfs, t_combo_data *cd)
 	init_combo(&best_combo, test_limit);
 	while (++test_id < bfs->path_nb)
 	{
+		best_behind = 0;
 		shortest = 0;
 		// ft_printf("ID:%d path:%d\n", test_id, bfs->path_nb);
 		first_path = test_id - 1;
@@ -220,7 +239,7 @@ int	get_shortest_combo(t_p *p, t_bfs *bfs, t_combo_data *cd)
 		cd->nb_path = 0;
 		// ft_printf("_______conditions nbpath:%d antcount:%d bfspathnb:%d\n",
 		//	cd->nb_path, p->data.ant_count, bfs->path_nb);
-		while (++cd->nb_path <= test_limit)
+		while (++cd->nb_path <= test_limit && !best_behind)
 		{
 			// ft_printf("_______ROUND #%d > ", cd->nb_path);
 			// if (cd->nb_path == 2 && !got_first)
@@ -231,6 +250,8 @@ int	get_shortest_combo(t_p *p, t_bfs *bfs, t_combo_data *cd)
 			// else
 			// {
 				first_path = get_next_path(bfs, first_path);
+				if (bfs->path_array[first_path].size > best_nb_lines)
+					best_behind = 1;
 			// }
 			
 			
@@ -248,7 +269,7 @@ int	get_shortest_combo(t_p *p, t_bfs *bfs, t_combo_data *cd)
 			{
 				//cd->nb_path++;
 				copy_path(bfs, cd->path_combo, first_path, ++path_id);
-				ft_printf("nb_lines_before: %d, nb_path: %d\n", cd->nb_line, cd->nb_path);
+				// ft_printf("nb_lines_before: %d, nb_path: %d\n", cd->nb_line, cd->nb_path);
 				cd->nb_line = lead_ants(cd->path_combo, p->data.ant_count, cd->nb_path);
 				//print_combo(p, cd);
 				// ft_printf("nb_line %d, best %d\n", cd->nb_line, best_nb_lines);
@@ -256,7 +277,7 @@ int	get_shortest_combo(t_p *p, t_bfs *bfs, t_combo_data *cd)
 				{
 					best_nb_path = cd->nb_path;
 					best_nb_lines = cd->nb_line;
-					ft_printf("\tnew best %d\n", best_nb_lines);
+					// ft_printf("\tnew best %d\n", best_nb_lines);
 					clear_path_combo(best_combo, test_limit);
 			//	ft_printf(" -> Here\n");
 					copy_path_combo(best_combo, cd->path_combo, cd->nb_path);
@@ -289,7 +310,7 @@ int	get_shortest_combo(t_p *p, t_bfs *bfs, t_combo_data *cd)
 t_path_combo *resolve(t_p *p, t_bfs *bfs, t_combo_data *cd)
 {
 	quicksort(bfs);
-	print_path_array(p, bfs);
+//	print_path_array(p, bfs);
 	init_combo(&cd->path_combo, p->data.ant_count);
 	get_shortest_combo(p, bfs, cd);
 	print_combo(p, cd);
