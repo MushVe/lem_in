@@ -50,7 +50,6 @@ void	fill_path_array(t_p *p, t_bfs *bfs)
 	int			room_id;
 	int			path_id;
 
-	path_id = -1;
 	if (!(bfs->path_array = ft_memalloc(sizeof(t_path_array) * bfs->path_nb)))
 		exit_error("Malloc Failed", (char*)__func__);
 	cpy = bfs->path_list;

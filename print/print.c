@@ -98,7 +98,8 @@ int			print_lem_in(t_p *p, t_combo_data *cd)
 	{
 		bada_ants(cd, ant);
 		id_ant = affect_ants(cd, ant, id_ant);
-		 print_ants(p, ant, i);
+		print_ants(p, ant, i);
 	}
+	ft_memdel((void*)&ant);
 	return (0);
 }

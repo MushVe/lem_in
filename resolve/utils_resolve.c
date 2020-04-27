@@ -109,9 +109,7 @@ int		get_test_limit(t_p *p)
 	int	end;
 
 	start = get_room_connections(p, p->data.rooms.start_index);
-		ft_printf("start Size: %d\n", start);
 	end = get_room_connections(p, p->data.rooms.end_index);
-		ft_printf("end Size: %d\n", end);
 	if (p->data.ant_count <= start && p->data.ant_count <= end)
 		return (p->data.ant_count);
 	if (start <= p->data.ant_count && start <= end)

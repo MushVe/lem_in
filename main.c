@@ -28,14 +28,25 @@ void	init(t_p *p, t_bfs *bfs)
 	p->hthandler.modulo = 0;
 }
 
-void		clean(t_p *p)
+void		clean(t_p *p, t_bfs *bfs, t_combo_data *cd)
 {
+	int	i;
+
 	delete_display_list(p->tmp);
 	hash_table_delete(&p->hthandler);
 	delete_junction_table(p->junction);
 	free(p->data.rooms.end);
 	free(p->data.rooms.start);
 	free(p->storage);
+	i = -1;
+	while (++i < bfs->path_nb)
+		ft_memdel((void*)&bfs->path_array[i].room);
+	ft_memdel((void*)&bfs->path_array);
+	i = -1;
+	while (++i < cd->nb_path)
+		ft_memdel((void*)&cd->path_combo[i].room);
+	ft_memdel((void*)&cd->path_combo);
+
 }
 
 int			 main()
@@ -44,34 +55,12 @@ int			 main()
 	t_bfs			bfs;
 	t_combo_data	cd;
 
-	ft_printf("+ init\n");
 	init(&p, &bfs);
-	ft_printf("+ parser\n");
 	parser(&p);
-	ft_printf("+ algo\n");
-	// display(p.data, p.tmp);
+	display(p.data, p.tmp);
 	algo(&p, &bfs);
-	ft_printf("+ resolve\n");
 	resolve(&p, &bfs, &cd);
-	ft_printf("+ print\n");
 	print_lem_in(&p, &cd);
-
-
-	// for (size_t i = 0; i < p.size; i++)
-	// {
-	// 	for (size_t j = 0; j < p.size; j++)
-	// 	{
-	// 		if (p.matrix[i][j] != 1)
-	// 			ft_printf(".");
-	// 		else
-	// 			ft_printf("1");
-	// 	}
-	// 	ft_printf("\n");
-	// }
-
-	/*
-	** Attention a ne pas utiliser avant la fin du programme hein
-	*/
-	clean(&p);
+	clean(&p, &bfs, &cd);
 	ft_doublefree_int(p.matrix, p.size);
 }

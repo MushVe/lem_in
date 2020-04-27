@@ -94,29 +94,32 @@ static void	do_bfs(t_p *p, t_bfs *bfs)
 			}
 		}
 	}
+	ft_memdel((void*)&q);
+}
+
+void	bfs_free_all(t_bfs *bfs)
+{
+	ft_memdel((void*)&bfs->visited_record);
+	ft_memdel((void*)&bfs->parent);
+	ft_memdel((void*)&bfs->tmp_path);
+	ft_memdel((void*)&bfs->matrix_level);
+
 }
 
 int			algo(t_p *p, t_bfs *bfs)
 {
-	ft_printf("++ algo init\n");
 	bfs_init(bfs, p->size);
-	ft_printf("++ algo dobfs\n");
 	do_bfs(p, bfs);
-	ft_printf("++ algo getmatrixlvl\n");
 	get_matrix_level(p, bfs);
-	ft_printf("++ algo resetvisited\n");
 	reset_visited(p, bfs);
-	ft_printf("++ algo findpath\n");
 	find_path(bfs, p, p->data.rooms.end_index, 0);
-	ft_printf("++ algo fillpatharray\n");
-	//print_matrix(p, bfs, 0, 0);
 	fill_path_array(p, bfs);
-	ft_printf("++ algo free\n");
+	bfs_free_all(bfs);
 	bfs_free_list(&bfs->path_list);
-	ft_printf("++ algo init\n");
 	return (0);
 }
 
 /*
+**	print_matrix(p, bfs, 0, 0);
 **	print_path_array(p, bfs);
 */
