@@ -23,9 +23,9 @@ static void	swap(t_path_array *a, t_path_array *b)
 
 static void	sort(t_path_array *array, int array_size)
 {
-	size_t	low;
-	size_t	i;
-	int		pivot;
+	int	low;
+	int	i;
+	int	pivot;
 
 	if (array_size < 2)
 		return ;

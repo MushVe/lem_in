@@ -138,7 +138,7 @@ void				bfs_free_list(t_path_list **path);
 int					bfs_new_node(int *data, t_path_list **path, int size);
 int					*bfs_get_node(int aim, t_path_list *path);
 void				bfs_init(t_bfs *bfs, int size);
-void				fill_path_array(t_p *p, t_bfs *bfs);
+void				fill_path_array(t_bfs *bfs);
 void				print_path_array(t_p *p, t_bfs *bfs);
 void				print_matrix(t_p *p, t_bfs *bfs, int i, int j);
 void				get_matrix_level(t_p *p, t_bfs *bfs);
@@ -157,6 +157,11 @@ void				print_combo(t_p *p, t_combo_data *cd);
 void				quicksort(t_bfs *bfs);
 int					get_room_connections(t_p *p, int room_level);
 int					get_test_limit(t_p *p);
+void				init_combo(t_path_combo **path_combo, int limit);
+void				clear_path_combo(t_path_combo *path_combo, int ant);
+int					collide(t_bfs *bfs, t_path_combo *combo, int target_id);
+int					negative_ants(t_path_combo *path, int nb_path);
+int					find_cible(t_path_combo *path, int nb_path, int marge);
 
 /*
 ** Linked list to store the anthill

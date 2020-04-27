@@ -20,14 +20,15 @@ LIBFT = libft/libftprintf.a
 
 FILE = ants.c main.c parser.c utils_parser.c room.c utils_room.c tubes.c \
 	utils_tubes.c utils.c utils_2.c algo.c utils_algo.c node.c \
-	resolve.c utils_resolve.c quicksort.c print.c utils_print.c
+	resolve.c utils_resolve.c quicksort.c print.c utils_print.c \
+	resolve_tools.c
 
 INC = -I libft 
 
 SRC = $(FILE:%=%)
 OBJ = $(FILE:%.c=objs/%.o)
 
-FLAG = #-fsanitize=address # -Wall -Werror -Wextra  -g3
+FLAG = -Wall -Werror -Wextra #-fsanitize=address  -g3
 CC = gcc $(FLAG) $(INC)
 
 RM = rm -rf

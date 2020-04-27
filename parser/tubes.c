@@ -27,7 +27,6 @@ int	fill_adjacency_matrix(int **matrix, char *line, t_hthandle *t_hthandler)
 {
 	t_ht		*room1;
 	t_ht		*room2;
-	static int	i = 0;
 
 	room1 = NULL;
 	room2 = NULL;

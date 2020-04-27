@@ -12,7 +12,7 @@
 
 #include "includes/lem_in.h"
 
-void	init(t_p *p, t_bfs *bfs)
+void	init(t_p *p)
 {
 	p->tmp = NULL;
 	p->size = 0;
@@ -54,7 +54,7 @@ int		main(void)
 	t_bfs			bfs;
 	t_combo_data	cd;
 
-	init(&p, &bfs);
+	init(&p);
 	parser(&p);
 	display(p.data, p.tmp);
 	algo(&p, &bfs);

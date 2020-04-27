@@ -61,7 +61,7 @@ void	get_matrix_level(t_p *p, t_bfs *bfs)
 	}
 }
 
-void	fill_path_array(t_p *p, t_bfs *bfs)
+void	fill_path_array(t_bfs *bfs)
 {
 	t_path_list	*cpy;
 	int			room_id;

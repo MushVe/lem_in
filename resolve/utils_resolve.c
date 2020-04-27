@@ -61,7 +61,6 @@ void	copy_path_combo(t_path_combo *best, t_path_combo *path, int limit)
 int		get_room_connections(t_p *p, int room_id)
 {
 	int	x;
-	int	y;
 	int cpt;
 
 	x = -1;
