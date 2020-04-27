@@ -12,29 +12,18 @@
 
 #include "../includes/lem_in.h"
 
-static void	reset_visited(t_p *p, t_bfs *bfs)
-{
-	int	i;
-
-	i = -1;
-	while (++i < p->size)
-		bfs->visited_record[i] = 0;
-}
-
 static int	find_path(t_bfs *bfs, t_p *p, int host, int i)
 {
 	int	link;
 
 	link = -1;
-	// ft_printf("+++ find path in function %d\n", i);
 	bfs->tmp_path[i] = p->junction[host].index;
 	bfs->visited_record[host] = 1;
 	if (host != p->data.rooms.start_index)
 	{
 		while (++link < p->size)
 		{
-			if (p->matrix[link][host] > 0
-				&& bfs->visited_record[link] == 0
+			if (p->matrix[link][host] > 0 && bfs->visited_record[link] == 0
 				&& bfs->matrix_level[link] <= bfs->matrix_level[host])
 				if (find_path(bfs, p, link, i + 1))
 					return (1);
@@ -44,7 +33,6 @@ static int	find_path(t_bfs *bfs, t_p *p, int host, int i)
 	{
 		bfs_new_node(bfs->tmp_path, &bfs->path_list, i + 1);
 		bfs->path_nb++;
-		// ft_printf("+++ pathnb %d\n", bfs->path_nb);
 		if (bfs->path_nb == 5000)
 			return (1);
 	}
@@ -87,23 +75,10 @@ static void	do_bfs(t_p *p, t_bfs *bfs)
 		de_queue(q);
 		bfs->link = -1;
 		while (++bfs->link < p->size)
-		{
 			if (p->matrix[bfs->host][bfs->link] != 0)
-			{
 				treat_unvisited(p, bfs, &q);
-			}
-		}
 	}
 	ft_memdel((void*)&q);
-}
-
-void	bfs_free_all(t_bfs *bfs)
-{
-	ft_memdel((void*)&bfs->visited_record);
-	ft_memdel((void*)&bfs->parent);
-	ft_memdel((void*)&bfs->tmp_path);
-	ft_memdel((void*)&bfs->matrix_level);
-
 }
 
 int			algo(t_p *p, t_bfs *bfs)

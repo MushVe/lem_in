@@ -12,33 +12,28 @@
 
 #include "../includes/lem_in.h"
 
-int	get_next_path(t_bfs *bfs, int path_id)
+int		get_next_path(t_bfs *bfs, int path_id)
 {
 	if (path_id + 1 < bfs->path_nb)
 		return (path_id + 1);
 	return (-1);
 }
 
-void	copy_path(t_bfs *bfs, t_path_combo *path_combo, int path_id, int combo_id)
+void	copy_path(t_bfs *bfs, t_path_combo *path_combo, int p_id, int c_id)
 {
-	int	room_id;
+	int	r_id;
 
-	// ft_printf("\n++ copy_path array into combo ++\n");
-	// ft_printf("path_id: %d  combo_id: %d  size: %d\n", path_id, combo_id, bfs->path_array[path_id].size);
-	path_combo[combo_id].size = bfs->path_array[path_id].size;
-	path_combo[combo_id].ants = 0;
-	if (!(path_combo[combo_id].room = ft_memalloc(sizeof(t_room_status) * bfs->path_array[path_id].size)))
+	path_combo[c_id].size = bfs->path_array[p_id].size;
+	path_combo[c_id].ants = 0;
+	if (!(path_combo[c_id].room = ft_memalloc(sizeof(t_room_status) *\
+		bfs->path_array[p_id].size)))
 		exit_error("Malloc Failed", (char*)__func__);
-	room_id = -1;
-	while (++room_id < bfs->path_array[path_id].size)
+	r_id = -1;
+	while (++r_id < bfs->path_array[p_id].size)
 	{
-		path_combo[combo_id].room[room_id].id = bfs->path_array[path_id].room[room_id];
-		path_combo[combo_id].room[room_id].ant = -1;
-		// ft_printf("room_id: %d ", room_id);
-		// ft_printf("[%d] ", bfs->path_array[path_id].room[room_id]);
-		// ft_printf("[%d]\n", path_combo[combo_id].room[room_id]);
+		path_combo[c_id].room[r_id].id = bfs->path_array[p_id].room[r_id];
+		path_combo[c_id].room[r_id].ant = -1;
 	}
-	// ft_printf("\n");
 }
 
 void	copy_path_combo(t_path_combo *best, t_path_combo *path, int limit)
@@ -49,11 +44,10 @@ void	copy_path_combo(t_path_combo *best, t_path_combo *path, int limit)
 	path_id = -1;
 	while (++path_id < limit)
 	{
-		// ft_printf("> copied ants : %d", path[path_id].ants);
-		// ft_printf(" size : %d\n", path[path_id].size);
 		best[path_id].ants = path[path_id].ants;
 		best[path_id].size = path[path_id].size;
-		if (!(best[path_id].room = ft_memalloc(sizeof(t_room_status) * best[path_id].size)))
+		if (!(best[path_id].room = ft_memalloc(sizeof(t_room_status) *\
+			best[path_id].size)))
 			exit_error("Malloc Failed", (char*)__func__);
 		room_id = -1;
 		while (++room_id < path[path_id].size)
@@ -62,31 +56,6 @@ void	copy_path_combo(t_path_combo *best, t_path_combo *path, int limit)
 			best[path_id].room[room_id].ant = -1;
 		}
 	}
-	// ft_printf("Copied\n");
-}
-
-void	print_combo(t_p *p, t_combo_data *cd)
-{
-	int	path_id;
-	int	room_id;
-
-	path_id = -1;
-	ft_printf("++++ Combo Content ++++\n");
-	while (++path_id < cd->nb_path && cd->path_combo[path_id].size != -1)
-	{
-		ft_printf("Ants: %d ", cd->path_combo[path_id].ants);
-		ft_printf("Path Size: %d >>> ", cd->path_combo[path_id].size);
-		room_id = -1;
-		while (++room_id < cd->path_combo[path_id].size)
-		{
-			if (room_id != 0)
-				ft_printf(" - ");
-			ft_printf("[%s]", p->junction[cd->path_combo[path_id].room[room_id].id].room_name);
-		}
-		ft_printf("\n");
-	}
-	ft_printf("\n");
-	
 }
 
 int		get_room_connections(t_p *p, int room_id)
@@ -118,3 +87,29 @@ int		get_test_limit(t_p *p)
 		return (end);
 	return (-1);
 }
+
+/*
+** void	print_combo(t_p *p, t_combo_data *cd)
+** {
+** 	int	path_id;
+** 	int	room_id;
+**
+** 	path_id = -1;
+** 	ft_printf("++++ Combo Content ++++\n");
+** 	while (++path_id < cd->nb_path && cd->path_combo[path_id].size != -1)
+** 	{
+** 		ft_printf("Ants: %d ", cd->path_combo[path_id].ants);
+** 		ft_printf("Path Size: %d >>> ", cd->path_combo[path_id].size);
+** 		room_id = -1;
+** 		while (++room_id < cd->path_combo[path_id].size)
+** 		{
+** 			if (room_id != 0)
+** 				ft_printf(" - ");
+** 			ft_printf("[%s]", p->junction[cd->path_combo[path_id]
+** 										.room[room_id].id].room_name);
+** 		}
+** 		ft_printf("\n");
+** 	}
+** 	ft_printf("\n");
+** }
+*/

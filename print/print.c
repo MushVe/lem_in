@@ -93,7 +93,7 @@ int			print_lem_in(t_p *p, t_combo_data *cd)
 	init_ant_status(&ant, p->data.ant_count);
 	i = -1;
 	id_ant = 0;
-	ft_printf("\n\nLines [%d]\n", cd->nb_line);
+	ft_printf("\nLines [%d]\n", cd->nb_line);
 	while (++i <= cd->nb_line)
 	{
 		bada_ants(cd, ant);

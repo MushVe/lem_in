@@ -28,7 +28,7 @@ void	init(t_p *p, t_bfs *bfs)
 	p->hthandler.modulo = 0;
 }
 
-void		clean(t_p *p, t_bfs *bfs, t_combo_data *cd)
+void	clean(t_p *p, t_bfs *bfs, t_combo_data *cd)
 {
 	int	i;
 
@@ -46,12 +46,11 @@ void		clean(t_p *p, t_bfs *bfs, t_combo_data *cd)
 	while (++i < cd->nb_path)
 		ft_memdel((void*)&cd->path_combo[i].room);
 	ft_memdel((void*)&cd->path_combo);
-
 }
 
-int			 main()
+int		main(void)
 {
-	t_p 			p;
+	t_p				p;
 	t_bfs			bfs;
 	t_combo_data	cd;
 

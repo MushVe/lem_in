@@ -142,6 +142,8 @@ void				fill_path_array(t_p *p, t_bfs *bfs);
 void				print_path_array(t_p *p, t_bfs *bfs);
 void				print_matrix(t_p *p, t_bfs *bfs, int i, int j);
 void				get_matrix_level(t_p *p, t_bfs *bfs);
+void				bfs_free_all(t_bfs *bfs);
+void				reset_visited(t_p *p, t_bfs *bfs);
 
 /*
 ** Resolve

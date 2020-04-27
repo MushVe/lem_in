@@ -12,8 +12,6 @@
 
 #include "../includes/lem_in.h"
 
-//if (bfs->path_array[path_id].size < shortest)
-
 static void	swap(t_path_array *a, t_path_array *b)
 {
 	t_path_array c;
@@ -48,8 +46,7 @@ static void	sort(t_path_array *array, int array_size)
 	sort(array + low - 1, array_size - low + 1);
 }
 
-void	quicksort(t_bfs *bfs)
+void		quicksort(t_bfs *bfs)
 {
 	sort(bfs->path_array, bfs->path_nb);
 }
-
