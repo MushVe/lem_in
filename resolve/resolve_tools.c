@@ -66,38 +66,22 @@ int		collide(t_bfs *bfs, t_path_combo *combo, int target_id)
 	return (0);
 }
 
-int		negative_ants(t_path_combo *path, int nb_path)
+void	free_path_combo(t_path_combo *combo, int nb_path)
 {
 	int	i;
 
 	i = -1;
 	while (++i < nb_path)
-	{
-		if (path[i].ants < 0)
-			return (1);
-	}
-	return (0);
+		ft_memdel((void*)&combo[i].room);
+	ft_memdel((void*)&combo);
 }
 
-int		find_cible(t_path_combo *path, int nb_path, int marge)
+void	init_utils(t_p *p, t_combo_data *cd, t_combo_utils *u)
 {
-	int	i;
-	int	cible_max;
-	int	cible_min;
-
-	i = -1;
-	cible_max = 0;
-	cible_min = 0;
-	while (++i < nb_path)
-	{
-		if (path[i].ants + path[i].size < path[cible_max].ants +\
-			path[cible_max].size)
-			cible_max = i;
-		if (path[i].ants + path[i].size > path[cible_min].ants +\
-			path[cible_min].size)
-			cible_min = i;
-	}
-	if (marge < 0)
-		return (cible_max);
-	return (cible_min);
+	u->test_id = -1;
+	u->nb_total_ants = p->data.ant_count;
+	u->best_nb_lines = __INT_MAX__;
+	u->best_nb_path = 0;
+	u->test_limit = get_test_limit(p);
+	cd->nb_path = 0;
 }

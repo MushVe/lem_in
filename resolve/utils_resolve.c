@@ -12,14 +12,7 @@
 
 #include "../includes/lem_in.h"
 
-int		get_next_path(t_bfs *bfs, int path_id)
-{
-	if (path_id + 1 < bfs->path_nb)
-		return (path_id + 1);
-	return (-1);
-}
-
-void	copy_path(t_bfs *bfs, t_path_combo *path_combo, int p_id, int c_id)
+void		copy_path(t_bfs *bfs, t_path_combo *path_combo, int p_id, int c_id)
 {
 	int	r_id;
 
@@ -36,7 +29,7 @@ void	copy_path(t_bfs *bfs, t_path_combo *path_combo, int p_id, int c_id)
 	}
 }
 
-void	copy_path_combo(t_path_combo *best, t_path_combo *path, int limit)
+void		copy_path_combo(t_path_combo *best, t_path_combo *path, int limit)
 {
 	int	path_id;
 	int	room_id;
@@ -58,7 +51,7 @@ void	copy_path_combo(t_path_combo *best, t_path_combo *path, int limit)
 	}
 }
 
-int		get_room_connections(t_p *p, int room_id)
+static int	get_room_connections(t_p *p, int room_id)
 {
 	int	x;
 	int cpt;
@@ -71,7 +64,7 @@ int		get_room_connections(t_p *p, int room_id)
 	return (cpt);
 }
 
-int		get_test_limit(t_p *p)
+int			get_test_limit(t_p *p)
 {
 	int	start;
 	int	end;
@@ -84,6 +77,7 @@ int		get_test_limit(t_p *p)
 		return (start);
 	if (end <= p->data.ant_count && end <= start)
 		return (end);
+	exit_error("Test Limit Exited", (char*)__func__);
 	return (-1);
 }
 

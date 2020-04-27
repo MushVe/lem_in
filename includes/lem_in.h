@@ -107,6 +107,20 @@ typedef struct		s_ant_status
 	int	id_room;
 }					t_ant_status;
 
+typedef struct		s_combo_utils
+{
+	t_path_combo	*best_combo;
+	int				first_path;
+	int				best_nb_lines;
+	int				best_nb_path;
+	int				path_id;
+	int				test_limit;
+	int				test_id;
+	int				minimum_size;
+	int				best_behind;
+	int				nb_total_ants;
+}					t_combo_utils;
+
 typedef struct		s_bfs
 {
 	int				*matrix_level;
@@ -150,18 +164,18 @@ void				reset_visited(t_p *p, t_bfs *bfs);
 */
 
 t_path_combo		*resolve(t_p *p, t_bfs *bfs, t_combo_data *cd);
-int					get_next_path(t_bfs *bfs, int path_id);
 void				copy_path(t_bfs *b, t_path_combo *p, int pi, int ci);
 void				copy_path_combo(t_path_combo *f, t_path_combo *p, int l);
 void				print_combo(t_p *p, t_combo_data *cd);
 void				quicksort(t_bfs *bfs);
-int					get_room_connections(t_p *p, int room_level);
 int					get_test_limit(t_p *p);
 void				init_combo(t_path_combo **path_combo, int limit);
 void				clear_path_combo(t_path_combo *path_combo, int ant);
 int					collide(t_bfs *bfs, t_path_combo *combo, int target_id);
-int					negative_ants(t_path_combo *path, int nb_path);
-int					find_cible(t_path_combo *path, int nb_path, int marge);
+void				get_start_values(t_combo_data *cd, t_combo_utils *u);
+int					lead_ants(t_path_combo *path, int ants, int nb_path);
+void				init_utils(t_p *p, t_combo_data *cd, t_combo_utils *u);
+void				free_path_combo(t_path_combo *combo, int nb_path);
 
 /*
 ** Linked list to store the anthill
