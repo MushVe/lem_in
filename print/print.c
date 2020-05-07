@@ -70,18 +70,23 @@ static int	affect_ants(t_combo_data *cd, t_ant_status *ant, int id_ant)
 	return (id_ant);
 }
 
-static void	print_ants(t_p *p, t_ant_status *ant, int sd)
+static void	print_ants(t_p *p, t_ant_status *ant)
 {
 	int	i;
+	int	check;
 
+	check = 0;
 	i = -1;
-	ft_printf("Line [%d]  ", sd);
 	while (++i < p->data.ant_count)
 	{
 		if (ant[i].id_room >= 0 && ant[i].id_room != p->data.rooms.start_index)
+		{
 			ft_printf("L%d-%s ", i + 1, p->junction[ant[i].id_room].room_name);
+			check++;
+		}
 	}
-	ft_printf("\n");
+	if (check)
+		ft_printf("\n");
 }
 
 int			print_lem_in(t_p *p, t_combo_data *cd)
@@ -93,12 +98,12 @@ int			print_lem_in(t_p *p, t_combo_data *cd)
 	init_ant_status(&ant, p->data.ant_count);
 	i = -1;
 	id_ant = 0;
-	ft_printf("\nLines [%d]\n", cd->nb_line);
+	ft_printf("\n");
 	while (++i <= cd->nb_line)
 	{
 		bada_ants(cd, ant);
 		id_ant = affect_ants(cd, ant, id_ant);
-		print_ants(p, ant, i);
+		print_ants(p, ant);
 	}
 	ft_memdel((void*)&ant);
 	return (0);

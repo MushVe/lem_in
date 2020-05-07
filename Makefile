@@ -10,11 +10,7 @@
 #                                                                              #
 # **************************************************************************** #
 
-#.PHONY: all, clean, fclean, re
-# all: 
-# 	@ gcc -o lem-in parser/*.c hash_table/*.c main.c libftprintf.a
-
-NAME = lem-in #cseguier.filler
+NAME = lem-in
 
 LIBFT = libft/libftprintf.a
 
@@ -28,7 +24,7 @@ INC = -I libft
 SRC = $(FILE:%=%)
 OBJ = $(FILE:%.c=objs/%.o)
 
-FLAG = -Wall -Werror -Wextra #-fsanitize=address  -g3
+FLAG = -Wall -Werror -Wextra #-fsanitize=address -g3
 CC = gcc $(FLAG) $(INC)
 
 RM = rm -rf

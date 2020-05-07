@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "../includes/lem_in.h"
-#include <stdio.h>
 
 int		is_ant_count_valid(char *line)
 {
