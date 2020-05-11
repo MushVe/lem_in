@@ -19,24 +19,19 @@
 # include <stdlib.h>
 # include <string.h>
 
-/*
-** GET LINE
-*/
-
 # define GL_BUFF_SIZE 1500
+# define GNL_BUFF_SIZE 3024
 
-typedef struct	s_gl_list
+typedef struct	s_gnl
 {
-	struct s_gl_list	*next;
-	void				(*my_strjoin)(char **, char *);
-}				t_gl_list;
+	struct s_gnl	*next;
+	struct s_gnl	*prev;
+	char			*stock;
+	int				fd;
+}				t_gnl;
 
-bool			gl_is_storage_empty(char *storage);
-bool			gl_contain_new_line(char *data, char **new_line_pos);
-bool			gl_is_nl_last_char(char *data, char *new_line_pos);
-bool			gl_save_data(char **storage, char *buffer);
-void			gl_strjoin_free_s1(char **s1, char *s2);
-int				ft_get_line(int fd, char **line, char **storage);
+char			*ft_gnl_strjoin2(char const *s1, char const *s2);
+char			*ft_gnl_strjoinf(char *s1, char *s2);
 
 /*
 ** QUEUE
@@ -77,6 +72,7 @@ void			ft_doublefree(char **s);
 void			ft_doublefree_int(int **s, int size);
 void			ft_doubleprint(char **s);
 void			ft_foreach(int *tab, size_t lenght, void (*f)(int));
+int				get_next_line(int const fd, char **line);
 int				ft_isalnum(int c);
 int				ft_isalpha(int c);
 int				ft_isascii(int c);

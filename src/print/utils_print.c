@@ -1,36 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pft_get_double.c                                   :+:      :+:    :+:   */
+/*   utils_print.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cseguier <cseguier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/04/29 14:01:55 by cseguier          #+#    #+#             */
-/*   Updated: 2019/11/13 01:41:29 by cseguier         ###   ########.fr       */
+/*   Created: 2020/04/24 18:15:59 by cseguier          #+#    #+#             */
+/*   Updated: 2020/04/24 18:40:10 by cseguier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/ft_printf.h"
+#include "../../includes/lem_in.h"
 
-char	*pft_get_string(va_list ap)
+void	go_to_next(t_combo_data *cd, t_ant_status *ant, t_bada_ids id)
 {
-	char	*res;
-	char	*tmp;
-
-	tmp = va_arg(ap, char*);
-	if (tmp == NULL)
-		res = ft_strdup("(null)");
-	else
-		res = ft_strdup(tmp);
-	return (res);
-}
-
-char	*pft_get_char(va_list ap)
-{
-	char	*res;
-
-	if (!(res = ft_strnew(1)))
-		return (0);
-	res[0] = va_arg(ap, int);
-	return (res);
+	cd->path_combo[id.path].room[id.room + 1].ant = id.ant;
+	ant[id.ant].id_path = id.path;
+	ant[id.ant].id_room = cd->path_combo[id.path].room[id.room + 1].id;
+	cd->path_combo[id.path].room[id.room].ant = -1;
 }

@@ -1,36 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pft_get_double.c                                   :+:      :+:    :+:   */
+/*   utils_2.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cseguier <cseguier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/04/29 14:01:55 by cseguier          #+#    #+#             */
-/*   Updated: 2019/11/13 01:41:29 by cseguier         ###   ########.fr       */
+/*   Created: 2020/03/06 06:45:19 by cseguier          #+#    #+#             */
+/*   Updated: 2020/03/06 06:45:34 by cseguier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/ft_printf.h"
+#include "../../includes/lem_in.h"
 
-char	*pft_get_string(va_list ap)
+void	exit_error(char *reason, char *camefrom)
 {
-	char	*res;
-	char	*tmp;
-
-	tmp = va_arg(ap, char*);
-	if (tmp == NULL)
-		res = ft_strdup("(null)");
-	else
-		res = ft_strdup(tmp);
-	return (res);
-}
-
-char	*pft_get_char(va_list ap)
-{
-	char	*res;
-
-	if (!(res = ft_strnew(1)))
-		return (0);
-	res[0] = va_arg(ap, int);
-	return (res);
+	ft_printf("In function <%s> : %s\n", camefrom, reason);
+	exit(0);
 }

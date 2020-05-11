@@ -26,17 +26,20 @@
 t_ht	*hash_table_create(size_t item_count, t_hthandle *t_hthandler)
 {
 	t_ht	*hash_table;
-	int		i;
+	size_t	i;
 
-	i = -1;
+	i = 0;
 	if (!(hash_table = ft_memalloc(item_count * 100 * sizeof(t_ht))))
 		return (0);
 	t_hthandler->capacity = item_count;
 	t_hthandler->modulo = item_count * 10;
 	t_hthandler->current_capacity = item_count;
 	t_hthandler->hash_table = hash_table;
-	while (++i < item_count * 100)
+	while (i < item_count * 100)
+	{
 		hash_table[i].key = -1;
+		i++;
+	}
 	return (hash_table);
 }
 

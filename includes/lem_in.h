@@ -51,7 +51,7 @@ typedef struct		s_map_room_index
 typedef struct		s_p
 {
 	int					size;
-	char				*line;
+	char				*new_line;
 	char				*storage;
 	t_map_room_index	*junction;
 	int					**matrix;
@@ -200,7 +200,7 @@ void				exit_error(char *reason, char *camefrom);
 ** Ants
 */
 
-void				handle_ants(t_p *p);
+int					handle_ants(t_p *p);
 
 /*
 ** Rooms
@@ -216,6 +216,7 @@ int					is_room(char *line);
 int					is_room_name_alphanumerical(char *line);
 int					is_coord_only_digit(char *line);
 int					is_tube(char *line);
+int					is_coord_valid(char *line);
 
 /*
 ** Tubes

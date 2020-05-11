@@ -81,9 +81,9 @@ int			ptf_process(char c, va_list ap, t_pf *p)
 	}
 	res = first_process(c, ap, p, res);
 	if (c == 'c')
-		res = pft_get_char(c, ap, p);
+		res = pft_get_char(ap);
 	if (c == 's')
-		res = pft_get_string(c, ap);
+		res = pft_get_string(ap);
 	res = next_process(c, p, res);
 	if (!(ptf_new_node(res, ft_strlen(res), p)))
 		return (0);

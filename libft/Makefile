@@ -11,11 +11,12 @@
 # **************************************************************************** #
 
 .PHONY: all, clean, fclean, re
+.SILENT:
 
 NAME = libftprintf.a
 
 FILE = 	ft_abs.c ft_atoi.c ft_bzero.c ft_capitalize.c ft_doublefree.c \
-		ft_doubleprint.c ft_foreach.c \
+		ft_doubleprint.c ft_foreach.c ft_gnl.c ft_gnl_utils.c \
 		ft_isalnum.c ft_isalpha.c ft_isascii.c ft_isdigit.c ft_isprint.c \
 		ft_itoa.c ft_itoa_base.c ft_lowcase.c ft_lstadd.c ft_lstdel.c  \
 		ft_lstdelone.c ft_lstiter.c ft_lstmap.c ft_lstnew.c ft_memalloc.c \
@@ -34,48 +35,32 @@ FILE = 	ft_abs.c ft_atoi.c ft_bzero.c ft_capitalize.c ft_doublefree.c \
 		pft_add_stuff.c pft_add_width.c pft_convert.c pft_check.c \
 		pft_get_type.c pft_get_double.c pft_get_unsigned.c \
 		hash_table_api.c hash_table_utils.c hash_table_tools.c\
-		ft_get_line.c get_line_utils.c \
 		queue.c \
 
 SRC = $(FILE:%=%)
 
 OBJ = $(FILE:%.c=objs/%.o)
 
-#CFLAGS = -Wall -Werror -Wextra
+CFLAGS = -Wall -Werror -Wextra
 CC = gcc
 RM = rm -f
 
 all: $(NAME)
 
 $(NAME): $(OBJ)
-		@ar rcs $(NAME) $(OBJ) 
-		@ranlib $(NAME)
+	ar rcs $(NAME) $(OBJ)
+	ranlib $(NAME)
 
-objs/%.o: src/%.c
-		@mkdir -p objs
-		@$(CC) -c $< -o $@
-
-objs/%.o: ft_printf/%.c
-		@mkdir -p objs
-		@$(CC) -c $< -o $@
-
-objs/%.o: queue/%.c
-		@mkdir -p objs
-		@$(CC) -c $< -o $@
-
-objs/%.o: hash_table/%.c
-		@mkdir -p objs
-		@$(CC) -c $< -o $@
-
-objs/%.o: ft_get_line/%.c
-		@mkdir -p objs
-		@$(CC) -c $< -o $@
+objs/%.o: */%.c
+	mkdir -p objs
+	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
-		@$(RM) $(OBJ)
-		@rm -df objs
+	$(RM) $(OBJ)
+	rm -df objs
 
 fclean: clean
-		@$(RM) $(NAME)
+	$(RM) $(NAME)
 
-re: fclean all
+re: fclean
+	$(MAKE)

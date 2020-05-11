@@ -59,10 +59,8 @@ char			*pft_get_longlong(va_list ap);
 char			*pft_get_uint(char c, va_list ap, t_pf *p);
 char			*pft_get_ulong(char c, va_list ap);
 char			*pft_get_ulonglong(char c, va_list ap);
-char			*pft_get_char(char c, va_list ap, t_pf *p);
-char			*pft_get_string(char c, va_list ap);
-char			*pft_get_double(char c, va_list ap);
-char			*pft_get_longdouble(char c, va_list ap);
+char			*pft_get_char(va_list ap);
+char			*pft_get_string(va_list ap);
 char			*pft_convert_signed(long long n);
 char			*pft_convert_unsigned(unsigned long long n);
 

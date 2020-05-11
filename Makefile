@@ -10,6 +10,9 @@
 #                                                                              #
 # **************************************************************************** #
 
+.PHONY: all clean fclean re
+.SILENT:
+
 NAME = lem-in
 
 LIBFT = libft/libftprintf.a
@@ -19,53 +22,39 @@ FILE = ants.c main.c parser.c utils_parser.c room.c utils_room.c tubes.c \
 	resolve.c utils_resolve.c quicksort.c print.c utils_print.c \
 	resolve_tools.c resolve_utils2.c
 
-INC = -I libft 
-
+INC = -I libft
 SRC = $(FILE:%=%)
 OBJ = $(FILE:%.c=objs/%.o)
-
-FLAG = -Wall -Werror -Wextra #-fsanitize=address -g3
-CC = gcc $(FLAG) $(INC)
-
+CFLAGS = -Wall -Werror -Wextra #-fsanitize=address,undefined -g3
+CC = gcc $(CFLAGS) $(INC)
 RM = rm -rf
 
 all: $(NAME)
 
 $(NAME) : $(LIBFT) $(OBJ)
-	@$(CC) -o $@ $(OBJ) -L libft/ -lftprintf 
+	$(CC) -o $@ $(OBJ) -L libft/ -lftprintf 
 
-$(LIBFT) :
-	@make -C libft/ all
+$(LIBFT) : FORCE
+	make -C libft/ all
 
-objs/%.o: %.c
-	@mkdir -p objs
-	@$(CC) $(INC) -o $@ -c $<
+FORCE:
 
-objs/%.o: parser/%.c
-	@mkdir -p objs
-	@$(CC) $(INC) -o $@ -c $<
+objs/%.o: src/%.c
+	mkdir -p objs
+	$(CC) $(INC) -o $@ -c $<
 
-objs/%.o: print/%.c
-	@mkdir -p objs
-	@$(CC) $(INC) -o $@ -c $<
-
-objs/%.o: algo/%.c
-	@mkdir -p objs
-	@$(CC) $(INC) -o $@ -c $<
-
-objs/%.o: resolve/%.c
-	@mkdir -p objs
-	@$(CC) $(INC) -o $@ -c $<
+objs/%.o: src/*/%.c
+	mkdir -p objs
+	$(CC) $(INC) -o $@ -c $<
 
 clean:
-	@$(RM) $(OBJ)
-	@rm -rf objs
-	@make -C libft/ clean
+	$(RM) $(OBJ)
+	rm -rf objs
+	make -C libft/ clean
 
 fclean: clean
-	@$(RM) $(NAME)
-	@make -C libft/ fclean
+	$(RM) $(NAME)
+	make -C libft/ fclean
 
-re: fclean all
-
-.PHONY: all clean fclean re
+re: fclean
+	$(MAKE)
