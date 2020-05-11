@@ -23,14 +23,17 @@
 ** et pas mettre valeur fixe
 */
 
-t_ht	*hash_table_create(size_t item_count, t_hthandle *t_hthandler)
+void	hash_table_create(size_t item_count, t_hthandle *t_hthandler)
 {
 	t_ht	*hash_table;
 	size_t	i;
 
 	i = 0;
 	if (!(hash_table = ft_memalloc(item_count * 100 * sizeof(t_ht))))
-		return (0);
+	{
+		ft_putendl("ERROR: Hash Table Malloc Fail.");
+		return ;
+	}
 	t_hthandler->capacity = item_count;
 	t_hthandler->modulo = item_count * 10;
 	t_hthandler->current_capacity = item_count;
@@ -40,7 +43,6 @@ t_ht	*hash_table_create(size_t item_count, t_hthandle *t_hthandler)
 		hash_table[i].key = -1;
 		i++;
 	}
-	return (hash_table);
 }
 
 /*

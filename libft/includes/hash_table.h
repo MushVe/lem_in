@@ -44,7 +44,7 @@ size_t			ht_hash(char *cp);
 ** Hash table API
 */
 
-t_ht			*hash_table_create(size_t item_count, t_hthandle *t_hthandler);
+void			hash_table_create(size_t item_count, t_hthandle *t_hthandler);
 int				hash_table_delete(t_hthandle *t_hthandler);
 t_ht			*hash_table_get(t_hthandle *t_hthandler, char *to_get);
 int				hash_table_put(t_hthandle *t_hthandler, char *data, int index);

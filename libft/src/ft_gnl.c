@@ -112,6 +112,7 @@ int				get_next_line(int const fd, char **line)
 	char			buf[GNL_BUFF_SIZE + 1];
 	int				ret;
 
+	ft_bzero(buf, GNL_BUFF_SIZE + 1);
 	if (!line)
 		return (-1);
 	if (control && fd != control->fd)

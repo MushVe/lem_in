@@ -49,7 +49,7 @@ int		is_room_name_alphanumerical(char *line)
 	ret = 0;
 	stop = ft_strchr(line, ' ');
 	while ((line[++i]) && (line + i != stop))
-		ret += ft_isalnum(line[i]);
+		ret += ft_isalnum(line[i]) || line[i] == '_';
 	return (ret == i);
 }
 

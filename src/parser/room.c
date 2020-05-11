@@ -57,17 +57,16 @@ char	*allocate_room(char *line)
 	return (to_ret);
 }
 
-int		handle_rooms(char **line, t_list **rooms, t_anthill *ant, char **s)
+int		handle_rooms(char **line, t_list **rooms, t_anthill *ant)
 {
 	char	*command;
 	int		command_flag;
 
 	command_flag = 0;
 	command = NULL;
-	while (ft_get_line(0, line, s) > 0)
+	while (get_next_line(0, line) > 0)
 	{
-		if (!(add_front_node(rooms, *line))
-			|| is_empty(*line))
+		if (!(add_front_node(rooms, *line)) || is_empty(*line))
 			return (0);
 		else if (is_comment(*line))
 			continue;

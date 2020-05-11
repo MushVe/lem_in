@@ -39,32 +39,38 @@ int	fill_adjacency_matrix(int **matrix, char *line, t_hthandle *t_hthandler)
 	return (0);
 }
 
-int	handle_tubes(t_p *p)
+/**
+ * is line valid peut etre mal place, si le mec mets du bullshit
+ * ca sera ajoute aux nodes
+ */
+int	handle_tubes(t_p *p, char **line)
 {
 	if (!(p->matrix = allocate_double_array(p->data.room_count)))
 		exit_error("Malloc failed\n", (char*)__func__);
-	if (!fill_adjacency_matrix(p->matrix, p->line, &p->hthandler))
+	if (!fill_adjacency_matrix(p->matrix, *line, &p->hthandler))
 		return (0);
-	while (ft_get_line(0, &p->line, &p->storage) > 0)
+	while (get_next_line(0, line) > 0)
 	{
-		if (!(add_front_node(&p->tmp, p->line)))
+		ft_printf("r <%s>\n", *line);
+		if (!(add_front_node(&p->tmp, *line)))
 			return (0);
-		if (is_empty(p->line))
+		if (is_empty(*line))
 			return (1);
-		else if (is_command(p->line))
+		else if (is_command(*line))
 			return (0);
-		else if (is_comment(p->line))
+		else if (is_comment(*line))
 			continue;
-		if (is_line_valid(p->line))
-			if (!fill_adjacency_matrix(p->matrix, p->line, &p->hthandler))
+		if (is_line_valid(*line))
+		{
+			if (!fill_adjacency_matrix(p->matrix, *line, &p->hthandler))
 				return (0);
+		}
+		else
+		{
+			ft_printf("The end approches: <%s>\n", *line);
+			return (1);
+		}
 	}
+	ft_printf("<%s>\n", *line);
 	return (1);
 }
-
-/*
-fourmis int max
-
-"" = nom valide
-
-*/

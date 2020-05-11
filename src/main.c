@@ -16,8 +16,6 @@ void	init(t_p *p)
 {
 	p->tmp = NULL;
 	p->size = 0;
-	p->line = NULL;
-	p->storage = NULL;
 	p->data.ant_count = 0;
 	p->data.room_count = 0;
 	p->data.rooms.end = NULL;
@@ -37,7 +35,6 @@ void	clean(t_p *p, t_bfs *bfs, t_combo_data *cd)
 	delete_junction_table(p->junction);
 	free(p->data.rooms.end);
 	free(p->data.rooms.start);
-	free(p->storage); //poubelle
 	i = -1;
 	while (++i < bfs->path_nb)
 		ft_memdel((void*)&bfs->path_array[i].room);
@@ -58,8 +55,8 @@ int		main(void)
 	parser(&p);
 	algo(&p, &bfs);
 	resolve(&p, &bfs, &cd);
-	display(p.data, p.tmp);
-	print_lem_in(&p, &cd);
+	// display(p.data, p.tmp);
+	// print_lem_in(&p, &cd);
 	clean(&p, &bfs, &cd);
 	ft_doublefree_int(p.matrix, p.size);
 }

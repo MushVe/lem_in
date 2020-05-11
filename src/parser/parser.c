@@ -39,7 +39,9 @@ void			delete_display_list(t_list *list)
 	next = NULL;
 	while (list)
 	{
+		ft_printf("line to free: %s\n", list->data);
 		next = list->next;
+		free(list->data);
 		free(list);
 		list = next;
 	}
@@ -74,34 +76,16 @@ void			display(t_anthill data, t_list *list)
 
 int				parser(t_p *p)
 {
-	int		i;
-	int		got_ants;
-	int		got_rooms;
-	int		table_created;
+	char *line;
 
-	i = 1;
-	got_ants = 0;
-	got_rooms = 0;
-	table_created = 0;
-	p->new_line = NULL;
-	while (0 < (i = get_next_line(0, &p->new_line)))
-	{
-		if (!got_ants)
-			got_ants = handle_ants(p);
-		
-		if (!handle_rooms(&p->new_line, &p->tmp, &p->data, &p->storage))
-			exit_error("ERROR, room parsing failed\n", (char*)__func__);
-		
-
-		if (!table_created && !got_rooms)
-			hash_table_create(p->data.room_count, &p->hthandler);
-		
-		p->junction = store_rooms(&p->data, &p->hthandler, p->tmp);
-		
-		if (!(handle_tubes(p)))
-			exit_error("ERROR, tubes parsing failed\n", (char*)__func__);
-		
-		p->size = p->data.room_count;
-	}
+	handle_ants(p);
+	if (!handle_rooms(&line, &p->tmp, &p->data))
+		exit_error("ERROR, room parsing failed\n", (char*)__func__);
+	hash_table_create(p->data.room_count, &p->hthandler);
+	ft_printf("line = %s\n", line);
+	p->junction = store_rooms(&p->data, &p->hthandler, p->tmp);
+	if (!(handle_tubes(p, &line)))
+		exit_error("ERROR, tubes parsing failed\n", (char*)__func__);
+	p->size = p->data.room_count;
 	return (0);
 }

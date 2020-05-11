@@ -51,8 +51,6 @@ typedef struct		s_map_room_index
 typedef struct		s_p
 {
 	int					size;
-	char				*new_line;
-	char				*storage;
 	t_map_room_index	*junction;
 	int					**matrix;
 	t_anthill			data;
@@ -200,7 +198,7 @@ void				exit_error(char *reason, char *camefrom);
 ** Ants
 */
 
-int					handle_ants(t_p *p);
+void				handle_ants(t_p *p);
 
 /*
 ** Rooms
@@ -210,7 +208,7 @@ int					is_room(char *line);
 int					is_room_valid(char *line);
 int					got_start_end(int command_flag, t_anthill *data);
 void				assign_command(t_anthill *data, char *command, char *line);
-int					handle_rooms(char **l, t_list **t, t_anthill *d, char **s);
+int					handle_rooms(char **l, t_list **t, t_anthill *d);
 int					white_space_count(char *line);
 int					is_room(char *line);
 int					is_room_name_alphanumerical(char *line);
@@ -225,7 +223,7 @@ int					is_coord_valid(char *line);
 t_ht				*does_room_exist(char *line, t_hthandle *t_hthandler);
 int					is_tube_valid(t_ht **a, t_ht **b, char *l, t_hthandle *ht);
 char				*split_tubes(char *line);
-int					handle_tubes(t_p *p);
+int					handle_tubes(t_p *p, char **c);
 
 /*
 ** parser
