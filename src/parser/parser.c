@@ -39,7 +39,6 @@ void			delete_display_list(t_list *list)
 	next = NULL;
 	while (list)
 	{
-		ft_printf("line to free: %s\n", list->data);
 		next = list->next;
 		free(list->data);
 		free(list);
@@ -78,11 +77,11 @@ int				parser(t_p *p)
 {
 	char *line;
 
+	line = NULL;
 	handle_ants(p);
 	if (!handle_rooms(&line, &p->tmp, &p->data))
 		exit_error("ERROR, room parsing failed\n", (char*)__func__);
 	hash_table_create(p->data.room_count, &p->hthandler);
-	ft_printf("line = %s\n", line);
 	p->junction = store_rooms(&p->data, &p->hthandler, p->tmp);
 	if (!(handle_tubes(p, &line)))
 		exit_error("ERROR, tubes parsing failed\n", (char*)__func__);

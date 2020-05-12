@@ -57,30 +57,31 @@ char	*allocate_room(char *line)
 	return (to_ret);
 }
 
-int		handle_rooms(char **line, t_list **rooms, t_anthill *ant)
+int		handle_rooms(char **l, t_list **rooms, t_anthill *ant)
 {
 	char	*command;
 	int		command_flag;
 
 	command_flag = 0;
 	command = NULL;
-	while (get_next_line(0, line) > 0)
+	while (get_next_line(0, l) > 0)
 	{
-		if (!(add_front_node(rooms, *line)) || is_empty(*line))
+		ft_printf("%s\n", *l);
+		if (!(add_front_node(rooms, *l)) || is_empty(*l))
 			return (0);
-		else if (is_comment(*line))
+		else if (is_comment(*l))
 			continue;
-		else if (is_command(*line))
-			command_flag += is_command_valid(*line, &command);
-		else if (is_room(*line) && is_room_valid(*line) && is_coord_valid(*line))
+		else if (is_command(*l))
+			command_flag += is_command_valid(*l, &command);
+		else if (is_room(*l) && is_room_valid(*l) && is_coord_valid(*l))
 		{
 			if (command)
-				assign_command(ant, command, *line);
+				assign_command(ant, command, *l);
 			ant->room_count++;
 			command = NULL;
 		}
 		else
-			return (is_tube(*line) && got_start_end(command_flag, ant));
+			return (is_tube(*l) && got_start_end(command_flag, ant));
 	}
 	return (0);
 }

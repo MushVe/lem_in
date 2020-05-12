@@ -91,6 +91,7 @@ int			algo(t_p *p, t_bfs *bfs)
 	fill_path_array(bfs);
 	bfs_free_all(bfs);
 	bfs_free_list(&bfs->path_list);
+	ft_printf("end of algo\n");
 	return (0);
 }
 

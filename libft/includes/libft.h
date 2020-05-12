@@ -18,20 +18,8 @@
 # include <unistd.h>
 # include <stdlib.h>
 # include <string.h>
-
-# define GL_BUFF_SIZE 1500
-# define GNL_BUFF_SIZE 3024
-
-typedef struct	s_gnl
-{
-	struct s_gnl	*next;
-	struct s_gnl	*prev;
-	char			*stock;
-	int				fd;
-}				t_gnl;
-
-char			*ft_gnl_strjoin2(char const *s1, char const *s2);
-char			*ft_gnl_strjoinf(char *s1, char *s2);
+# include <sys/types.h>
+# include <sys/uio.h>
 
 /*
 ** QUEUE

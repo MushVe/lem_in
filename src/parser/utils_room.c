@@ -12,18 +12,6 @@
 
 #include "../../includes/lem_in.h"
 
-int		white_space_count(char *line)
-{
-	int	i;
-	int	count;
-
-	i = -1;
-	count = 0;
-	while (line[++i])
-		count += line[i] == ' ';
-	return (count);
-}
-
 int		is_room(char *line)
 {
 	int to_ret;

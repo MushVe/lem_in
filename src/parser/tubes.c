@@ -39,10 +39,6 @@ int	fill_adjacency_matrix(int **matrix, char *line, t_hthandle *t_hthandler)
 	return (0);
 }
 
-/**
- * is line valid peut etre mal place, si le mec mets du bullshit
- * ca sera ajoute aux nodes
- */
 int	handle_tubes(t_p *p, char **line)
 {
 	if (!(p->matrix = allocate_double_array(p->data.room_count)))
@@ -51,7 +47,7 @@ int	handle_tubes(t_p *p, char **line)
 		return (0);
 	while (get_next_line(0, line) > 0)
 	{
-		ft_printf("r <%s>\n", *line);
+		ft_printf("%s\n", *line);
 		if (!(add_front_node(&p->tmp, *line)))
 			return (0);
 		if (is_empty(*line))
@@ -66,11 +62,7 @@ int	handle_tubes(t_p *p, char **line)
 				return (0);
 		}
 		else
-		{
-			ft_printf("The end approches: <%s>\n", *line);
 			return (1);
-		}
 	}
-	ft_printf("<%s>\n", *line);
 	return (1);
 }

@@ -16,7 +16,7 @@
 NAME = libftprintf.a
 
 FILE = 	ft_abs.c ft_atoi.c ft_bzero.c ft_capitalize.c ft_doublefree.c \
-		ft_doubleprint.c ft_foreach.c ft_gnl.c ft_gnl_utils.c \
+		ft_doubleprint.c ft_foreach.c get_next_line.c get_next_line_utils.c \
 		ft_isalnum.c ft_isalpha.c ft_isascii.c ft_isdigit.c ft_isprint.c \
 		ft_itoa.c ft_itoa_base.c ft_lowcase.c ft_lstadd.c ft_lstdel.c  \
 		ft_lstdelone.c ft_lstiter.c ft_lstmap.c ft_lstnew.c ft_memalloc.c \
@@ -41,7 +41,7 @@ SRC = $(FILE:%=%)
 
 OBJ = $(FILE:%.c=objs/%.o)
 
-CFLAGS = -Wall -Werror -Wextra
+CFLAGS = -Wall -Werror -Wextra -fsanitize=address
 CC = gcc
 RM = rm -f
 

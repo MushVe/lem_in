@@ -17,3 +17,15 @@ void	exit_error(char *reason, char *camefrom)
 	ft_printf("In function <%s> : %s\n", camefrom, reason);
 	exit(0);
 }
+
+int		white_space_count(char *line)
+{
+	int	i;
+	int	count;
+
+	i = -1;
+	count = 0;
+	while (line[++i])
+		count += line[i] == ' ';
+	return (count);
+}
