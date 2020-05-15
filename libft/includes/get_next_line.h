@@ -15,19 +15,17 @@
 
 # include "libft.h"
 
-# define GNL_BUFFER_SIZE 1024
+# define GNL_BUFF_SIZE 2048
 
-typedef struct			s_gnl_lst
+typedef struct	s_gnl
 {
-	int					fd;
-	char				*stock;
-	struct s_gnl_lst	*next;
-}						t_gnl_lst;
+	struct s_gnl	*next;
+	struct s_gnl	*prev;
+	char			*stock;
+	int				fd;
+}				t_gnl;
 
-int						get_next_line(int fd, char **line);
-int						gnl_read(t_gnl_lst *lst);
-int						gnl_fill_line(t_gnl_lst *lst, char **line);
-t_gnl_lst				*gnl_get_elem(t_gnl_lst **lst, int fd);
-char					*gnl_strjoinf(char *s1, char s2[GNL_BUFFER_SIZE]);
+char			*ft_gnl_strjoin2(char const *s1, char const *s2);
+char			*ft_gnl_strjoinf(char *s1, char *s2);
 
 #endif

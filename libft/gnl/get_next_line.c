@@ -11,72 +11,125 @@
 /* ************************************************************************** */
 
 #include "../includes/get_next_line.h"
+#include <stdio.h>
 
-static void	gnl_free_function(t_gnl_lst **begin, t_gnl_lst *current)
+static t_gnl	*new(int fd)
 {
-	t_gnl_lst	*tmp;
+	t_gnl	*control;
 
-	if (current == *begin)
-		*begin = current->next;
-	else
-	{
-		tmp = *begin;
-		while (tmp->next != current)
-			tmp = tmp->next;
-		tmp->next = tmp->next->next;
-	}
-	free(current->stock);
-	free(current);
+	if (!(control = (t_gnl*)ft_memalloc(sizeof(t_gnl))))
+		return (0);
+	control->next = NULL;
+	control->prev = NULL;
+	control->stock = NULL;
+	control->fd = fd;
+	return (control);
 }
 
-static int	gnl_ret_functions(t_gnl_lst **begin, t_gnl_lst *lst, int ret)
+static t_gnl	*add_node(t_gnl *elem, int fd)
 {
-	char	buff[GNL_BUFFER_SIZE + 1];
+	t_gnl	*control;
 
-	if (ret == 0)
+	while (elem)
 	{
-		if (lst->stock != NULL)
-			return (1);
-	}
-	else
-	{
-		if (lst->stock)
-			return (1);
-		if ((ret = read(lst->fd, buff, GNL_BUFFER_SIZE)) == -1)
-			return (-1);
-		buff[ret] = 0;
-		if (ret > 0)
+		if (elem->fd == fd)
+			return (elem);
+		if (elem->next == NULL)
 		{
-			if (!(lst->stock = gnl_strjoinf(lst->stock, buff)))
-				return (-1);
-			return (1);
+			while (elem)
+			{
+				if (elem->fd == fd)
+					return (elem);
+				if (elem->prev == NULL)
+					break ;
+				elem = elem->prev;
+			}
+			break ;
 		}
+		elem = elem->next;
 	}
-	gnl_free_function(begin, lst);
+	control = new(fd);
+	control->next = elem;
+	elem->prev = control;
+	return (control);
+}
+
+static int		god_like(char *buf, t_gnl *control, char **line, int way)
+{
+	char	*tmp;
+	char	*tmp2;
+
+	if ((tmp = ft_strchr(buf, '\n')) && (way == 1))
+	{
+		*tmp = '\0';
+		*line = ft_gnl_strjoin2(control->stock, buf);
+		ft_memdel((void*)&control->stock);
+		control->stock = ft_strdup(tmp + 1);
+		return (1);
+	}
+	else if ((tmp = ft_strchr(control->stock, '\n')) && (way == 2))
+	{
+		tmp2 = ft_strdup(tmp + 1);
+		*tmp = '\0';
+		*line = ft_strdup(control->stock);
+		ft_memdel((void*)&control->stock);
+		control->stock = ft_strdup(tmp2);
+		ft_memdel((void*)&tmp2);
+		return (1);
+	}
 	return (0);
 }
 
-int			get_next_line(int fd, char **line)
+static int		read_mem(int fd, char *buf, t_gnl *control, char **line)
 {
-	static t_gnl_lst	*lst = NULL;
-	t_gnl_lst			*current;
-	int					ret;
+	int	ret;
 
-	if (fd < 0 || !line || GNL_BUFFER_SIZE < 1)
+	ret = 0;
+	if (fd < 0)
 		return (-1);
-	if (!(current = gnl_get_elem(&lst, fd)))
-		return (-1);
-	if ((ret = gnl_read(current)) == -1)
-		return (-1);
-	if (current->stock)
+	while ((ret = read(fd, buf, GNL_BUFF_SIZE)) > 0)
 	{
-		if (!(gnl_fill_line(current, line)))
-			return (-1);
+		buf[ret] = '\0';
+		if (god_like(buf, control, line, 1))
+			return (1);
+		control->stock = ft_gnl_strjoinf(control->stock, buf);
 	}
+	if (ret == -1)
+		return (-1);
+	if (control->stock)
+	{
+		if (*control->stock == '\0')
+			return (0);
+		*line = ft_strdup(control->stock);
+		if (ret == 0 && control->stock)
+			free(control->stock);
+		control->stock = NULL;
+		return (1);
+	}
+	return (0);
+}
+
+int				get_next_line(int const fd, char **line)
+{
+	static t_gnl	*control = NULL;
+	char			buf[GNL_BUFF_SIZE + 1];
+	int				ret;
+
+	ft_bzero(buf, GNL_BUFF_SIZE + 1);
+	if (!line)
+		return (-1);
+	if (control && fd != control->fd)
+		control = add_node(control, fd);
+	if (!control)
+		control = new(fd);
+	if (control->stock)
+		if (god_like(buf, control, line, 2))
+			return (1);
+	ret = read_mem(fd, buf, control, line);
+	if (ret == 1)
+		return (1);
+	else if (ret == -1)
+		return (-1);
 	else
-	{
-		if (!(*line = ft_memalloc(1)))
-			return (-1);
-	}
-	return (gnl_ret_functions(&lst, current, ret));
+		return (0);
 }

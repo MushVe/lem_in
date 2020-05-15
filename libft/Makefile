@@ -41,7 +41,7 @@ SRC = $(FILE:%=%)
 
 OBJ = $(FILE:%.c=objs/%.o)
 
-CFLAGS = -Wall -Werror -Wextra -fsanitize=address
+CFLAGS = -Wall -Werror -Wextra #-fsanitize=address
 CC = gcc
 RM = rm -f
 

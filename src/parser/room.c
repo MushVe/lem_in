@@ -66,7 +66,6 @@ int		handle_rooms(char **l, t_list **rooms, t_anthill *ant)
 	command = NULL;
 	while (get_next_line(0, l) > 0)
 	{
-		ft_printf("%s\n", *l);
 		if (!(add_front_node(rooms, *l)) || is_empty(*l))
 			return (0);
 		else if (is_comment(*l))

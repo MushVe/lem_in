@@ -1,6 +1,8 @@
 {
 	"files.associations": {
 		"lem_in.h": "c",
-		"libft.h": "c"
+		"libft.h": "c",
+		"get_next_line.h": "c",
+		"types.h": "c"
 	}
 }
