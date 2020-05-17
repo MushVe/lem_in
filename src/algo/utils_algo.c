@@ -160,30 +160,30 @@ void	fill_path_array(t_bfs *bfs)
 ** }
 **
 **
-** void	print_matrix(t_p *p, t_bfs *bfs, int i, int j)
-** {
-** 	ft_printf("   ");
-** 	i = p->size;
-** 	while (--i >= 0)
-** 		ft_printf("%s ", p->junction[i].room_name);
-** 	ft_printf("\n");
-** 	i = p->size;
-** 	while (--i >= 0)
-** 	{
-** 		ft_printf("%s  ", p->junction[i].room_name);
-** 		j = p->size;
-** 		while (--j >= 0)
-** 		{
-** 			if (i == j)
-** 				ft_printf("  ");
-** 			else if (p->matrix[i][j] == 0)
-** 				ft_printf(". ");
-** 			else if (p->matrix[i][j] == __INT_MAX__)
-** 				ft_printf("X ");
-** 			else
-** 				ft_printf("%d ", p->matrix[i][j]);
-** 		}
-** 		ft_printf("    %d\n", bfs->matrix_level[i]);
-** 	}
-** }
 */
+ void	print_matrix(t_p *p, t_bfs *bfs, int i, int j)
+ {
+ 	ft_printf("   ");
+ 	i = p->size;
+ 	while (--i >= 0)
+ 		ft_printf("%s ", p->junction[i].room_name);
+ 	ft_printf("\n");
+ 	i = p->size;
+ 	while (--i >= 0)
+ 	{
+ 		ft_printf("%s  ", p->junction[i].room_name);
+ 		j = p->size;
+ 		while (--j >= 0)
+ 		{
+ 			if (i == j)
+ 				ft_printf("  ");
+ 			else if (p->matrix[i][j] == 0)
+ 				ft_printf(". ");
+ 			else if (p->matrix[i][j] == __INT_MAX__)
+ 				ft_printf("X ");
+ 			else
+ 				ft_printf("%d ", p->matrix[i][j]);
+ 		}
+ 		ft_printf("    %d\n", bfs->matrix_level[i]);
+ 	}
+ }

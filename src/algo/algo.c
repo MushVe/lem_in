@@ -107,24 +107,30 @@ void		get_ultimate_result(t_p *p, t_bfs *bfs)
 static void do_dfs_from_start(t_p *p, t_bfs *bfs, int current_room, int distance)
 {
 	t_room_infos *rooms;
-	int			link;
+	int			cpt;
+	int			link_id;
 
 	if (distance != 0 && current_room == p->data.rooms.start_index)
 		return ;
 	rooms = bfs->rooms;
 	rooms[current_room].distance_start = distance;
-	link = -1;
-	// ft_printf("[%s] ", p->junction[current_room].room_name);
-	// ft_printf("distance:%ld ", distance);
-	// ft_printf("d_start:%ld\n", rooms[current_room].distance_start);
+	ft_printf("[%s] ", p->junction[current_room].room_name);
+	ft_printf("distance:%ld ", distance);
+	ft_printf("d_start:%ld\n", rooms[current_room].distance_start);
 	if (current_room == p->data.rooms.end_index)
 		return ;
-	while (++link < p->size)
+	cpt = -1;
+	// 		for (int v = 0; v < p->size; v++)
+	// 	{
+	// 		ft_printf("%d ", bfs->rooms[current_room].link_array[v]);
+	// 	}
+	while (++cpt < rooms[current_room].nb_link)
 	{
-		if (rooms[link].token != -1 && (rooms[link].distance_start == 0
-			|| rooms[link].distance_start > distance)
-			&& p->matrix[current_room][link] != 0)
-				do_dfs_from_start(p, bfs, link, distance + 1);
+		link_id = rooms[current_room].link_array[cpt];
+		// ft_printf("   %d\t", link);
+		// ft_printf("[%s] %d\n", p->junction[rooms[current_room].link_array[link]].room_name, rooms[current_room].link_array[link]);
+		if (rooms[link_id].token != -1 && (rooms[link_id].distance_start == 0 || rooms[link_id].distance_start > distance))
+				do_dfs_from_start(p, bfs, link_id, distance + 1);
 	}
 	if (rooms[current_room].nb_link < 2 && current_room != p->data.rooms.start_index)
 		rooms[current_room].token = -1;
@@ -133,39 +139,39 @@ static void do_dfs_from_start(t_p *p, t_bfs *bfs, int current_room, int distance
 static void do_dfs_from_end(t_p *p, t_bfs *bfs, int current_room, int distance)
 {
 	t_room_infos *rooms;
-	int			link;
+	int			cpt;
+	int			link_id;
 
 	// ft_printf("%d %d %d            ", distance, current_room, p->data.rooms.end_index);
 	// possible problemes avec la facon dont la map est stockée
 	if (distance != 0 && current_room == p->data.rooms.end_index)
 	{
-		// ft_printf("%s is end\n", __func__);
+		ft_printf("%s is end\n", __func__);
 		return ;
 	}
 	
 	rooms = bfs->rooms;
 	rooms[current_room].distance_end = distance;
 	rooms[current_room].score = rooms[current_room].distance_end + rooms[current_room].distance_start;
-	link = -1;
+	cpt = -1;
 	
-	// ft_printf("[%s] ", p->junction[current_room].room_name);
-	// ft_printf("distance:%ld ", distance);
-	// ft_printf("d_start:%ld ", rooms[current_room].distance_start);
-	// ft_printf("d_end:%ld ", rooms[current_room].distance_end);
-	// ft_printf("score:%ld\n", rooms[current_room].score);
+	ft_printf("[%s] ", p->junction[current_room].room_name);
+	ft_printf("distance:%ld ", distance);
+	ft_printf("d_start:%ld ", rooms[current_room].distance_start);
+	ft_printf("d_end:%ld ", rooms[current_room].distance_end);
+	ft_printf("score:%ld\n", rooms[current_room].score);
 	
 	if (current_room == p->data.rooms.start_index)
 	{
-		// ft_printf("%s is start\n", __func__);
+		ft_printf("%s is start\n", __func__);
 		return ;
 	}
 
-	while (++link < p->size)
+	while (++cpt < rooms[current_room].nb_link)
 	{
-		if (rooms[link].token != -1 && (rooms[link].distance_end == 0
-			|| rooms[link].distance_end > distance)
-			&& p->matrix[current_room][link] != 0)
-				do_dfs_from_end(p, bfs, link, distance + 1);
+		link_id = rooms[current_room].link_array[cpt];
+		if (rooms[link_id].token != -1 && (rooms[link_id].distance_end == 0 || rooms[link_id].distance_end > distance))
+			do_dfs_from_end(p, bfs, link_id, distance + 1);
 	}
 
 	if (rooms[current_room].nb_link < 2 && current_room != p->data.rooms.end_index)
@@ -179,6 +185,7 @@ void		set_nb_link(t_p *p, t_bfs *bfs)
 {
 	int		i;
 	int		j;
+	int		z;
 	int		links;
 
 	i = -1;
@@ -186,13 +193,14 @@ void		set_nb_link(t_p *p, t_bfs *bfs)
 	{
 		links = 0;
 		j = -1;
-		if (!(bfs->rooms[i].link_array = malloc(sizeof(int) * p->size)))
+		z = -1;
+		if (!(bfs->rooms[i].link_array = ft_memalloc(sizeof(int) * p->size)))
 			exit_error("Malloc Error\n", (char*)__func__);
 		while (++j < p->size)
 		{
 			if (p->matrix[i][j] != 0)
 			{
-				bfs->rooms[i].link_array[j] = j;
+				bfs->rooms[i].link_array[++z] = j;
 				links++;
 			}
 		}
