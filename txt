@@ -1,9 +1,0 @@
-
-Norme: ./libft/src/ft_gnl.c
-Error (line 28): bad spacing after add_node
-Error (line 56): multiple empty lines
-Error (line 57): function god_like has 28 lines
-Error (line 57): bad spacing before god_like
-Norme: ./libft/src/ft_gnl_utils.c
-Error: file must end with a single empty line
-Error (line 54, col 0): no newline after block

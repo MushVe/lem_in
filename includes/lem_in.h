@@ -119,8 +119,20 @@ typedef struct		s_combo_utils
 	int				nb_total_ants;
 }					t_combo_utils;
 
+typedef struct		s_room_infos
+{
+	int				distance_start;
+	int				distance_end;
+	int				score;
+	int				token;
+	int				nb_link;
+	int				current_link;
+	int				*link_array;
+}					t_room_infos;
+
 typedef struct		s_bfs
 {
+	int				final_score;
 	int				*matrix_level;
 	int				*visited_record;
 	int				*parent;
@@ -132,6 +144,7 @@ typedef struct		s_bfs
 	int				host;
 	int				link;
 	t_path_array	*path_array;
+	t_room_infos	*rooms;
 }					t_bfs;
 
 /*

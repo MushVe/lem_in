@@ -30,15 +30,20 @@ void	clean(t_p *p, t_bfs *bfs, t_combo_data *cd)
 {
 	int	i;
 
+	(void)bfs;
 	delete_display_list(p->tmp);
 	hash_table_delete(&p->hthandler);
 	delete_junction_table(p->junction);
 	free(p->data.rooms.end);
 	free(p->data.rooms.start);
-	i = -1;
-	while (++i < bfs->path_nb)
-		ft_memdel((void*)&bfs->path_array[i].room);
-	ft_memdel((void*)&bfs->path_array);
+	// i = -1;
+	// while (++i < bfs->path_nb)
+	// 	ft_memdel((void*)&bfs->path_array[i].room);
+	// ft_memdel((void*)&bfs->path_array);
+	// i = -1;
+	// while (++i < p->size)
+	// 	ft_memdel((void*)&bfs->rooms[i].room);
+	// ft_memdel((void*)&bfs->rooms);
 	i = -1;
 	while (++i < cd->nb_path)
 		ft_memdel((void*)&cd->path_combo[i].room);
@@ -53,10 +58,11 @@ int		main(void)
 
 	init(&p);
 	parser(&p);
+		ft_printf("End parsing\n");
 	algo(&p, &bfs);
 	resolve(&p, &bfs, &cd);
-	display(p.data, p.tmp);
-	print_lem_in(&p, &cd);
+	// display(p.data, p.tmp);
+	// print_lem_in(&p, &cd);
 	clean(&p, &bfs, &cd);
 	ft_doublefree_int(p.matrix, p.size);
 }

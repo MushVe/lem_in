@@ -29,18 +29,47 @@ void	reset_visited(t_p *p, t_bfs *bfs)
 		bfs->visited_record[i] = 0;
 }
 
+static void visited(t_bfs *bfs, int size)
+{
+	if (!(bfs->visited_record = ft_memalloc(sizeof(int) * size)))
+		exit_error("Malloc Failed", (char*)__func__);
+}
+static void parent(t_bfs *bfs, int size)
+{
+	if (!(bfs->parent = ft_memalloc(sizeof(int) * size)))
+		exit_error("Malloc Failed", (char*)__func__);
+}
+static void tmp_path(t_bfs *bfs, int size)
+{
+	if (!(bfs->tmp_path = ft_memalloc(sizeof(int) * size)))
+		exit_error("Malloc Failed", (char*)__func__);
+}
+static void rooms(t_bfs *bfs, int size)
+{
+	if (!(bfs->rooms = ft_memalloc(sizeof(t_room_infos) * size)))
+		exit_error("Malloc Failed", (char*)__func__);
+}
+static void matrix_level(t_bfs *bfs, int size)
+{
+	if (!(bfs->matrix_level = ft_memalloc(sizeof(int) * size)))
+		exit_error("Malloc Failed", (char*)__func__);
+}
+
+
 void	bfs_init(t_bfs *bfs, int size)
 {
 	int	i;
 
-	if (!(bfs->visited_record = ft_memalloc(sizeof(int) * size))
-		|| !(bfs->parent = ft_memalloc(sizeof(int) * size))
-		|| !(bfs->tmp_path = ft_memalloc(sizeof(int) * size))
-		|| !(bfs->matrix_level = ft_memalloc(sizeof(int) * size)))
-		exit_error("Malloc Failed", (char*)__func__);
+	visited(bfs, size);
+	parent(bfs, size);
+	tmp_path(bfs, size);
+	rooms(bfs, size);
+	matrix_level(bfs, size);
+
 	i = -1;
 	while (++i < size)
 		bfs->tmp_path[i] = -1;
+	bfs->final_score = 0;
 	bfs->max_path = 0;
 	bfs->path_nb = 0;
 	bfs->path_list = NULL;
