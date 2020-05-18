@@ -141,6 +141,7 @@ typedef struct		s_bfs
 	int				max_path;
 	int				path_id;
 	int				path_nb;
+	int				real_path_nb;
 	int				host;
 	int				link;
 	t_path_array	*path_array;
@@ -206,6 +207,8 @@ int					is_empty(char *line);
 int					**allocate_double_array(int size);
 char				*allocate_room(char *line);
 void				exit_error(char *reason, char *camefrom);
+void			print_path_list(t_p *p, t_bfs *bfs);
+void			print_path_array(t_p *p, t_bfs *bfs);
 
 /*
 ** Ants

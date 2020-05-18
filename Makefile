@@ -25,7 +25,7 @@ FILE = ants.c main.c parser.c utils_parser.c room.c utils_room.c tubes.c \
 INC = -I libft
 SRC = $(FILE:%=%)
 OBJ = $(FILE:%.c=objs/%.o)
-CFLAGS = #-Wall -Werror -Wextra #-O3-fsanitize=address #,undefined -g3
+CFLAGS = #-fsanitize=address #-Wall -Werror -Wextra #-O3#,undefined -g3
 CC = gcc $(CFLAGS) $(INC)
 RM = rm -rf
 

@@ -101,7 +101,7 @@ void		get_ultimate_result(t_p *p, t_bfs *bfs)
 				bfs->final_score = bfs->rooms[i].score;
 		}
 	}
-	// ft_printf("%d\n", bfs->final_score);
+	ft_printf("%d\n", bfs->final_score);
 }
 
 static void do_dfs_from_start(t_p *p, t_bfs *bfs, int current_room, int distance)
@@ -114,16 +114,12 @@ static void do_dfs_from_start(t_p *p, t_bfs *bfs, int current_room, int distance
 		return ;
 	rooms = bfs->rooms;
 	rooms[current_room].distance_start = distance;
-	ft_printf("[%s] ", p->junction[current_room].room_name);
-	ft_printf("distance:%ld ", distance);
-	ft_printf("d_start:%ld\n", rooms[current_room].distance_start);
+	// ft_printf("[%s] ", p->junction[current_room].room_name);
+	// ft_printf("distance:%ld ", distance);
+	// ft_printf("d_start:%ld\n", rooms[current_room].distance_start);
 	if (current_room == p->data.rooms.end_index)
 		return ;
 	cpt = -1;
-	// 		for (int v = 0; v < p->size; v++)
-	// 	{
-	// 		ft_printf("%d ", bfs->rooms[current_room].link_array[v]);
-	// 	}
 	while (++cpt < rooms[current_room].nb_link)
 	{
 		link_id = rooms[current_room].link_array[cpt];
@@ -146,7 +142,7 @@ static void do_dfs_from_end(t_p *p, t_bfs *bfs, int current_room, int distance)
 	// possible problemes avec la facon dont la map est stockée
 	if (distance != 0 && current_room == p->data.rooms.end_index)
 	{
-		ft_printf("%s is end\n", __func__);
+		// ft_printf("%s is end\n", __func__);
 		return ;
 	}
 	
@@ -155,15 +151,15 @@ static void do_dfs_from_end(t_p *p, t_bfs *bfs, int current_room, int distance)
 	rooms[current_room].score = rooms[current_room].distance_end + rooms[current_room].distance_start;
 	cpt = -1;
 	
-	ft_printf("[%s] ", p->junction[current_room].room_name);
-	ft_printf("distance:%ld ", distance);
-	ft_printf("d_start:%ld ", rooms[current_room].distance_start);
-	ft_printf("d_end:%ld ", rooms[current_room].distance_end);
-	ft_printf("score:%ld\n", rooms[current_room].score);
+	// ft_printf("[%s] ", p->junction[current_room].room_name);
+	// ft_printf("distance:%ld ", distance);
+	// ft_printf("d_start:%ld ", rooms[current_room].distance_start);
+	// ft_printf("d_end:%ld ", rooms[current_room].distance_end);
+	// // ft_printf("score:%ld\n", rooms[current_room].score);
 	
 	if (current_room == p->data.rooms.start_index)
 	{
-		ft_printf("%s is start\n", __func__);
+		// ft_printf("%s is start\n", __func__);
 		return ;
 	}
 
@@ -234,78 +230,228 @@ int find_best_room(t_p *p, t_room_infos *rooms, int host, int way)
 	int d_start;
 	int d_end;
 	int i;
+	int link_id;
 
 	d_start = rooms[host].distance_start;
 	d_end = rooms[host].distance_end;
 	i = 0;
-	while (i < p->size)
+	while (i < rooms[host].nb_link)
 	{
-		if (p->matrix[host][i] != 0)
-		{
-			if (rooms[i].score <= rooms[host].score && is_closer(&d_start, &d_end, way, rooms[i]))
-				return (i);
-		}
+		link_id = rooms[host].link_array[i];
+		// ft_printf("%d\n", link_id);
+		if (rooms[link_id].score <= rooms[host].score && is_closer(&d_start, &d_end, way, rooms[link_id]))
+			return (link_id);
 		i++;
 	}
 	return (-1);
 }
 
+// int find_best_room(t_p *p, t_room_infos *rooms, int host, int way)
+// {
+// 	int d_start;
+// 	int d_end;
+// 	int i;
+
+// 	d_start = rooms[host].distance_start;
+// 	d_end = rooms[host].distance_end;
+// 	i = 0;
+// 	while (i < p->size)
+// 	{
+// 		if (p->matrix[host][i] != 0)
+// 		{
+// 			ft_printf("%d\n", i);
+// 			if (rooms[i].score <= rooms[host].score && is_closer(&d_start, &d_end, way, rooms[i]))
+// 				return (i);
+// 		}
+// 		i++;
+// 	}
+// 	return (-1);
+// }
+
 int get_to_end(t_p *p, t_room_infos *rooms, int curr)
 {
 	int best_room_index;
 
-	// ft_printf("Room tested in %s: [%s]\n", __func__, p->junction[curr].room_name);
+	// ft_printf("Room tested in %s: [%s] [%d]\n", __func__, p->junction[curr].room_name, curr);
 	if (curr == p->data.rooms.end_index)
 		return (1);
 	if ((best_room_index = find_best_room(p, rooms, curr, 0)) != -1)
 	{
+		// ft_printf("(%d)[%s] contain (%d)[%s]\n", best_room_index, p->junction[best_room_index].room_name, curr, p->junction[curr].room_name);
 		rooms[best_room_index].current_link = curr;
 		return (get_to_end(p, rooms, best_room_index));
 	}
 	return (0);
 }
 
-int get_to_start(t_p *p, t_room_infos *rooms, int curr)
+void save_path(t_p *p, t_bfs *bfs, int index, int size)
+{
+	if (index == p->data.rooms.start_index)
+	{
+		bfs->path_nb++;
+		bfs_new_node(bfs->tmp_path, &bfs->path_list, size);
+		return ;
+	}
+	else
+	{
+		bfs->tmp_path[size] = bfs->rooms[index].current_link;
+		save_path(p, bfs, bfs->rooms[index].current_link, size + 1);
+	}
+}
+
+int get_to_start(t_p *p, t_room_infos *rooms, int curr, t_bfs *bfs)
 {
 	int best_room_index;
 
-	// ft_printf("Room tested in %s: [%s]\n", __func__, p->junction[curr].room_name);
+	// ft_printf("Room tested in %s: [%s] [%d]\n", __func__, p->junction[curr].room_name, curr);
 	if (curr == p->data.rooms.start_index)
 	{
-		// if (!save_path())
-		// 	return (-1);
+		bfs->tmp_path[0] = p->data.rooms.end_index;
+		save_path(p, bfs, p->data.rooms.end_index, 1);
 		return (1);
 	}
 	if ((best_room_index = find_best_room(p, rooms, curr, 1)) != -1)
 	{
-		rooms[best_room_index].current_link = curr;
-		return (get_to_start(p, rooms, best_room_index));
+		// ft_printf("(%d)[%s] contain (%d)[%s]\n", best_room_index, p->junction[best_room_index].room_name, curr, p->junction[curr].room_name);
+		rooms[curr].current_link = best_room_index;
+		return (get_to_start(p, rooms, best_room_index, bfs));
 	}
 	return (0);
 }
 
-int			run(t_p *p, t_bfs *bfs)
+int			dfs_solve(t_p *p, t_bfs *bfs)
 {
 	t_room_infos	*rooms;
 	int				next;
 	
 	rooms = bfs->rooms;
 	next = 0;
-	// ft_printf("\n ------ in [%s] ------\n", __func__);
+	ft_printf("\n ------ in [%s] ------\n", __func__);
 	while (next < p->size)
 	{
 		// ft_printf("------> Room tested in %s: [%s]\n", __func__, p->junction[next].room_name);
 		if (rooms[next].token != -1 && next != p->data.rooms.start_index)
 		{
 			if (get_to_end(p, rooms, next) == 1)
-				get_to_start(p, rooms, next);
+				get_to_start(p, rooms, next, bfs);
 		}
 		next++;
 	}
 	return 1;
 }
 
+static void		remove_bad_link(t_bfs *bfs, t_p *p)
+{
+	int i;
 
+	i = 0;
+	while (i < p->size)
+	{
+		if (bfs->rooms[i].score > bfs->final_score)
+		{
+			// ft_printf("[%s]\n", p->junction[i].room_name);
+			bfs->rooms[i].token = -1;
+		}
+		i++;
+	}
+}
+
+void	ignore_path(t_path_array *path_array, int i_other_path)
+{
+	path_array[i_other_path].size = -1;
+}
+
+int		is_the_same(t_path_array *path_array, int i_current_path, int i_other_path)
+{
+	int	i_room;
+
+	i_room = -1;
+	while (++i_room < path_array[i_current_path].size)
+		if (path_array[i_current_path].room[i_room] != path_array[i_other_path].room[i_room])
+			return (0);
+	return (1);
+}
+
+int	find_n_kill_dopples(t_p *p, int	path_nb, t_path_array *path_array)
+{
+	int	i_other_path;
+	int	i_current_path;
+	int	real_path_nb;
+	int	id_alias;
+	int	room_id;
+
+	real_path_nb = path_nb;
+	i_current_path = -1;
+	while (++i_current_path < path_nb)
+	{
+		i_other_path = i_current_path;
+		while (++i_other_path < path_nb)
+		{
+			if (path_array[i_other_path].size == -1 || path_array[i_other_path].size > path_array[i_current_path].size)
+				break ;
+			if (path_array[i_other_path].size != -1 && path_array[i_other_path].size == path_array[i_current_path].size)
+			{
+				if (is_the_same(path_array, i_current_path, i_other_path))
+				{
+					// ft_printf("current:");
+					// room_id = -1;
+					// while (++room_id < path_array[i_current_path].size)
+					// {id_alias = path_array[i_current_path].room[room_id];
+					// ft_printf(" - [%s]", p->junction[id_alias].room_name);}
+					// ft_printf("\nother:  ");
+					// room_id = -1;
+					// while (++room_id < path_array[i_other_path].size)
+					// {id_alias = path_array[i_other_path].room[room_id];
+					// ft_printf(" - [%s]", p->junction[id_alias].room_name);}
+					// ft_printf("\n\n");
+
+					real_path_nb--;
+					ignore_path(path_array, i_other_path);
+				}
+			}
+		}
+	}
+	return (real_path_nb);
+}
+
+t_path_array	*clean_path_array(t_path_array *path_array, int path_nb, int real_path_nb)
+{
+	t_path_array *real_array;
+	int	i;
+	int	r;
+
+	if (!(real_array = ft_memalloc((sizeof(t_path_array) * real_path_nb))))
+		exit_error("Malloc Failed", (char*)__func__);
+	i = -1;
+	r = -1;
+	// ft_printf("path nb = %d\n", path_nb);
+	while (++i < path_nb && r < real_path_nb)
+	{
+		// ft_printf("rp:%d r:%d\n", real_path_nb, r);	
+		if (path_array[i].size != -1)
+		{
+			// r++;
+			real_array[++r].room = path_array[i].room;
+			// path_array[i].size++;
+			real_array[r].size = path_array[i].size;
+		}
+		// }
+		// else
+		// 	ft_memdel((void*)&path_array[i].room);
+	}
+	// ft_memdel((void*)&path_array);
+	return (real_array);
+}
+
+void	reorder_path(t_p *p, t_bfs *bfs)
+{
+	quicksort(bfs);
+	// print_path_array(p, bfs);
+	bfs->real_path_nb = find_n_kill_dopples(p, bfs->path_nb, bfs->path_array);
+	bfs->path_array = clean_path_array(bfs->path_array, bfs->path_nb, bfs->real_path_nb);
+	bfs->path_nb = bfs->real_path_nb;
+	// print_path_array(p, bfs);
+}
 
 int			algo(t_p *p, t_bfs *bfs)
 {
@@ -319,9 +465,15 @@ int			algo(t_p *p, t_bfs *bfs)
 	do_dfs_from_end(p, bfs, p->data.rooms.end_index, 0);
 	ft_printf("AFTER set from end\n");
 	get_ultimate_result(p, bfs);
+	remove_bad_link(bfs, p);
 	get_test_limit(p);
 
-	// run(p, bfs);
+	dfs_solve(p, bfs);
+
+	fill_path_array(bfs);
+	// sort + supress doubles
+	reorder_path(p, bfs);
+	
 	// do_bfs(p, bfs);
 	// get_matrix_level(p, bfs);
 	// reset_visited(p, bfs);
