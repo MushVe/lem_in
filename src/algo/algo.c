@@ -485,6 +485,8 @@ int			algo(t_p *p, t_bfs *bfs)
 	return (0);
 }
 
+//FIXME: MAP AVEC AUCUN CHEMIN
+
 /*
 **	print_matrix(p, bfs, 0, 0);
 **	print_path_array(p, bfs);
