@@ -6,7 +6,7 @@
 /*   By: cseguier <cseguier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/29 01:27:16 by cseguier          #+#    #+#             */
-/*   Updated: 2020/05/20 18:38:03 by cseguier         ###   ########.fr       */
+/*   Updated: 2020/05/20 19:14:25 by cseguier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ static int	find_path(t_bfs *bfs, t_p *p, int host, int i)
 	}
 	else
 	{
-		bfs_new_node(bfs->tmp_path, &bfs->path_list, i + 1);
+		bfs_new_node(bfs->tmp_path, &bfs->path_list, i + 1, 0);
 		bfs->path_nb++;
 		if (bfs->path_nb == 5000)
 			return (1);
@@ -50,7 +50,7 @@ static void	treat_unvisited(t_p *p, t_bfs *bfs, t_queue **q)
 	}
 	else
 	{
-		p->matrix[bfs->host][bfs->link] = 
+		p->matrix[bfs->host][bfs->link] =
 			p->matrix[bfs->parent[bfs->host]][bfs->host] + 1;
 		if (bfs->visited_record[bfs->link] == 0)
 		{
@@ -102,8 +102,6 @@ int			algo(t_p *p, t_bfs *bfs)
 	bfs_free_list(&bfs->path_list);
 	return (0);
 }
-
-//FIXME: MAP AVEC AUCUN CHEMIN
 
 /*
 **	print_matrix(p, bfs, 0, 0);

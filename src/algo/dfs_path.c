@@ -6,66 +6,65 @@
 /*   By: cseguier <cseguier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/20 16:05:06 by cseguier          #+#    #+#             */
-/*   Updated: 2020/05/20 16:05:06 by cseguier         ###   ########.fr       */
+/*   Updated: 2020/05/20 19:34:23 by cseguier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/lem_in.h"
 
-int	find_n_kill_dopples(int	path_nb, t_path_array *path_array)
+int				find_n_kill_dopples(int path_nb, t_path_array *paths)
 {
-	int	i_other_path;
-	int	i_current_path;
-	int	real_path_nb;
+	int	next;
+	int	cur;
+	int	real_nb;
 
-
-	real_path_nb = path_nb;
-	i_current_path = -1;
-	while (++i_current_path < path_nb)
+	real_nb = path_nb;
+	cur = -1;
+	while (++cur < path_nb)
 	{
-		i_other_path = i_current_path;
-		while (++i_other_path < path_nb)
+		next = cur;
+		while (++next < path_nb)
 		{
-			if (path_array[i_other_path].size == -1 || path_array[i_other_path].size > path_array[i_current_path].size)
+			if (paths[next].size == -1 || paths[next].size > paths[cur].size)
 				break ;
-			if (path_array[i_other_path].size != -1 && path_array[i_other_path].size == path_array[i_current_path].size)
+			if (paths[next].size != -1 && paths[next].size == paths[cur].size)
 			{
-				if (is_the_same(path_array, i_current_path, i_other_path))
+				if (is_the_same(paths, cur, next))
 				{
-					real_path_nb--;
-					ignore_path(path_array, i_other_path);
+					real_nb--;
+					ignore_path(paths, next);
 				}
 			}
 		}
 	}
-	return (real_path_nb);
+	return (real_nb);
 }
 
-t_path_array	*clean_path_array(t_path_array *path_array, int path_nb, int real_path_nb)
+t_path_array	*clean_path_array(t_path_array *paths, int path_nb, int real_nb)
 {
-	t_path_array *real_array;
-	int	i;
-	int	r;
+	t_path_array	*real_array;
+	int				i;
+	int				r;
 
-	if (!(real_array = ft_memalloc((sizeof(t_path_array) * real_path_nb))))
+	if (!(real_array = ft_memalloc((sizeof(t_path_array) * real_nb))))
 		exit_error("Malloc Failed", (char*)__func__);
 	i = -1;
 	r = -1;
-	while (++i < path_nb && r < real_path_nb)
+	while (++i < path_nb && r < real_nb)
 	{
-		if (path_array[i].size != -1)
+		if (paths[i].size != -1)
 		{
-			real_array[++r].room = path_array[i].room;
-			real_array[r].size = path_array[i].size;
+			real_array[++r].room = paths[i].room;
+			real_array[r].size = paths[i].size;
 		}
 		else
-			ft_memdel((void*)&path_array[i].room);
+			ft_memdel((void*)&paths[i].room);
 	}
-	ft_memdel((void*)&path_array);
+	ft_memdel((void*)&paths);
 	return (real_array);
 }
 
-static int get_to_end(t_p *p, t_room_infos *rooms, int curr)
+static int		get_to_end(t_p *p, t_room_infos *rooms, int curr)
 {
 	int best_room_index;
 
@@ -79,7 +78,7 @@ static int get_to_end(t_p *p, t_room_infos *rooms, int curr)
 	return (0);
 }
 
-static int get_to_start(t_p *p, t_room_infos *rooms, int curr, t_bfs *bfs)
+static int		get_to_start(t_p *p, t_room_infos *rooms, int curr, t_bfs *bfs)
 {
 	int best_room_index;
 
@@ -97,11 +96,11 @@ static int get_to_start(t_p *p, t_room_infos *rooms, int curr, t_bfs *bfs)
 	return (0);
 }
 
-int			create_path(t_p *p, t_bfs *bfs)
+int				create_path(t_p *p, t_bfs *bfs)
 {
 	t_room_infos	*rooms;
 	int				next;
-	
+
 	rooms = bfs->rooms;
 	next = 0;
 	while (next < p->size)
@@ -113,5 +112,5 @@ int			create_path(t_p *p, t_bfs *bfs)
 		}
 		next++;
 	}
-	return 1;
+	return (1);
 }

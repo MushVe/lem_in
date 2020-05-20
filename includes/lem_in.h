@@ -6,7 +6,7 @@
 /*   By: cseguier <cseguier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/26 01:37:37 by cseguier          #+#    #+#             */
-/*   Updated: 2020/05/20 16:56:58 by cseguier         ###   ########.fr       */
+/*   Updated: 2020/05/20 19:37:05 by cseguier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -161,7 +161,7 @@ void				go_to_next(t_combo_data *c, t_ant_status *a, t_bada_ids i);
 
 int					algo(t_p *p, t_bfs *bfs);
 void				bfs_free_list(t_path_list **path);
-int					bfs_new_node(int *data, t_path_list **path, int size);
+int					bfs_new_node(int *d, t_path_list **p, int s, int j);
 int					*bfs_get_node(int aim, t_path_list *path);
 void				bfs_init(t_bfs *bfs, int size);
 void				fill_path_array(t_bfs *bfs);
@@ -176,7 +176,7 @@ void				reset_visited(t_p *p, t_bfs *bfs);
 */
 
 void				dfs_solve(t_p *p, t_bfs *bfs);
-int					is_closer(int *d_start, int *d_end, int way, t_room_infos current);
+int					is_closer(int *d_s, int *d_end, int way, t_room_infos c);
 int					find_best_room(t_room_infos *rooms, int host, int way);
 void				get_ultimate_result(t_p *p, t_bfs *bfs);
 void				set_nb_link(t_p *p, t_bfs *bfs);
@@ -185,10 +185,10 @@ int					create_path(t_p *p, t_bfs *bfs);
 void				reorder_path(t_bfs *bfs);
 void				dfs_solve(t_p *p, t_bfs *bfs);
 int					find_n_kill_dopples(int	path_nb, t_path_array *path_array);
-t_path_array		*clean_path_array(t_path_array *path_array, int path_nb, int real_path_nb);
+t_path_array		*clean_path_array(t_path_array *pay, int path_nb, int r);
 void				save_path(t_p *p, t_bfs *bfs, int index, int size);
 void				ignore_path(t_path_array *path_array, int i_other_path);
-int					is_the_same(t_path_array *path_array, int i_current_path, int i_other_path);
+int					is_the_same(t_path_array *path_y, int i_curth, int i_);
 
 /*
 ** Resolve
@@ -226,8 +226,6 @@ int					is_empty(char *line);
 int					**allocate_double_array(int size);
 char				*allocate_room(char *line);
 void				exit_error(char *reason, char *camefrom);
-void			print_path_list(t_p *p, t_bfs *bfs);
-void			print_path_array(t_p *p, t_bfs *bfs);
 
 /*
 ** Ants
