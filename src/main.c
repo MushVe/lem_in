@@ -6,7 +6,7 @@
 /*   By: cseguier <cseguier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/21 21:35:49 by cseguier          #+#    #+#             */
-/*   Updated: 2020/04/21 21:35:49 by cseguier         ###   ########.fr       */
+/*   Updated: 2020/05/20 18:47:47 by cseguier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,14 +36,14 @@ void	clean(t_p *p, t_bfs *bfs, t_combo_data *cd)
 	delete_junction_table(p->junction);
 	free(p->data.rooms.end);
 	free(p->data.rooms.start);
-	// i = -1;
-	// while (++i < bfs->path_nb)
-	// 	ft_memdel((void*)&bfs->path_array[i].room);
-	// ft_memdel((void*)&bfs->path_array);
-	// i = -1;
-	// while (++i < p->size)
-	// 	ft_memdel((void*)&bfs->rooms[i].room);
-	// ft_memdel((void*)&bfs->rooms);
+	i = -1;
+	while (++i < bfs->path_nb)
+		ft_memdel((void*)&bfs->path_array[i].room);
+	ft_memdel((void*)&bfs->path_array);
+	i = -1;
+	while (++i < p->size)
+		ft_memdel((void*)&bfs->rooms[i].link_array);
+	ft_memdel((void*)&bfs->rooms);
 	i = -1;
 	while (++i < cd->nb_path)
 		ft_memdel((void*)&cd->path_combo[i].room);
@@ -58,11 +58,10 @@ int		main(void)
 
 	init(&p);
 	parser(&p);
-		ft_printf("End parsing\n");
 	algo(&p, &bfs);
 	resolve(&p, &bfs, &cd);
-	display(p.data, p.tmp);
-	print_lem_in(&p, &cd);
-	// clean(&p, &bfs, &cd);
+	// display(p.data, p.tmp);
+	// print_lem_in(&p, &cd);
+	clean(&p, &bfs, &cd);
 	ft_doublefree_int(p.matrix, p.size);
 }

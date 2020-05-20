@@ -6,7 +6,7 @@
 /*   By: cseguier <cseguier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/26 01:32:13 by cseguier          #+#    #+#             */
-/*   Updated: 2020/03/06 06:35:29 by cseguier         ###   ########.fr       */
+/*   Updated: 2020/05/20 17:18:00 by cseguier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,21 +44,21 @@ int	handle_tubes(t_p *p, char **line)
 	if (!(p->matrix = allocate_double_array(p->data.room_count)))
 		exit_error("Malloc failed\n", (char*)__func__);
 	if (!fill_adjacency_matrix(p->matrix, *line, &p->hthandler))
-		return (0);
+		return (1);
 	while (get_next_line(0, line) > 0)
 	{
 		if (!(add_front_node(&p->tmp, *line)))
-			return (0);
+			return (1);
 		if (is_empty(*line))
 			return (1);
 		else if (is_command(*line))
-			return (0);
+			return (1);
 		else if (is_comment(*line))
 			continue;
 		if (is_line_valid(*line))
 		{
 			if (!fill_adjacency_matrix(p->matrix, *line, &p->hthandler))
-				return (0);
+				return (1);
 		}
 		else
 			return (1);

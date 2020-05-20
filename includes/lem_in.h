@@ -6,7 +6,7 @@
 /*   By: cseguier <cseguier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/26 01:37:37 by cseguier          #+#    #+#             */
-/*   Updated: 2020/04/24 18:42:01 by cseguier         ###   ########.fr       */
+/*   Updated: 2020/05/20 16:56:58 by cseguier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -170,6 +170,25 @@ void				print_matrix(t_p *p, t_bfs *bfs, int i, int j);
 void				get_matrix_level(t_p *p, t_bfs *bfs);
 void				bfs_free_all(t_bfs *bfs);
 void				reset_visited(t_p *p, t_bfs *bfs);
+
+/*
+** Algo dfs
+*/
+
+void				dfs_solve(t_p *p, t_bfs *bfs);
+int					is_closer(int *d_start, int *d_end, int way, t_room_infos current);
+int					find_best_room(t_room_infos *rooms, int host, int way);
+void				get_ultimate_result(t_p *p, t_bfs *bfs);
+void				set_nb_link(t_p *p, t_bfs *bfs);
+void				remove_bad_link(t_bfs *bfs, t_p *p);
+int					create_path(t_p *p, t_bfs *bfs);
+void				reorder_path(t_bfs *bfs);
+void				dfs_solve(t_p *p, t_bfs *bfs);
+int					find_n_kill_dopples(int	path_nb, t_path_array *path_array);
+t_path_array		*clean_path_array(t_path_array *path_array, int path_nb, int real_path_nb);
+void				save_path(t_p *p, t_bfs *bfs, int index, int size);
+void				ignore_path(t_path_array *path_array, int i_other_path);
+int					is_the_same(t_path_array *path_array, int i_current_path, int i_other_path);
 
 /*
 ** Resolve

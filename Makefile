@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: cseguier <cseguier@student.42.fr>              +#+  +:+       +#+     #
+#    By: cseguier <cseguier@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/26 01:31:01 by cseguier          #+#    #+#              #
-#    Updated: 2020/04/24 18:41:45 by cseguier           ###   ########.fr      #
+#    Updated: 2020/05/20 18:47:11 by cseguier         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,12 +20,13 @@ LIBFT = libft/libftprintf.a
 FILE = ants.c main.c parser.c utils_parser.c room.c utils_room.c tubes.c \
 	utils_tubes.c utils.c utils_2.c algo.c utils_algo.c node.c \
 	resolve.c utils_resolve.c quicksort.c print.c utils_print.c \
-	resolve_tools.c resolve_utils2.c
+	resolve_tools.c resolve_utils2.c dfs_path_utils.c dfs_path.c \
+	dfs_utils.c dfs.c
 
 INC = -I libft
 SRC = $(FILE:%=%)
 OBJ = $(FILE:%.c=objs/%.o)
-CFLAGS = #-fsanitize=address #-Wall -Werror -Wextra #-O3#,undefined -g3
+CFLAGS = -fsanitize=address,undefined -g3 #-Wall -Werror -Wextra#-O3#
 CC = gcc $(CFLAGS) $(INC)
 RM = rm -rf
 

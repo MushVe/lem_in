@@ -6,7 +6,7 @@
 /*   By: cseguier <cseguier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/03 05:18:48 by cseguier          #+#    #+#             */
-/*   Updated: 2020/03/07 05:51:29 by cseguier         ###   ########.fr       */
+/*   Updated: 2020/05/20 17:58:58 by cseguier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,9 +41,12 @@ int		bfs_new_node(int *room, t_path_list **path, int size)
 		|| !(node->room = ft_memalloc(sizeof(int) * size)))
 		exit_error("Malloc Failed", (char*)__func__);
 	i = size;
-	j = -1;
-	while (room[++j] != -1 && i > 0)
+	j = 0;
+	while (j < size && room[j] != -1 && i > 0)
+	{
 		node->room[--i] = room[j];
+		j++;
+	}
 	node->size = size;
 	node->next = NULL;
 	if (!cpy)

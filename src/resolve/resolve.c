@@ -6,7 +6,7 @@
 /*   By: cseguier <cseguier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/09 09:46:07 by cseguier          #+#    #+#             */
-/*   Updated: 2020/04/24 18:39:52 by cseguier         ###   ########.fr       */
+/*   Updated: 2020/05/20 18:44:25 by cseguier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,8 @@ static int		get_shortest_combo(t_p *p, t_bfs *bfs, t_combo_data *cd)
 
 t_path_combo	*resolve(t_p *p, t_bfs *bfs, t_combo_data *cd)
 {
-	quicksort(bfs);
 	get_shortest_combo(p, bfs, cd);
+	if (cd->nb_path <= 0)
+		exit_error(NULL, NULL);
 	return (0);
 }
