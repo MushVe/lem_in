@@ -1,0 +1,33 @@
+[31]
+L1-Prd8 L2-Rbc4 
+L1-Zw_8 L2-Gps9 L3-Prd8 L4-Rbc4 
+L1-Adn2 L2-Rfq1 L3-Zw_8 L4-Gps9 L5-Prd8 L6-Rbc4 
+L1-Gez5 L2-Itf2 L3-Adn2 L4-Rfq1 L5-Zw_8 L6-Gps9 L7-Prd8 L8-Rbc4 
+L1-Hsf2 L2-Jcq0 L3-Gez5 L4-Itf2 L5-Adn2 L6-Rfq1 L7-Zw_8 L8-Gps9 L9-Prd8 L10-Rbc4 
+L1-Twp7 L2-Yoa4 L3-Hsf2 L4-Jcq0 L5-Gez5 L6-Itf2 L7-Adn2 L8-Rfq1 L9-Zw_8 L10-Gps9 
+L1-Oea4 L2-Psy6 L3-Twp7 L4-Yoa4 L5-Hsf2 L6-Jcq0 L7-Gez5 L8-Itf2 L9-Adn2 L10-Rfq1 
+L1-Huj8 L2-D_g9 L3-Oea4 L4-Psy6 L5-Twp7 L6-Yoa4 L7-Hsf2 L8-Jcq0 L9-Gez5 L10-Itf2 
+L1-Jmu6 L2-Xio9 L3-Huj8 L4-D_g9 L5-Oea4 L6-Psy6 L7-Twp7 L8-Yoa4 L9-Hsf2 L10-Jcq0 
+L1-Ijz8 L2-Jet2 L3-Jmu6 L4-Xio9 L5-Huj8 L6-D_g9 L7-Oea4 L8-Psy6 L9-Twp7 L10-Yoa4 
+L1-Wbm3 L2-R_c1 L3-Ijz8 L4-Jet2 L5-Jmu6 L6-Xio9 L7-Huj8 L8-D_g9 L9-Oea4 L10-Psy6 
+L1-Xid9 L2-U_c8 L3-Wbm3 L4-R_c1 L5-Ijz8 L6-Jet2 L7-Jmu6 L8-Xio9 L9-Huj8 L10-D_g9 
+L1-Zjy4 L2-Bso1 L3-Xid9 L4-U_c8 L5-Wbm3 L6-R_c1 L7-Ijz8 L8-Jet2 L9-Jmu6 L10-Xio9 
+L1-Jdw9 L2-Hot1 L3-Zjy4 L4-Bso1 L5-Xid9 L6-U_c8 L7-Wbm3 L8-R_c1 L9-Ijz8 L10-Jet2 
+L1-Twx7 L2-Oon1 L3-Jdw9 L4-Hot1 L5-Zjy4 L6-Bso1 L7-Xid9 L8-U_c8 L9-Wbm3 L10-R_c1 
+L1-Cyp3 L2-Ctb5 L3-Twx7 L4-Oon1 L5-Jdw9 L6-Hot1 L7-Zjy4 L8-Bso1 L9-Xid9 L10-U_c8 
+L1-O_o2 L2-Rqb5 L3-Cyp3 L4-Ctb5 L5-Twx7 L6-Oon1 L7-Jdw9 L8-Hot1 L9-Zjy4 L10-Bso1 
+L1-Xlq4 L2-Mut4 L3-O_o2 L4-Rqb5 L5-Cyp3 L6-Ctb5 L7-Twx7 L8-Oon1 L9-Jdw9 L10-Hot1 
+L1-Iah1 L2-Enl5 L3-Xlq4 L4-Mut4 L5-O_o2 L6-Rqb5 L7-Cyp3 L8-Ctb5 L9-Twx7 L10-Oon1 
+L1-Rcb7 L2-Jn_5 L3-Iah1 L4-Enl5 L5-Xlq4 L6-Mut4 L7-O_o2 L8-Rqb5 L9-Cyp3 L10-Ctb5 
+L1-Hs_9 L2-Tl_0 L3-Rcb7 L4-Jn_5 L5-Iah1 L6-Enl5 L7-Xlq4 L8-Mut4 L9-O_o2 L10-Rqb5 
+L1-Dnv6 L2-Dkq8 L3-Hs_9 L4-Tl_0 L5-Rcb7 L6-Jn_5 L7-Iah1 L8-Enl5 L9-Xlq4 L10-Mut4 
+L1-Upy6 L2-Xvy5 L3-Dnv6 L4-Dkq8 L5-Hs_9 L6-Tl_0 L7-Rcb7 L8-Jn_5 L9-Iah1 L10-Enl5 
+L1-Acd9 L2-Qso3 L3-Upy6 L4-Xvy5 L5-Dnv6 L6-Dkq8 L7-Hs_9 L8-Tl_0 L9-Rcb7 L10-Jn_5 
+L1-Yr_5 L2-Hpa0 L3-Acd9 L4-Qso3 L5-Upy6 L6-Xvy5 L7-Dnv6 L8-Dkq8 L9-Hs_9 L10-Tl_0 
+L1-Cht3 L2-Blb5 L3-Yr_5 L4-Hpa0 L5-Acd9 L6-Qso3 L7-Upy6 L8-Xvy5 L9-Dnv6 L10-Dkq8 
+L1-Wav9 L2-Qmj9 L3-Cht3 L4-Blb5 L5-Yr_5 L6-Hpa0 L7-Acd9 L8-Qso3 L9-Upy6 L10-Xvy5 
+L2-Wav9 L3-Wav9 L4-Qmj9 L5-Cht3 L6-Blb5 L7-Yr_5 L8-Hpa0 L9-Acd9 L10-Qso3 
+L4-Wav9 L5-Wav9 L6-Qmj9 L7-Cht3 L8-Blb5 L9-Yr_5 L10-Hpa0 
+L6-Wav9 L7-Wav9 L8-Qmj9 L9-Cht3 L10-Blb5 
+L8-Wav9 L9-Wav9 L10-Qmj9 
+L10-Wav9 

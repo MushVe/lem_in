@@ -1,0 +1,32 @@
+[31]
+L1-Uhb9 L2-Dff8 L3-Vpp1 
+L1-Wpr1 L2-Zef1 L3-Kfn5 L4-Uhb9 L5-Dff8 
+L1-Tkr5 L2-Kyj8 L3-Ccl1 L4-Wpr1 L5-Zef1 L6-Uhb9 L7-Dff8 
+L1-Enl0 L2-Vy_4 L3-I_z1 L4-Tkr5 L5-Kyj8 L6-Wpr1 L7-Zef1 L8-Uhb9 L9-Dff8 
+L1-Nsb0 L2-Dyw8 L3-Bwp6 L4-Enl0 L5-Vy_4 L6-Tkr5 L7-Kyj8 L8-Wpr1 L9-Zef1 
+L1-P_j1 L2-Olv1 L3-Q_l9 L4-Nsb0 L5-Dyw8 L6-Enl0 L7-Vy_4 L8-Tkr5 L9-Kyj8 
+L1-Q_e6 L2-Idw2 L3-Q_o2 L4-P_j1 L5-Olv1 L6-Nsb0 L7-Dyw8 L8-Enl0 L9-Vy_4 
+L1-Uw_9 L2-Mzc1 L3-Uao1 L4-Q_e6 L5-Idw2 L6-P_j1 L7-Olv1 L8-Nsb0 L9-Dyw8 
+L1-U_x2 L2-Oaf8 L3-Sbx8 L4-Uw_9 L5-Mzc1 L6-Q_e6 L7-Idw2 L8-P_j1 L9-Olv1 
+L1-Cdx1 L2-Akc0 L3-Q_i4 L4-U_x2 L5-Oaf8 L6-Uw_9 L7-Mzc1 L8-Q_e6 L9-Idw2 
+L1-Rl_2 L2-Fld7 L3-Xlb2 L4-Cdx1 L5-Akc0 L6-U_x2 L7-Oaf8 L8-Uw_9 L9-Mzc1 
+L1-Tbg2 L2-Sbj7 L3-Ato8 L4-Rl_2 L5-Fld7 L6-Cdx1 L7-Akc0 L8-U_x2 L9-Oaf8 
+L1-O_g0 L2-Mxn1 L3-Bb_2 L4-Tbg2 L5-Sbj7 L6-Rl_2 L7-Fld7 L8-Cdx1 L9-Akc0 
+L1-Qhj0 L2-Egd8 L3-Cjw2 L4-O_g0 L5-Mxn1 L6-Tbg2 L7-Sbj7 L8-Rl_2 L9-Fld7 
+L1-Gfz2 L2-Wz_0 L3-C_u3 L4-Qhj0 L5-Egd8 L6-O_g0 L7-Mxn1 L8-Tbg2 L9-Sbj7 
+L1-Mou7 L2-Obs1 L3-Efh6 L4-Gfz2 L5-Wz_0 L6-Qhj0 L7-Egd8 L8-O_g0 L9-Mxn1 
+L1-Tpm7 L2-Exq9 L3-Swg7 L4-Mou7 L5-Obs1 L6-Gfz2 L7-Wz_0 L8-Qhj0 L9-Egd8 
+L1-M_u2 L2-Mkr8 L3-Tgm7 L4-Tpm7 L5-Exq9 L6-Mou7 L7-Obs1 L8-Gfz2 L9-Wz_0 
+L1-Nks2 L2-Fn_9 L3-Agb2 L4-M_u2 L5-Mkr8 L6-Tpm7 L7-Exq9 L8-Mou7 L9-Obs1 
+L1-Oyh6 L2-Oho1 L3-Hhu8 L4-Nks2 L5-Fn_9 L6-M_u2 L7-Mkr8 L8-Tpm7 L9-Exq9 
+L1-Qn_7 L2-G_n5 L3-Kki4 L4-Oyh6 L5-Oho1 L6-Nks2 L7-Fn_9 L8-M_u2 L9-Mkr8 
+L1-D_u6 L2-Vqf9 L3-Pwb1 L4-Qn_7 L5-G_n5 L6-Oyh6 L7-Oho1 L8-Nks2 L9-Fn_9 
+L1-Cqr4 L2-Gez9 L3-Bvj0 L4-D_u6 L5-Vqf9 L6-Qn_7 L7-G_n5 L8-Oyh6 L9-Oho1 
+L1-Djg8 L2-Ios7 L3-Eql3 L4-Cqr4 L5-Gez9 L6-D_u6 L7-Vqf9 L8-Qn_7 L9-G_n5 
+L1-Rsh7 L2-Tgi1 L3-Ojo1 L4-Djg8 L5-Ios7 L6-Cqr4 L7-Gez9 L8-D_u6 L9-Vqf9 
+L1-R_o8 L2-Gzj3 L3-B_b1 L4-Rsh7 L5-Tgi1 L6-Djg8 L7-Ios7 L8-Cqr4 L9-Gez9 
+L1-Zdj2 L2-D_o8 L3-Bcy0 L4-R_o8 L5-Gzj3 L6-Rsh7 L7-Tgi1 L8-Djg8 L9-Ios7 
+L1-Qa_2 L2-Qa_2 L3-Fha6 L4-Zdj2 L5-D_o8 L6-R_o8 L7-Gzj3 L8-Rsh7 L9-Tgi1 
+L3-Fiv4 L4-Qa_2 L5-Qa_2 L6-Zdj2 L7-D_o8 L8-R_o8 L9-Gzj3 
+L3-Sxd3 L6-Qa_2 L7-Qa_2 L8-Zdj2 L9-D_o8 
+L3-Qa_2 L8-Qa_2 L9-Qa_2 

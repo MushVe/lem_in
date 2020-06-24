@@ -1,0 +1,33 @@
+[32]
+L1-Gkh9 L2-Wdu2 
+L1-Qda8 L2-Duk5 L3-Gkh9 L4-Wdu2 
+L1-Tbq6 L2-P_n5 L3-Qda8 L4-Duk5 L5-Gkh9 L6-Wdu2 
+L1-Kdg8 L2-Iyu9 L3-Tbq6 L4-P_n5 L5-Qda8 L6-Duk5 L7-Gkh9 
+L1-Qtz2 L2-Bsv7 L3-Kdg8 L4-Iyu9 L5-Tbq6 L6-P_n5 L7-Qda8 L8-Gkh9 
+L1-Oql4 L2-W_q5 L3-Qtz2 L4-Bsv7 L5-Kdg8 L6-Iyu9 L7-Tbq6 L8-Qda8 L9-Gkh9 
+L1-Xyu0 L2-Eqs3 L3-Oql4 L4-W_q5 L5-Qtz2 L6-Bsv7 L7-Kdg8 L8-Tbq6 L9-Qda8 
+L1-Flx8 L2-Ccj8 L3-Xyu0 L4-Eqs3 L5-Oql4 L6-W_q5 L7-Qtz2 L8-Kdg8 L9-Tbq6 
+L1-Acz7 L2-Dal3 L3-Flx8 L4-Ccj8 L5-Xyu0 L6-Eqs3 L7-Oql4 L8-Qtz2 L9-Kdg8 
+L1-Nru7 L2-Un_6 L3-Acz7 L4-Dal3 L5-Flx8 L6-Ccj8 L7-Xyu0 L8-Oql4 L9-Qtz2 
+L1-M_t4 L2-Alc3 L3-Nru7 L4-Un_6 L5-Acz7 L6-Dal3 L7-Flx8 L8-Xyu0 L9-Oql4 
+L1-Szz7 L2-God7 L3-M_t4 L4-Alc3 L5-Nru7 L6-Un_6 L7-Acz7 L8-Flx8 L9-Xyu0 
+L1-Foa8 L2-Fyl9 L3-Szz7 L4-God7 L5-M_t4 L6-Alc3 L7-Nru7 L8-Acz7 L9-Flx8 
+L1-Rep0 L2-E_s0 L3-Foa8 L4-Fyl9 L5-Szz7 L6-God7 L7-M_t4 L8-Nru7 L9-Acz7 
+L1-I_p8 L2-W_e0 L3-Rep0 L4-E_s0 L5-Foa8 L6-Fyl9 L7-Szz7 L8-M_t4 L9-Nru7 
+L1-Ujh1 L2-Wfz1 L3-I_p8 L4-W_e0 L5-Rep0 L6-E_s0 L7-Foa8 L8-Szz7 L9-M_t4 
+L1-Ky_0 L2-Qhb9 L3-Ujh1 L4-Wfz1 L5-I_p8 L6-W_e0 L7-Rep0 L8-Foa8 L9-Szz7 
+L1-Mlq2 L2-P_d4 L3-Ky_0 L4-Qhb9 L5-Ujh1 L6-Wfz1 L7-I_p8 L8-Rep0 L9-Foa8 
+L1-J_w3 L2-M_v9 L3-Mlq2 L4-P_d4 L5-Ky_0 L6-Qhb9 L7-Ujh1 L8-I_p8 L9-Rep0 
+L1-Wtp6 L2-Bqh1 L3-J_w3 L4-M_v9 L5-Mlq2 L6-P_d4 L7-Ky_0 L8-Ujh1 L9-I_p8 
+L1-Xil0 L2-Skj3 L3-Wtp6 L4-Bqh1 L5-J_w3 L6-M_v9 L7-Mlq2 L8-Ky_0 L9-Ujh1 
+L1-N_m0 L2-Xub5 L3-Xil0 L4-Skj3 L5-Wtp6 L6-Bqh1 L7-J_w3 L8-Mlq2 L9-Ky_0 
+L1-Rtq3 L2-S_x5 L3-N_m0 L4-Xub5 L5-Xil0 L6-Skj3 L7-Wtp6 L8-J_w3 L9-Mlq2 
+L1-Bpu7 L2-Ktn0 L3-Rtq3 L4-S_x5 L5-N_m0 L6-Xub5 L7-Xil0 L8-Wtp6 L9-J_w3 
+L1-Slz8 L2-Yoa9 L3-Bpu7 L4-Ktn0 L5-Rtq3 L6-S_x5 L7-N_m0 L8-Xil0 L9-Wtp6 
+L1-Iep4 L2-Qzj6 L3-Slz8 L4-Yoa9 L5-Bpu7 L6-Ktn0 L7-Rtq3 L8-N_m0 L9-Xil0 
+L1-Eh_7 L2-Scd3 L3-Iep4 L4-Qzj6 L5-Slz8 L6-Yoa9 L7-Bpu7 L8-Rtq3 L9-N_m0 
+L2-Jcn7 L3-Eh_7 L4-Scd3 L5-Iep4 L6-Qzj6 L7-Slz8 L8-Bpu7 L9-Rtq3 
+L2-Mow8 L4-Jcn7 L5-Eh_7 L6-Scd3 L7-Iep4 L8-Slz8 L9-Bpu7 
+L2-Eh_7 L4-Mow8 L6-Jcn7 L7-Eh_7 L8-Iep4 L9-Slz8 
+L4-Eh_7 L6-Mow8 L8-Eh_7 L9-Iep4 
+L6-Eh_7 L9-Eh_7 

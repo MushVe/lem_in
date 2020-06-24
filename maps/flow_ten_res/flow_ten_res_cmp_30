@@ -1,0 +1,32 @@
+[30]
+L1-Wev4 L2-Ozj2 
+L1-Hng3 L2-Gem1 L3-Wev4 L4-Ozj2 
+L1-U_v4 L2-Xnu1 L3-Hng3 L4-Gem1 L5-Wev4 L6-Ozj2 
+L1-Tec8 L2-Mkg1 L3-U_v4 L4-Xnu1 L5-Hng3 L6-Gem1 L7-Wev4 L8-Ozj2 
+L1-Uic4 L2-Pwf0 L3-Tec8 L4-Mkg1 L5-U_v4 L6-Xnu1 L7-Hng3 L8-Gem1 L9-Ozj2 
+L1-Ohe4 L2-Jc_1 L3-Uic4 L4-Pwf0 L5-Tec8 L6-Mkg1 L7-U_v4 L8-Xnu1 L9-Gem1 
+L1-S_z7 L2-V_v4 L3-Ohe4 L4-Jc_1 L5-Uic4 L6-Pwf0 L7-Tec8 L8-Mkg1 L9-Xnu1 
+L1-Ckp5 L2-Vtg5 L3-S_z7 L4-V_v4 L5-Ohe4 L6-Jc_1 L7-Uic4 L8-Pwf0 L9-Mkg1 
+L1-H_x7 L2-Nhj5 L3-Ckp5 L4-Vtg5 L5-S_z7 L6-V_v4 L7-Ohe4 L8-Jc_1 L9-Pwf0 
+L1-Ta_4 L2-Yvl1 L3-H_x7 L4-Nhj5 L5-Ckp5 L6-Vtg5 L7-S_z7 L8-V_v4 L9-Jc_1 
+L1-Ykt2 L2-Xcx0 L3-Ta_4 L4-Yvl1 L5-H_x7 L6-Nhj5 L7-Ckp5 L8-Vtg5 L9-V_v4 
+L1-Ewj3 L2-Sae3 L3-Ykt2 L4-Xcx0 L5-Ta_4 L6-Yvl1 L7-H_x7 L8-Nhj5 L9-Vtg5 
+L1-Jda0 L2-Mjn0 L3-Ewj3 L4-Sae3 L5-Ykt2 L6-Xcx0 L7-Ta_4 L8-Yvl1 L9-Nhj5 
+L1-Nzr6 L2-Klu1 L3-Jda0 L4-Mjn0 L5-Ewj3 L6-Sae3 L7-Ykt2 L8-Xcx0 L9-Yvl1 
+L1-Zfr2 L2-Pmt1 L3-Nzr6 L4-Klu1 L5-Jda0 L6-Mjn0 L7-Ewj3 L8-Sae3 L9-Xcx0 
+L1-Tyj2 L2-Srj1 L3-Zfr2 L4-Pmt1 L5-Nzr6 L6-Klu1 L7-Jda0 L8-Mjn0 L9-Sae3 
+L1-Ryi5 L2-Al_8 L3-Tyj2 L4-Srj1 L5-Zfr2 L6-Pmt1 L7-Nzr6 L8-Klu1 L9-Mjn0 
+L1-T_a7 L2-Uj_9 L3-Ryi5 L4-Al_8 L5-Tyj2 L6-Srj1 L7-Zfr2 L8-Pmt1 L9-Klu1 
+L1-Omy7 L2-Qvr2 L3-T_a7 L4-Uj_9 L5-Ryi5 L6-Al_8 L7-Tyj2 L8-Srj1 L9-Pmt1 
+L1-Gzu7 L2-Knw1 L3-Omy7 L4-Qvr2 L5-T_a7 L6-Uj_9 L7-Ryi5 L8-Al_8 L9-Srj1 
+L1-Juh3 L2-Ggt1 L3-Gzu7 L4-Knw1 L5-Omy7 L6-Qvr2 L7-T_a7 L8-Uj_9 L9-Al_8 
+L1-Nqk1 L2-Ccu9 L3-Juh3 L4-Ggt1 L5-Gzu7 L6-Knw1 L7-Omy7 L8-Qvr2 L9-Uj_9 
+L1-Stg0 L2-Yc_2 L3-Nqk1 L4-Ccu9 L5-Juh3 L6-Ggt1 L7-Gzu7 L8-Knw1 L9-Qvr2 
+L1-Rih7 L2-Nhz7 L3-Stg0 L4-Yc_2 L5-Nqk1 L6-Ccu9 L7-Juh3 L8-Ggt1 L9-Knw1 
+L1-Gqm0 L2-Xpn3 L3-Rih7 L4-Nhz7 L5-Stg0 L6-Yc_2 L7-Nqk1 L8-Ccu9 L9-Ggt1 
+L1-En_4 L2-Wlg1 L3-Gqm0 L4-Xpn3 L5-Rih7 L6-Nhz7 L7-Stg0 L8-Yc_2 L9-Ccu9 
+L1-Jmf4 L2-Jmf4 L3-En_4 L4-Wlg1 L5-Gqm0 L6-Xpn3 L7-Rih7 L8-Nhz7 L9-Yc_2 
+L3-Jmf4 L4-Jmf4 L5-En_4 L6-Wlg1 L7-Gqm0 L8-Xpn3 L9-Nhz7 
+L5-Jmf4 L6-Jmf4 L7-En_4 L8-Wlg1 L9-Xpn3 
+L7-Jmf4 L8-Jmf4 L9-Wlg1 
+L9-Jmf4 

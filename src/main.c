@@ -60,7 +60,7 @@ int		main(void)
 	parser(&p);
 	algo(&p, &bfs);
 	resolve(&p, &bfs, &cd);
-	display(p.data, p.tmp);
+	// display(p.data, p.tmp);
 	print_lem_in(&p, &cd);
 	clean(&p, &bfs, &cd);
 	ft_doublefree_int(p.matrix, p.size);

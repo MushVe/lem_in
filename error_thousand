@@ -1,0 +1,52 @@
+flow-thousand_7
+double free or corruption (!prev)
+launch.sh: line 3:  5545 Aborted                 (core dumped) ./lem-in < ./maps/flow_thousand/"flow-thousand_$i"
+
+flow-thousand_17
+munmap_chunk(): invalid pointer
+launch.sh: line 3:  5555 Aborted                 (core dumped) ./lem-in < ./maps/flow_thousand/"flow-thousand_$i"
+
+flow-thousand_21
+free(): invalid next size (normal)
+launch.sh: line 3:  5559 Aborted                 (core dumped) ./lem-in < ./maps/flow_thousand/"flow-thousand_$i"
+
+flow-thousand_48
+launch.sh: line 3:  5586 Segmentation fault      (core dumped) ./lem-in < ./maps/flow_thousand/"flow-thousand_$i"
+
+flow-thousand_64
+double free or corruption (!prev)
+launch.sh: line 3:  5602 Aborted                 (core dumped) ./lem-in < ./maps/flow_thousand/"flow-thousand_$i"
+
+flow-thousand_89
+double free or corruption (!prev)
+launch.sh: line 3:  5627 Aborted                 (core dumped) ./lem-in < ./maps/flow_thousand/"flow-thousand_$i"
+
+flow-thousand_126
+double free or corruption (!prev)
+launch.sh: line 3:  5664 Aborted                 (core dumped) ./lem-in < ./maps/flow_thousand/"flow-thousand_$i"
+
+flow-thousand_128
+free(): invalid next size (normal)
+launch.sh: line 3:  5666 Aborted                 (core dumped) ./lem-in < ./maps/flow_thousand/"flow-thousand_$i"
+
+flow-thousand_129
+free(): invalid next size (normal)
+launch.sh: line 3:  5667 Aborted                 (core dumped) ./lem-in < ./maps/flow_thousand/"flow-thousand_$i"
+
+flow-thousand_150
+double free or corruption (!prev)
+launch.sh: line 3:  5688 Aborted                 (core dumped) ./lem-in < ./maps/flow_thousand/"flow-thousand_$i"
+
+flow-thousand_175
+launch.sh: line 3:  5713 Segmentation fault      (core dumped) ./lem-in < ./maps/flow_thousand/"flow-thousand_$i"
+
+flow-thousand_178
+double free or corruption (!prev)
+launch.sh: line 3:  5716 Aborted                 (core dumped) ./lem-in < ./maps/flow_thousand/"flow-thousand_$i"
+
+flow-thousand_182
+double free or corruption (!prev)
+launch.sh: line 3:  5720 Aborted                 (core dumped) ./lem-in < ./maps/flow_thousand/"flow-thousand_$i"
+
+flow-thousand_208
+launch.sh: line 3:  5746 Segmentation fault      (core dumped) ./lem-in < ./maps/flow_thousand/"flow-thousand_$i"

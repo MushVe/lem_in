@@ -1,0 +1,33 @@
+[32]
+L1-Riq8 L2-Gdj8 
+L1-Oh_7 L2-Jsx5 L3-Riq8 L4-Gdj8 
+L1-H_m7 L2-Toa0 L3-Oh_7 L4-Jsx5 L5-Riq8 L6-Gdj8 
+L1-Szb9 L2-Vgq9 L3-H_m7 L4-Toa0 L5-Oh_7 L6-Jsx5 L7-Riq8 
+L1-Ped1 L2-D_i7 L3-Szb9 L4-Vgq9 L5-H_m7 L6-Toa0 L7-Oh_7 L8-Riq8 
+L1-Gwm8 L2-Wwg9 L3-Ped1 L4-D_i7 L5-Szb9 L6-Vgq9 L7-H_m7 L8-Oh_7 L9-Riq8 
+L1-Gel3 L2-Sva1 L3-Gwm8 L4-Wwg9 L5-Ped1 L6-D_i7 L7-Szb9 L8-H_m7 L9-Oh_7 
+L1-Ato6 L2-Krt7 L3-Gel3 L4-Sva1 L5-Gwm8 L6-Wwg9 L7-Ped1 L8-Szb9 L9-H_m7 
+L1-Awp8 L2-J_y9 L3-Ato6 L4-Krt7 L5-Gel3 L6-Sva1 L7-Gwm8 L8-Ped1 L9-Szb9 
+L1-Qgy4 L2-Xkx7 L3-Awp8 L4-J_y9 L5-Ato6 L6-Krt7 L7-Gel3 L8-Gwm8 L9-Ped1 
+L1-Ham1 L2-Vyu2 L3-Qgy4 L4-Xkx7 L5-Awp8 L6-J_y9 L7-Ato6 L8-Gel3 L9-Gwm8 
+L1-Nnu3 L2-Ohx1 L3-Ham1 L4-Vyu2 L5-Qgy4 L6-Xkx7 L7-Awp8 L8-Ato6 L9-Gel3 
+L1-Apm1 L2-Vce1 L3-Nnu3 L4-Ohx1 L5-Ham1 L6-Vyu2 L7-Qgy4 L8-Awp8 L9-Ato6 
+L1-Wqb2 L2-Okg7 L3-Apm1 L4-Vce1 L5-Nnu3 L6-Ohx1 L7-Ham1 L8-Qgy4 L9-Awp8 
+L1-Mej6 L2-S_n2 L3-Wqb2 L4-Okg7 L5-Apm1 L6-Vce1 L7-Nnu3 L8-Ham1 L9-Qgy4 
+L1-Ypf0 L2-Gd_1 L3-Mej6 L4-S_n2 L5-Wqb2 L6-Okg7 L7-Apm1 L8-Nnu3 L9-Ham1 
+L1-Cmx2 L2-Uqq3 L3-Ypf0 L4-Gd_1 L5-Mej6 L6-S_n2 L7-Wqb2 L8-Apm1 L9-Nnu3 
+L1-Mkj0 L2-Kku5 L3-Cmx2 L4-Uqq3 L5-Ypf0 L6-Gd_1 L7-Mej6 L8-Wqb2 L9-Apm1 
+L1-Dvr2 L2-Kdy9 L3-Mkj0 L4-Kku5 L5-Cmx2 L6-Uqq3 L7-Ypf0 L8-Mej6 L9-Wqb2 
+L1-Zab4 L2-Vsj5 L3-Dvr2 L4-Kdy9 L5-Mkj0 L6-Kku5 L7-Cmx2 L8-Ypf0 L9-Mej6 
+L1-Gf_7 L2-Inn7 L3-Zab4 L4-Vsj5 L5-Dvr2 L6-Kdy9 L7-Mkj0 L8-Cmx2 L9-Ypf0 
+L1-Mbe5 L2-Cle9 L3-Gf_7 L4-Inn7 L5-Zab4 L6-Vsj5 L7-Dvr2 L8-Mkj0 L9-Cmx2 
+L1-Kfx8 L2-Kj_4 L3-Mbe5 L4-Cle9 L5-Gf_7 L6-Inn7 L7-Zab4 L8-Dvr2 L9-Mkj0 
+L1-Kuh2 L2-Htd6 L3-Kfx8 L4-Kj_4 L5-Mbe5 L6-Cle9 L7-Gf_7 L8-Zab4 L9-Dvr2 
+L1-Iwn6 L2-Dl_3 L3-Kuh2 L4-Htd6 L5-Kfx8 L6-Kj_4 L7-Mbe5 L8-Gf_7 L9-Zab4 
+L1-Bwy4 L2-Zj_0 L3-Iwn6 L4-Dl_3 L5-Kuh2 L6-Htd6 L7-Kfx8 L8-Mbe5 L9-Gf_7 
+L1-R_k2 L2-Bnx1 L3-Bwy4 L4-Zj_0 L5-Iwn6 L6-Dl_3 L7-Kuh2 L8-Kfx8 L9-Mbe5 
+L2-Wdr9 L3-R_k2 L4-Bnx1 L5-Bwy4 L6-Zj_0 L7-Iwn6 L8-Kuh2 L9-Kfx8 
+L2-R_k2 L4-Wdr9 L5-R_k2 L6-Bnx1 L7-Bwy4 L8-Iwn6 L9-Kuh2 
+L4-R_k2 L6-Wdr9 L7-R_k2 L8-Bwy4 L9-Iwn6 
+L6-R_k2 L8-R_k2 L9-Bwy4 
+L9-R_k2 

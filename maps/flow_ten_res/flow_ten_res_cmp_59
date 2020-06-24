@@ -1,0 +1,33 @@
+[32]
+L1-Cam7 L2-Gwd2 
+L1-U_s7 L2-N_z3 L3-Cam7 L4-Gwd2 
+L1-Rcp5 L2-Hrg6 L3-U_s7 L4-N_z3 L5-Cam7 L6-Gwd2 
+L1-Dra4 L2-Wkz4 L3-Rcp5 L4-Hrg6 L5-U_s7 L6-N_z3 L7-Cam7 
+L1-Fdk0 L2-Yju3 L3-Dra4 L4-Wkz4 L5-Rcp5 L6-Hrg6 L7-U_s7 L8-Cam7 
+L1-Ehd5 L2-Kni6 L3-Fdk0 L4-Yju3 L5-Dra4 L6-Wkz4 L7-Rcp5 L8-U_s7 L9-Cam7 
+L1-Xza6 L2-Qaf1 L3-Ehd5 L4-Kni6 L5-Fdk0 L6-Yju3 L7-Dra4 L8-Rcp5 L9-U_s7 
+L1-Cqr9 L2-Iwg1 L3-Xza6 L4-Qaf1 L5-Ehd5 L6-Kni6 L7-Fdk0 L8-Dra4 L9-Rcp5 
+L1-Zam1 L2-Ukm4 L3-Cqr9 L4-Iwg1 L5-Xza6 L6-Qaf1 L7-Ehd5 L8-Fdk0 L9-Dra4 
+L1-Ybt9 L2-Qio2 L3-Zam1 L4-Ukm4 L5-Cqr9 L6-Iwg1 L7-Xza6 L8-Ehd5 L9-Fdk0 
+L1-Q_c5 L2-Tmj1 L3-Ybt9 L4-Qio2 L5-Zam1 L6-Ukm4 L7-Cqr9 L8-Xza6 L9-Ehd5 
+L1-Rck8 L2-Z_h4 L3-Q_c5 L4-Tmj1 L5-Ybt9 L6-Qio2 L7-Zam1 L8-Cqr9 L9-Xza6 
+L1-Qnk1 L2-Wta8 L3-Rck8 L4-Z_h4 L5-Q_c5 L6-Tmj1 L7-Ybt9 L8-Zam1 L9-Cqr9 
+L1-Qow4 L2-Obm0 L3-Qnk1 L4-Wta8 L5-Rck8 L6-Z_h4 L7-Q_c5 L8-Ybt9 L9-Zam1 
+L1-Fwd2 L2-Qkx0 L3-Qow4 L4-Obm0 L5-Qnk1 L6-Wta8 L7-Rck8 L8-Q_c5 L9-Ybt9 
+L1-Hmz6 L2-Bwj6 L3-Fwd2 L4-Qkx0 L5-Qow4 L6-Obm0 L7-Qnk1 L8-Rck8 L9-Q_c5 
+L1-Diy3 L2-Ave0 L3-Hmz6 L4-Bwj6 L5-Fwd2 L6-Qkx0 L7-Qow4 L8-Qnk1 L9-Rck8 
+L1-Oge6 L2-Usm9 L3-Diy3 L4-Ave0 L5-Hmz6 L6-Bwj6 L7-Fwd2 L8-Qow4 L9-Qnk1 
+L1-Bgc9 L2-Uvn3 L3-Oge6 L4-Usm9 L5-Diy3 L6-Ave0 L7-Hmz6 L8-Fwd2 L9-Qow4 
+L1-Gnj3 L2-Iua1 L3-Bgc9 L4-Uvn3 L5-Oge6 L6-Usm9 L7-Diy3 L8-Hmz6 L9-Fwd2 
+L1-Imv3 L2-Ivp3 L3-Gnj3 L4-Iua1 L5-Bgc9 L6-Uvn3 L7-Oge6 L8-Diy3 L9-Hmz6 
+L1-Kon5 L2-J_w2 L3-Imv3 L4-Ivp3 L5-Gnj3 L6-Iua1 L7-Bgc9 L8-Oge6 L9-Diy3 
+L1-Dix5 L2-Irv7 L3-Kon5 L4-J_w2 L5-Imv3 L6-Ivp3 L7-Gnj3 L8-Bgc9 L9-Oge6 
+L1-Ztm4 L2-Gbx6 L3-Dix5 L4-Irv7 L5-Kon5 L6-J_w2 L7-Imv3 L8-Gnj3 L9-Bgc9 
+L1-Uad4 L2-W_v5 L3-Ztm4 L4-Gbx6 L5-Dix5 L6-Irv7 L7-Kon5 L8-Imv3 L9-Gnj3 
+L1-H_z1 L2-Gzq0 L3-Uad4 L4-W_v5 L5-Ztm4 L6-Gbx6 L7-Dix5 L8-Kon5 L9-Imv3 
+L1-Cjw6 L2-Xvi2 L3-H_z1 L4-Gzq0 L5-Uad4 L6-W_v5 L7-Ztm4 L8-Dix5 L9-Kon5 
+L2-Caq5 L3-Cjw6 L4-Xvi2 L5-H_z1 L6-Gzq0 L7-Uad4 L8-Ztm4 L9-Dix5 
+L2-Cjw6 L4-Caq5 L5-Cjw6 L6-Xvi2 L7-H_z1 L8-Uad4 L9-Ztm4 
+L4-Cjw6 L6-Caq5 L7-Cjw6 L8-H_z1 L9-Uad4 
+L6-Cjw6 L8-Cjw6 L9-H_z1 
+L9-Cjw6 

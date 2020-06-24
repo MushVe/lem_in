@@ -51,14 +51,14 @@ static void	bada_ants(t_combo_data *cd, t_ant_status *ant)
 	}
 }
 
-static int	affect_ants(t_combo_data *cd, t_ant_status *ant, int id_ant)
+static int	affect_ants(t_combo_data *cd, t_ant_status *ant, int id_ant, int max_ants)
 {
 	int	id_path;
 
 	id_path = -1;
 	while (++id_path < cd->nb_path)
 	{
-		if (cd->path_combo[id_path].ants > 0)
+		if (cd->path_combo[id_path].ants > 0 && id_ant < max_ants)
 		{
 			cd->path_combo[id_path].room[1].ant = id_ant;
 			ant[id_ant].id_path = id_path;
@@ -98,13 +98,14 @@ int			print_lem_in(t_p *p, t_combo_data *cd)
 	init_ant_status(&ant, p->data.ant_count);
 	i = -1;
 	id_ant = 0;
-	ft_printf("\n");
+	ft_printf("[%d]\n", cd->nb_line);
 	while (++i <= cd->nb_line)
 	{
 		bada_ants(cd, ant);
-		id_ant = affect_ants(cd, ant, id_ant);
-		print_ants(p, ant);
+		id_ant = affect_ants(cd, ant, id_ant, p->data.ant_count);
+		// print_ants(p, ant);
 	}
+	// ft_printf("Done \n");
 	ft_memdel((void*)&ant);
 	return (0);
 }
