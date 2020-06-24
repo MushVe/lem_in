@@ -6,7 +6,7 @@
 /*   By: cseguier <cseguier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/24 17:52:34 by cseguier          #+#    #+#             */
-/*   Updated: 2020/05/24 13:05:18 by cseguier         ###   ########.fr       */
+/*   Updated: 2020/06/24 09:57:36 by cseguier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,12 +98,12 @@ int			print_lem_in(t_p *p, t_combo_data *cd)
 	init_ant_status(&ant, p->data.ant_count);
 	i = -1;
 	id_ant = 0;
-	ft_printf("[%d]\n", cd->nb_line);
+	ft_printf("                                      [%d]\n", cd->nb_line);
 	while (++i <= cd->nb_line)
 	{
 		bada_ants(cd, ant);
 		id_ant = affect_ants(cd, ant, id_ant, p->data.ant_count);
-		// print_ants(p, ant);
+		//print_ants(p, ant);
 	}
 	// ft_printf("Done \n");
 	ft_memdel((void*)&ant);
