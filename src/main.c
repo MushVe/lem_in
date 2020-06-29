@@ -6,7 +6,7 @@
 /*   By: cseguier <cseguier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/21 21:35:49 by cseguier          #+#    #+#             */
-/*   Updated: 2020/05/20 19:07:51 by cseguier         ###   ########.fr       */
+/*   Updated: 2020/06/25 11:00:51 by cseguier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ int		main(void)
 	parser(&p);
 	algo(&p, &bfs);
 	resolve(&p, &bfs, &cd);
-	// display(p.data, p.tmp);
+	display(p.data, p.tmp);
 	print_lem_in(&p, &cd);
 	clean(&p, &bfs, &cd);
 	ft_doublefree_int(p.matrix, p.size);

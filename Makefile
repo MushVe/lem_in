@@ -6,7 +6,7 @@
 #    By: cseguier <cseguier@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/26 01:31:01 by cseguier          #+#    #+#              #
-#    Updated: 2020/06/24 10:37:41 by cseguier         ###   ########.fr        #
+#    Updated: 2020/06/29 09:51:58 by cseguier         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,7 +26,7 @@ FILE = ants.c main.c parser.c utils_parser.c room.c utils_room.c tubes.c \
 INC = -I libft
 SRC = $(FILE:%=%)
 OBJ = $(FILE:%.c=objs/%.o)
-CFLAGS = -Wall -Werror -Wextra #-fsanitize=address,undefined # -g3 #-O3#
+CFLAGS = -Wall -Werror -Wextra #-fsanitize=address,undefined #-g3 #-O3
 CC = gcc $(CFLAGS) $(INC)
 RM = rm -rf
 
@@ -44,7 +44,19 @@ objs/%.o: src/%.c
 	mkdir -p objs
 	$(CC) $(INC) -o $@ -c $<
 
-objs/%.o: src/*/%.c
+objs/%.o: src/algo/%.c
+	mkdir -p objs
+	$(CC) $(INC) -o $@ -c $<
+
+objs/%.o: src/parser/%.c
+	mkdir -p objs
+	$(CC) $(INC) -o $@ -c $<
+
+objs/%.o: src/print/%.c
+	mkdir -p objs
+	$(CC) $(INC) -o $@ -c $<
+
+objs/%.o: src/resolve/%.c
 	mkdir -p objs
 	$(CC) $(INC) -o $@ -c $<
 
